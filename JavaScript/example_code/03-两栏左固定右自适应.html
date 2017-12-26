@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+        }
+    </style>
+</head>
+<body>
+<h3>左边固定，右边自适应的布局</h3>
+<section id="one">
+    <style>
+        #one {
+            height: 100px;
+            background: #6942f5;
+            margin:15px 0;
+        }
+
+        #one .one {
+            float: left;
+            width: 200px;
+            height: 50px;
+            background: #ff0;
+        }
+
+        #one .two {
+            height: 80px;
+            overflow: hidden;
+            background: #f0f;
+        }
+    </style>
+    <div class="one">左边左浮动，右边加个overflow:hidden;</div>
+    <div class="two">right</div>
+</section>
+
+<section id="two">
+    <style>
+        #two {
+            height: 100px;
+            background: #f57d3c;
+            margin:15px 0;
+        }
+
+        #two .one {
+            float: left;
+            width: 200px;
+            height: 50px;
+            background: #ff0
+        }
+
+        #two .two {
+            margin-left: 200px;
+            background: #f0f;
+            height:80px;
+        }
+    </style>
+    <div class="one">左边左浮动，右边加个margin-left;</div>
+    <div class="two">right</div>
+</section>
+
+<!--<section id="three">-->
+    <!--<style>-->
+        <!--#three {-->
+            <!--height: 100px;-->
+            <!--background: #6bc9f5;-->
+            <!--margin:15px 0;-->
+        <!--}-->
+
+        <!--#three .one {-->
+            <!--position: absolute;-->
+            <!--top: 0;-->
+            <!--left: 0;-->
+            <!--width: 200px;-->
+            <!--background: #ff0;-->
+        <!--}-->
+
+        <!--#three .two {-->
+            <!--margin-left: 200px;-->
+            <!--background: #f0f;-->
+        <!--}-->
+    <!--</style>-->
+    <!--<div class="one"> 左边绝对定位，右边加个margin-left;</div>-->
+    <!--<div class="two">right</div>-->
+<!--</section>-->
+
+<!--<section id="four">-->
+    <!--<style>-->
+        <!--#four {-->
+            <!--height: 100px;-->
+            <!--background: #4af56f;-->
+            <!--margin:15px 0;-->
+        <!--}-->
+
+        <!--#four .one {-->
+            <!--position: absolute;-->
+            <!--top: 0;-->
+            <!--left: 0;-->
+            <!--width: 200px;-->
+            <!--background: #ff0;-->
+        <!--}-->
+
+        <!--#four .two {-->
+            <!--position: absolute;-->
+            <!--top: 0;-->
+            <!--left: 200px;-->
+            <!--width: 100%;-->
+            <!--rigth: 0;-->
+            <!--background: #f0f;-->
+        <!--}-->
+    <!--</style>-->
+    <!--<div class="one"> 左右两边绝对定位，右边加个width,top,left,right</div>-->
+    <!--<div class="two">right</div>-->
+<!--</section>-->
+</body>
+</html>

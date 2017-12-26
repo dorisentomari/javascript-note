@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>两栏右固定左自适应</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h3>右边固定，左边自适应的布局</h3>
+<section id="one">
+    <style>
+        #one {
+            height: 100px;
+            background: #00f56b;
+            margin: 15px 0;
+        }
+
+        #one .one {
+            float: left;
+            width: 100%;
+            height: 50px;
+            background: #ff2d1f;
+            margin-right: -200px;
+        }
+
+        #one .two {
+            float: right;
+            width: 200px;
+            height: 80px;
+            background: #ff0;
+        }
+    </style>
+    <div class="one">左边左浮动，margin-left负值,右边右浮动;</div>
+    <div class="two">right</div>
+</section>
+
+<section id="two">
+    <style>
+        #two {
+            display: none;
+            height: 100px;
+            background: #00f56b;
+            margin: 15px 0;
+        }
+
+        #two .one {
+            margin-right: 200px;
+            background: #00f;
+            height: 50px;
+        }
+
+        #two .two {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 200px;
+            background: #ff0;
+        }
+    </style>
+    <div class="one">右边绝对定位，左边margin-right;</div>
+    <div class="two">right</div>
+</section>
+
+<section id="three">
+    <style>
+        #three {
+            display: none;
+            height: 100px;
+            background: #00f56b;
+            margin: 15px 0;
+        }
+
+        #three .one {
+            position: absolute;
+            top: 0;
+            left: 0;
+            rigth: 0;
+            width: 100%;
+            background: #f0f;
+        }
+
+        #three .two {
+            position: absolute;
+            top: 0;
+            left: 200px;
+            width: 200px;
+            background: #ff0;
+        }
+    </style>
+    <div class="one">右边绝对定位，左边margin-right;</div>
+    <div class="two">right</div>
+</section>
+
+</body>
+</html>
