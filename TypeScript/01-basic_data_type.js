@@ -86,3 +86,4 @@ var one = 'this is a string';
 var two = one.length;
 // 另一个为as语法
 var three = one.length;
+//# sourceMappingURL=01-basic_data_type.js.map

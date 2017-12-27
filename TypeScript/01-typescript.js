@@ -112,3 +112,4 @@ vector.normalize();
 vector.toArray(function (vectorAsArray) {
     console.log("x: " + vectorAsArray[0] + " y: " + vectorAsArray[1]); // x: 10 y: 15
 });
+//# sourceMappingURL=01-typescript.js.map

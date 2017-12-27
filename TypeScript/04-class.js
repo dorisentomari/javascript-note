@@ -128,3 +128,64 @@ var Octopus = /** @class */ (function () {
     return Octopus;
 }());
 var ken = new Octopus('the octopus has 10 strong legs');
+var Grid = /** @class */ (function () {
+    function Grid(scale) {
+        this.scale = scale;
+    }
+    Grid.prototype.calculateDistance = function (point) {
+        var xDist = (point.x - Grid.origin.x);
+        var yDist = (point.y - Grid.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    };
+    Grid.origin = {
+        x: 0,
+        y: 0
+    };
+    return Grid;
+}());
+var grid1 = new Grid(2);
+var grid2 = new Grid(5);
+console.log(Number.parseInt(grid1.calculateDistance({ x: 10, y: 10 }))); // 7
+console.log(Number.parseInt(grid2.calculateDistance({ x: 20, y: 20 }))); // 5
+/** abstract **/
+// 抽象类做为其它派生类的基类使用。 它们一般不会直接被实例化。
+// 不同于接口，抽象类可以包含成员的实现细节。 abstract关键字是用于定义抽象类和在抽象类内部定义抽象方法
+var Cool = /** @class */ (function () {
+    function Cool() {
+    }
+    Cool.prototype.eat = function () {
+        console.log('eat food....');
+    };
+    return Cool;
+}());
+// 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。
+// 抽象方法的语法与接口方法相似。
+// 两者都是定义方法签名但不包含方法体。
+// 然而，抽象方法必须包含 abstract关键字并且可以包含访问修饰符
+var Department = /** @class */ (function () {
+    function Department(name) {
+        this.name = name;
+    }
+    Department.prototype.printName = function () {
+        console.log("Department name: " + this.name);
+    };
+    return Department;
+}());
+var House = /** @class */ (function (_super) {
+    __extends(House, _super);
+    function House() {
+        return _super.call(this, '在派生类的构造函数中必须调用super()') || this;
+    }
+    House.prototype.printMeeting = function () {
+        console.log('实现基类的printMeeting方法');
+    };
+    House.prototype.genFn = function () {
+        console.log('generator function ');
+    };
+    return House;
+}(Department));
+var smallDepartment; // 创建一个对抽象类型的引用
+smallDepartment = new House(); // 允许对一个抽象子类进行实例化和赋值，但是不能创建一个抽象类的实例
+smallDepartment.printName(); // Department name: 在派生类的构造函数中必须调用super()
+smallDepartment.printMeeting(); // 实现基类的printMeeting方法
+//# sourceMappingURL=04-class.js.map

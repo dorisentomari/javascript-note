@@ -31,7 +31,7 @@ var JackUser = {
         English: 96
     },
     birthday: new Date('1995-05-09'),
-    id: 2596
+    id: 2596,
 };
 Jack(JackUser);
 // TypeScript具有ReadonlyArray<T>类型，它与Array<T>相似，只是把所有可变方法去掉了，因此可以确保数组创建后再也不能被修改
@@ -131,3 +131,4 @@ console.log(CNumber);
 console.log(CNumber(10));
 console.log(CNumber.reset());
 console.log(CNumber.interval = 8.0);
+//# sourceMappingURL=03-interface.js.map

@@ -31,6 +31,13 @@ var noUser = function (name) {
     }
 };
 console.log("noUser: " + noUser('Jack'));
+// 推荐类型
+var noTop = function (x, y) {
+    return x + y;
+};
+var toBotton = function (x, y) {
+    return x + y;
+};
 /** 3. 可选参数和有默认参数的函数 **/
 function sum(a, b, c) {
     if (!c) {
@@ -46,6 +53,8 @@ function minus(a, b, c) {
     if (c === void 0) { c = 10; }
     return a - b - c;
 }
+// 共享同样的类型(firstName: string, lastName?: string) => string。
+// 默认参数的默认值消失了，只保留了它是一个可选参数的信息
 console.log("minus: " + minus(1, 2, 3)); // minus: -4
 console.log("minus: " + minus(1, 2)); // minus: -11
 // void 0 是TypeScript编译器检测一个变量是否为undefined的用法
@@ -248,28 +257,29 @@ Jack.sayHiDelayWrong(1000); // Hi, my name is undefined delay wrong
 // 无限循环而不会导致栈溢出
 // 可能以同步的方式编写异步代码
 /******************************
-function* gen() {
+ function* gen() {
     yield 'first';
     yield 'second';
     yield 'third';
     yield 'fourth';
 }
 
-let genYield = gen();
-console.log(genYield.next()); // { value: 'first', done: false }
-console.log(genYield.next()); // { value: 'second', done: false }
-console.log(genYield.next()); // { value: 'third', done: false }
-console.log(genYield.next()); // { value: 'fourth', done: false }
-console.log(genYield.next()); // { value: undefined, done: true }
+ let genYield = gen();
+ console.log(genYield.next()); // { value: 'first', done: false }
+ console.log(genYield.next()); // { value: 'second', done: false }
+ console.log(genYield.next()); // { value: 'third', done: false }
+ console.log(genYield.next()); // { value: 'fourth', done: false }
+ console.log(genYield.next()); // { value: undefined, done: true }
  ******************************/
 /** 13. 异步函数 async, await **/
 // 一个异步函数是在异步操作中被调用的函数
 // 可以使用await关键字等待异步结果的到来而不会阻塞程序的执行
 /******************
-let promise: Promise<number>;
+ let promise: Promise<number>;
 
-async function fn(): Promise<number> {
+ async function fn(): Promise<number> {
     let i = await promise;
     return 1 + i;
 }
-******************/ 
+ ******************/ 
+//# sourceMappingURL=05-function.js.map
