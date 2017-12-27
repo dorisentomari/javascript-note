@@ -26,10 +26,10 @@ info[4] = 666;
 console.log(info);
 
 /** 7. 枚举类型，可以不写默认值*/
-enum Element {ONE = 1, TWO = 2, THREE = 3, FOUR = 4, FIVE = 5};
-let number: Element = Element.ONE;
+enum Ele {ONE = 1, TWO = 2, THREE = 3, FOUR = 4, FIVE = 5};
+let number: Ele = Ele.ONE;
 console.log(number);
-let price: number = Element[2];
+let price: string = Ele[2];
 console.log('price', price);// price TWO
 
 /** 8. Any 类型*/

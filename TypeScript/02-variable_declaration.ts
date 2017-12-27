@@ -1,6 +1,6 @@
 /** 变量声明 */
 
-var age: number = 18;
+var tips: number = 18;
 let width: number = 20;
 const PORT: number = 3000;
 

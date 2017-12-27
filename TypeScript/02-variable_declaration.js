@@ -7,7 +7,7 @@ var __assign = (this && this.__assign) || Object.assign || function(t) {
     }
     return t;
 };
-var age = 18;
+var tips = 18;
 var width = 20;
 var PORT = 3000;
 var _loop_1 = function (m) {
@@ -72,5 +72,4 @@ var Mark = {
 };
 var MarkInfo = __assign({ school: 'Beijing', hobby: 'music' }, Mark);
 console.log(MarkInfo); // { school: 'Beijing', hobby: 'movie', name: 'Mark', age: 18 }
-// TypeScript编译器不允许展开泛型函数上的类型参数
-
+// TypeScript编译器不允许展开泛型函数上的类型参数 

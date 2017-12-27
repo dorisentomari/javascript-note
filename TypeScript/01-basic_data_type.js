@@ -25,18 +25,18 @@ info[3] = 'element kkk';
 info[4] = 666;
 console.log(info);
 /** 7. 枚举类型，可以不写默认值*/
-var Element;
-(function (Element) {
-    Element[Element["ONE"] = 1] = "ONE";
-    Element[Element["TWO"] = 2] = "TWO";
-    Element[Element["THREE"] = 3] = "THREE";
-    Element[Element["FOUR"] = 4] = "FOUR";
-    Element[Element["FIVE"] = 5] = "FIVE";
-})(Element || (Element = {}));
+var Ele;
+(function (Ele) {
+    Ele[Ele["ONE"] = 1] = "ONE";
+    Ele[Ele["TWO"] = 2] = "TWO";
+    Ele[Ele["THREE"] = 3] = "THREE";
+    Ele[Ele["FOUR"] = 4] = "FOUR";
+    Ele[Ele["FIVE"] = 5] = "FIVE";
+})(Ele || (Ele = {}));
 ;
-var number = Element.ONE;
+var number = Ele.ONE;
 console.log(number);
-var price = Element[2];
+var price = Ele[2];
 console.log('price', price); // price TWO
 /** 8. Any 类型*/
 var noname = 'Coool';
