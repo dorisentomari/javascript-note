@@ -79,4 +79,4 @@ console.log(user);
     * 浏览器里面,顶层对象是`window`.但Node和Web Worker没有window.
     * 浏览器和Web Worker里面.`self`也指向顶层对象.但是Node没有`self`.
     * Node里面.顶层对象是`global`.但其他环境都不支持.
-
++ 注意：浏览器端的顶层对象和Node.js端的顶层对象是不一样的，注意区分。
