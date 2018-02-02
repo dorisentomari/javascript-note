@@ -62,7 +62,7 @@
 
 ## 13.2 基本用法
 `Promise`对象是一个构造函数，用来生成`Promise`实例
-```javascript
+```ecmascript 6
 let promise = new Promise(function (resolve, reject) {
     if (true) {
         resolve(value);
@@ -71,12 +71,12 @@ let promise = new Promise(function (resolve, reject) {
     }
 });
 ```
-`Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。它们是两个函数，由 JavaScript 引擎提供，不用自己部署
+`Promise`构造函数接受一个函数作为参数，该函数的两个参数分别是`resolve`和`reject`。它们是两个函数，由 ecmascript 6 引擎提供，不用自己部署
 
 `resolve`函数的作用是，将`Promise`对象的状态从`未完成`变为`成功`,即从`pending`变为`resolved`，在异步操作成功时调用，并将异步操作的结果，作为参数传递出去；`reject`函数的作用是，将`Promise`对象的状态从`未完成`变为`失败`,即从`pending`变为`rejected`，在异步操作失败时调用，并将异步操作报出的错误，作为参数传递出去
 
 `Promise`实例生成以后，可以用`then`方法分别指定`resolved`状态和`rejected`状态的回调函数
-```javascript
+```ecmascript 6
 let promise = new Promise(function (resolve, reject) {
     if (true) {
         resolve(value);
@@ -91,7 +91,7 @@ promise.then(function (value) {
 })
 ```
 `then`方法可以接受两个回调函数作为参数。第一个回调函数是`Promise`对象的状态变为`resolved`时调用，第二个回调函数是`Promise`对象的状态变为`rejected`时调用。其中，第二个函数是可选的，不一定要提供。这两个函数都接受`Promise`对象传出的值作为参数
-```javascript
+```ecmascript 6
 function timeout(ms) {
     return new Promise((resolve, reject) => {
         setTimeout(resolve, ms, 'done');
@@ -103,7 +103,7 @@ timeout(100).then((value) => {
 })
 ```
 `timeout`方法返回一个`Promise`实例，表示一段时间以后才会发生的结果。过了指定的时间`ms参数`以后，`Promise`实例的状态变为`resolved`，就会触发`then`方法绑定的回调函数
-```javascript
+```ecmascript 6
 let promise = new Promise(function (resolve, reject) {
     console.log('this is promise object');
     resolve();
@@ -198,7 +198,7 @@ console.log('global string');
 </html>
 ```
 + 调用`resolve`或`reject`并不会终结`Promise`的参数函数的执行
-```javascript
+```ecmascript 6
 new Promise((resolve, reject) => {
     resolve(111);
     console.log(222);
@@ -213,7 +213,7 @@ new Promise((resolve, reject) => {
 调用`resolve(111)`以后，后面的`console.log(222)`还是会执行，并且会首先打印出来。这是因为立即 `resolved`的`Promise`是在本轮事件循环的末尾执行，总是晚于本轮循环的同步任务
 
 调用`resolve`或`reject`以后，`Promise`的使命就完成了，后继操作应该放到`then`方法里面，而不应该直接写在`resolve`或`reject`的后面。所以，最好在它们前面加上`return`语句，这样就不会有意外
-```javascript
+```ecmascript 6
 new Promise((resolve, reject) => {
     return resolve(111);
     console.log(222);
@@ -232,7 +232,7 @@ new Promise((resolve, reject) => {
 
 ## 13.4 `Promise.prototype.catch()`
 `Promise.prototype.catch`方法是`.then(null, rejection)`的别名，用于指定发生错误时的回调函数
-```javascript
+```ecmascript 6
 getJSON('./data.json').then(function (data) {
     console.log(data);
 }).catch(function (err) {
@@ -240,7 +240,7 @@ getJSON('./data.json').then(function (data) {
 })
 ```
 `getJSON`方法返回一个`Promise`对象，如果该对象状态变为`resolved`，则会调用`then`方法指定的回调函数；如果异步操作抛出错误，状态就会变为`rejected`，就会调用`catch`方法指定的回调函数，处理这个错误。另外，`then`方法指定的回调函数，如果运行中抛出错误，也会被`catch`方法捕获
-```javascript
+```ecmascript 6
 let promise = new Promise((resolve, reject) => {
     throw new Error('this is a error message');
 });
@@ -263,7 +263,7 @@ promise.catch(function (err) {
 `promise`抛出一个错误，就被`catch`方法指定的回调函数捕获
 如果`Promise`状态已经变成`resolved`，再抛出错误是无效的
 + 如果`Promise`状态已经变成`resolved`，再抛出错误是无效的
-```javascript
+```ecmascript 6
 let promise = new Promise((resolve, reject) => {
     resolve('nornal end...');
     throw new Error('this is a error message');
@@ -278,7 +278,7 @@ promise.then(value => {
 一般来说，不要在`then`方法里面定义`Reject`状态的回调函数（即`then`的第二个参数），总是使用`catch`方法
 
 跟传统的`try/catch`代码块不同的是，如果没有使用`catch`方法指定错误处理的回调函数，`Promise`对象抛出的错误不会传递到外层代码，即不会有任何反应
-```javascript
+```ecmascript 6
 let pro = function () {
     return new Promise((resolve, reject) => {
         resolve(wrong); // renceError: wrong is not defined
@@ -293,7 +293,7 @@ setTimeout(() => {
 ```
 `Promise`内部的错误不会影响到`Promise`外部的代码
 > 这个脚本放在服务器执行，退出码就是0（即表示执行成功）。不过，Node 有一个`unhandledRejection`事件，专门监听未捕获的`reject`错误，上面的脚本会触发这个事件的监听函数，可以在监听函数里面抛出错误
-```javascript
+```ecmascript 6
 let process = require('process');
 let pro = function () {
     return new Promise((resolve, reject) => {
@@ -315,7 +315,7 @@ process.on('unhandledRejection', function (err, pro) {
 Node 有计划在未来废除`unhandledRejection`事件。如果`Promise`内部有未捕获的错误，会直接终止进程，并且进程的退出码不为`0`
 
 `Promise`对象后面要跟`catch`方法，这样可以处理`Promise`内部发生的错误。`catch`方法返回的还是一个`Promise`对象，因此后面还可以接着调用`then`方法
-```javascript
+```ecmascript 6
 let promise = new Promise((resolve, reject) => {
     resolve(ken)
 });
@@ -335,14 +335,14 @@ promise.then(value => {
 
 ## 13.5 `Promise.all()`
 `Promise.all`方法用于将多个`Promise`实例，包装成一个新的`Promise`实例
-```javascript
+```ecmascript 6
 const p = Promise.all([p1, p2, p3]);
 ```
 `Promise.all`方法接受一个数组作为参数，`p1`、`p2`、`p3`都是`Promise`实例，如果不是，就会先调用下面讲到的`Promise.resolve`方法，将参数转为`Promise`实例，再进一步处理。（`Promise.all`方法的参数可以不是数组，但必须具有`Iterator`接口，且返回的每个成员都是`Promise`实例。）
 `p`的状态由`p1`、`p2`、`p3`决定，分成两种情况
 + 只有`p1`、`p2`、`p3`的状态都变成`fulfilled`，`p`的状态才会变成`fulfilled`，此时`p1`、`p2`、`p3`的返回值组成一个数组，传递给`p`的回调函数
 + 只要`p1`、`p2`、`p3`之中有一个被`rejected`，`p`的状态就变成`rejected`，此时第一个被`reject`的实例的返回值，会传递给`p`的回调函数
-```javascript
+```ecmascript 6
 let promises = [1, 2, 5, 6, 3, 7].map(id => {
     return getJSON('/post/' + id + '.json');
 });
@@ -354,7 +354,7 @@ Promise.all(promises).then(post => {
 })
 ```
 `promises`是包含 6 个`Promise`实例的数组，只有这 6 个实例的状态都变成`fulfilled`，或者其中有一个变为`rejected`，才会调用`Promise.all`方法后面的回调函数
-```javascript
+```ecmascript 6
 const p1 = new Promise((resolve, reject) => {
   resolve('hello');
 })
@@ -374,7 +374,7 @@ Promise.all([p1, p2])
 ```
 `p1`会`resolved`，`p2`首先会`rejected`，但是`p2`有自己的`catch`方法，该方法返回的是一个新的 `Promise`实例，`p2`指向的实际上是这个实例。该实例执行完`catch`方法后，也会变成`resolved`，导致`Promise.all()`方法参数里面的两个实例都会`resolved`，因此会调用then方法指定的回调函数，而不会调用`catch`方法指定的回调函数
 如果`p2`没有自己的`catch`方法，就会调用`Promise.all()`的`catch`方法
-```javascript
+```ecmascript 6
 const p1 = new Promise((resolve, reject) => {
   resolve('hello');
 })
@@ -392,14 +392,14 @@ Promise.all([p1, p2])
 ```
 ## 13.6 `Promise.race()`
 `Promise.race`方法同样是将多个`Promise`实例，包装成一个新的`Promise`实例
-```javascript
+```ecmascript 6
 const p = Promise.race([p1, p2, p3]);
 ```
 只要`p1`、`p2`、`p3`之中有一个实例率先改变状态，`p`的状态就跟着改变。那个率先改变的`Promise`实例的返回值，就传递给`p`的回调函数。
 
 `Promise.race`方法的参数与`Promise.all`方法一样，如果不是`Promise`实例，就会先调用下面讲到的`Promise.resolve`方法，将参数转为`Promise`实例，再进一步处理
 + 如果指定时间内没有获得结果，就将`Promise`的状态变为`reject`，否则变为`resolve`
-```javascript
+```ecmascript 6
 let promise = Promise.race([
     fetch('/bigImage.jpg'),
     new Promise((resolve, reject) => {
@@ -416,11 +416,11 @@ promise.catch(err => console.log(err));
 
 ## 13.7 `Promise.resolve()`
 有时需要将现有对象转为`Promise`对象，`Promise.resolve`方法就起到这个作用
-```javascript
+```ecmascript 6
 const jsPromise = Promise.resolve($.ajax('/whatever.json'));
 ```
 `Promise.resolve`等价于下面的写法
-```javascript
+```ecmascript 6
 Promise.resolve('message');
 /** 等价于下边的写法 */
 new Promise(resolve => resolve('message'));
@@ -430,7 +430,7 @@ new Promise(resolve => resolve('message'));
 如果参数是`Promise`实例，那么`Promise.resolve`将不做任何修改、原封不动地返回这个实例
 + 参数是一个`thenable`对象
 `thenable`对象指的是具有then方法的对象，比如下面这个对象
-```javascript
+```ecmascript 6
 let thenable = {
     then(resolve, reject) {
         resolve('message');
@@ -438,7 +438,7 @@ let thenable = {
 }
 ```
 `Promise.resolve`方法会将这个对象转为`Promise`对象，然后就立即执行`thenable`对象的`then`方法
-```javascript
+```ecmascript 6
 let thenable = {
     then(resolve, reject) {
         resolve('message');
@@ -452,7 +452,7 @@ promise.then(value => {
 `thenable`对象的`then`方法执行后，对象`promise`的状态就变为`resolved`，从而立即执行最后那个`then`方法指定的回调函数，输出`message`
 + 参数不是具有`then`方法的对象，或根本就不是对象
 如果参数是一个原始值，或者是一个不具有`then`方法的对象，则`Promise.resolve`方法返回一个新的`Promise`对象，状态为`resolved`
-```javascript
+```ecmascript 6
 let promise = Promise.resolve('message');
 promise.then((value) => {
     console.log(value);
@@ -462,14 +462,14 @@ promise.then((value) => {
 + 不带有任何参数
 `Promise.resolve`方法允许调用时不带参数，直接返回一个`resolved`状态的`Promise`对象
 希望得到一个`Promise`对象，比较方便的方法就是直接调用`Promise.resolve`方法
-```javascript
+```ecmascript 6
 let promise = Promise.resolve('message');
 promise.then((resolve) => {
     resolve();
 });
 ```
 需要注意的是，立即`resolve`的`Promise`对象，是在本轮“事件循环”（event loop）的结束时，而不是在下一轮“事件循环”的开始时
-```javascript
+```ecmascript 6
 setTimeout(function () {
     console.log('message one');
 }, 0);
@@ -488,7 +488,7 @@ console.log('message three');
 ## 13.8 `Promise.reject()`
 `Promise.reject(reason)`方法也会返回一个新的`Promise`实例，该实例的状态为`rejected`
 `Promise.reject()`方法的参数，会原封不动地作为`reject`的理由，变成后续方法的参数。这一点与`Promise.resolve`方法不一致
-```javascript
+```ecmascript 6
 let thenable = {
     then(resolve, reject) {
         reject('wrong');
@@ -501,7 +501,7 @@ Promise.reject(thenable).catch(err => {
 ```
 ## 13.9 `done()`
 `Promise`对象的回调链，不管以`then`方法或`catch`方法结尾，要是最后一个方法抛出错误，都有可能无法捕捉到（因为 `Promise`内部的错误不会冒泡到全局）。因此，我们可以提供一个`done`方法，总是处于回调链的尾端，保证抛出任何可能出现的错误
-```javascript
+```ecmascript 6
 let promise = new Promise((resolve, reject) => {
     resolve(ken)
 });
@@ -518,7 +518,7 @@ promise.then(value => {
 });
 ```
 **代码实现**
-```javascript
+```ecmascript 6
 Promise.prototype.done = function (onFulfilled, onRejected) {
     this.then(onFulfilled, onRejected)
         .catch(reason => {
@@ -533,13 +533,13 @@ Promise.prototype.done = function (onFulfilled, onRejected) {
 ## 13.10 `finally()`
 `finally`方法用于指定不管`Promise`对象最后状态如何，都会执行的操作。它与`done`方法的最大区别，它接受一个普通的回调函数作为参数，该函数不管怎样都必须执行
 + 服务器使用`Promise`处理请求，然后使用`finally`方法关掉服务器
-```javascript
+```ecmascript 6
 server.listen(3333).then((resolve, reject) => {
     
 }).finally(server.stop);
 ```
 **代码实现**
-```javascript
+```ecmascript 6
 Promise.prototype.finally = function (callback) {
     let promise = this.constructor;
     return this.then(
@@ -554,7 +554,7 @@ Promise.prototype.finally = function (callback) {
 
 ## 13.11 `Generator`函数与`Promise`的结合
 **不懂**
-```javascript
+```ecmascript 6
 function one() {
     return new Promise((resolve, reject) => {
         resolve('one message');

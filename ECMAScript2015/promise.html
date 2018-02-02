@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>promise</title>
+</head>
+<body>
+<script>
+	let log = console.log.bind(console);
+	log('one')
+	
+	function finger(x, y) {
+		return new Promise((resolve, reject) => {
+			if (x > y) {
+				resolve(x + y);
+			} else {
+				reject(x - y);
+			}
+		}).then((feed) => {
+			log(feed);
+		}).catch((err) => {
+			log(err);
+		})
+	}
+	
+	finger(8, 1);
+	/*****
+	 new Promise(function (resolve, reject) {
+		log('start new Promise...');
+		var timeOut = Math.random() * 2;
+		log('set timeout to: ' + timeOut + ' seconds.');
+		setTimeout(function () {
+			if (timeOut < 1) {
+				log('call resolve()...');
+				resolve('200 OK');
+			}
+			else {
+				log('call reject()...');
+				reject('timeout in ' + timeOut + ' seconds.');
+			}
+		}, timeOut * 1000);
+	}).then(function (r) {
+		log('Done: ' + r);
+	}).catch(function (reason) {
+		log('Failed: ' + reason);
+	});
+	 
+	 
+	 [].forEach.call($$("*"), function (a) {
+			a.style.outline = "1px solid #" + (~~(Math.random() * (1 << 24))).toString(16)
+		})
+	 *****/
+</script>
+</body>
+</html>
