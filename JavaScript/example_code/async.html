@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>async</title>
+</head>
+
+<body>
+<script>
+	/******
+	 async function getInfo(value, ms) {
+            await new Promise((resolve, reject) => {
+                let a = 5, b = 3;
+                if (a > b) {
+                    setTimeout(resolve, ms)
+                } else {
+                    setTimeout(reject, ms);
+                }
+            })
+            return value;
+        }
+	 getInfo({ username: 'mark' }, 20).then(value => {
+            console.log('value:', value)
+        }).catch(err => {
+            console.log('err:', err);
+        });
+	 
+	 
+	 function getUserA() {
+            return 1;
+        }
+	 
+	 function getUserB() {
+            return 2;
+        }
+	 
+	 function getUserC() {
+            return 3;
+        }
+	 async function getUser() {
+            let results = await Promise.all([getUserA(), getUserB(), getUserC()])
+            return results.reduce((total, value)=>total * value);
+        }
+	 getUser().then((res) => {
+            console.log(res);
+        }).catch(err => {
+            console.log('err:', err);
+        });
+	 *********/
+	function asyncGet(x) {
+		return new Promise(resolve => {
+			console.log('a');
+			setTimeout(() => {
+				resolve(x)
+			}, 50)
+		})
+	}
+	
+	async function test() {
+		console.log('b');
+		const x = 3 + 5;
+		console.log(x);
+		
+		const a = await asyncGet(1);
+		console.log(a);
+		
+		const b = await asyncGet(2);
+		console.log(b);
+		
+		// const [a, b] = await Promise.all([
+		//     asyncGet(1),
+		//     asyncGet(2)
+		// ])
+		console.log('c');
+		return a + b;
+	}
+	
+	const now = Date.now();
+	console.log('d');
+	test().then((res) => {
+		console.log(res);
+		console.log(`elapsed: ${Date.now() - now}`)
+	});
+	console.log('f');
+	// d b 8 a f 1 a 2 c 3   elapsed: 104
+	// d b 8 a a f c 3     elapsed: 53
+</script>
+</body>
+
+</html>
