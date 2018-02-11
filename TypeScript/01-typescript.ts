@@ -78,25 +78,15 @@ let user: UserInterface = {
 // 注意：命名空间内的第一个接口声明前并没有export关键字，所以在命名空间的外部，我们访问不到它
 /***************************
  namespace Geometry {
-    interface VectorInterface {
+    interface VectorInterface {}
 
-    }
+    export interface Vector2dInterface {}
 
-    export interface Vector2dInterface {
+    export interface Vector3dInterface {}
 
-    }
+    export class Vector2d implements VectorInterface, Vector2dInterface {}
 
-    export interface Vector3dInterface {
-
-    }
-
-    export class Vector2d implements VectorInterface, Vector2dInterface {
-
-    }
-
-    export class Vector3d implements VectorInterface, Vector3dInterface {
-
-    }
+    export class Vector3d implements VectorInterface, Vector3dInterface {}
 }
 
  let vector2dInstance: Geometry.Vector2dInterface = new Geometry.Vector2d();

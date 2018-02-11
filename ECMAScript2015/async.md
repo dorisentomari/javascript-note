@@ -1,7 +1,8 @@
 # async 函数
 ## 含义
 > async 函数,使得异步操作变得更加方便
-```javascript
+
+```ecmascript 6
 const fs = require('fs');
 
 const readFile = function (fileName) {

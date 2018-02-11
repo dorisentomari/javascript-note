@@ -212,7 +212,8 @@ class Cocacola implements Water {
     }
 }
  ****/
-// 因为当一个类实现了一个接口时，只对其实例部分进行类型检查。 constructor存在于类的静态部分，所以不在检查的范围内
+// 因为当一个类实现了一个接口时，只对其实例部分进行类型检查。
+// constructor存在于类的静态部分，所以不在检查的范围内
 /*******
  interface ColorConstructor {
     new (hour: number, minute: number): ColorInterface ;
