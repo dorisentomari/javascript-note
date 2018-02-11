@@ -173,7 +173,7 @@ abstract class Cool {
 + 抽象类中的抽象方法不包含具体实现并且必须在派生类中实现。
 + 抽象方法的语法与接口方法相似。
 + 两者都是定义方法签名但不包含方法体。
-+ 然而，抽象方法必须包含 abstract关键字并且可以包含访问修饰符
++ 然而，抽象方法必须包含`abstract`关键字并且可以包含访问修饰符
 ```typescript
 abstract class Department {
     constructor(public name: string) {

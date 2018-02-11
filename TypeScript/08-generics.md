@@ -19,7 +19,6 @@ function TypeArray<M>(arg: Array<M>): Array<M> {
 }
 ```
 
-
 2. 泛型类型
 ```typescript
 let identityT: <T>(arg: T) => T = identity;
@@ -59,7 +58,7 @@ genNum.add = function (x, y) {
 };
 ```
 
-5. 泛型约束
+4. 泛型约束
 + 对泛型进行约束限制，参数必须有Length属性
 ```typescript
 interface LengthWise {

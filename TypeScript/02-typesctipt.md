@@ -1,4 +1,4 @@
-**learning typescript**
+## learning typescript
 ```typescript
 let str: string[] | string;
 str = ['a', 'b'];
@@ -13,7 +13,6 @@ if (typeof sen === 'string') {
 
 sen.getName();
 ```
-
 
 ```typescript
 let fen = (name: string): string => {

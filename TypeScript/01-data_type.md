@@ -3,7 +3,7 @@
 let isStudent: boolean = false;
 console.log(isStudent);
 ```
- 2. 数值类型 
+2. 数值类型 
  ```typescript
 let hexNumber: number = 0x784fd;
 console.log(hexNumber);
