@@ -24,7 +24,7 @@
 	}
 	
 	finger(8, 1);
-	 new Promise(function (resolve, reject) {
+	new Promise(function (resolve, reject) {
 		log('start new Promise...');
 		var timeOut = Math.random() * 2;
 		log('set timeout to: ' + timeOut + ' seconds.');
@@ -43,6 +43,42 @@
 	}).catch(function (reason) {
 		log('Failed: ' + reason);
 	});
+	
+	// 自己实现一个Promise对象
+	function promise(fn) {
+		let status = 'pending';
+		let successArray = [];
+		let failArray = [];
+		
+		function successNotify() {
+			status = 'resolve';
+		}
+		
+		function failNotify() {
+			status = 'reject'
+		}
+		
+		function todoThen() {
+			if (status === 'resolve') {
+				for (let i = 0; i < successArray.length; i++) {
+					successArray[i].call();
+				}
+			} else if (status === 'reject') {
+				for (let i = 0; i < failArray.length; i++) {
+					failArray[i].call()
+				}
+			}
+		}
+		
+		fn.call(undefined, successNotify, failNotify)
+		return {
+			then: function (successFn, failFn) {
+				successArray.push(successFn);
+				failArray.push(failFn);
+				return undefined;
+			}
+		}
+	}
 
 </script>
 </body>
