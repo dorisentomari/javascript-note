@@ -2,15 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9c50ed1-1792-4211-9b6f-65a93abe6b7f" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/01-data_type.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/02-typesctipts.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/03-variable_declaration.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/04-interface.md" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/05-class.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ECMAScript2015/async.md" afterPath="$PROJECT_DIR$/ECMAScript2015/async.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/06-function.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/07-OOP.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/08-generics.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/09-enum.md" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TypeScript/10-descripor.md" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/01-basic_data_type.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/01-typescript.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/01-typescript.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/02-variable_declaration.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/02-variable_declaration.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/03-interface.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/03-variable_declaration.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/04-class.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/04-class.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/04-interface.md" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/05-function.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/05-function.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/06-OOP.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/06-OOP.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/07-generics.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/07-generics.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/08-enum.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/08-enum.ts" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/09-descriptor.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/TypeScript/09-descriptor.ts" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ECMAScript2015/promise.html" afterPath="$PROJECT_DIR$/ECMAScript2015/promise.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TypeScript/01-typescript.ts" afterPath="$PROJECT_DIR$/TypeScript/01-typescript.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TypeScript/03-interface.ts" afterPath="$PROJECT_DIR$/TypeScript/03-interface.ts" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -23,89 +41,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="promise.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ECMAScript2015/promise.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="79" column="9" lean-forward="true" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="async.md" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ECMAScript2015/async.md">
-          <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-            <state split_layout="FIRST">
-              <first_editor relative-caret-position="44">
-                <caret line="2" column="7" lean-forward="false" selection-start-line="2" selection-start-column="7" selection-end-line="2" selection-end-column="7" />
-                <folding>
-                  <marker date="1518354955408" expanded="true" signature="122:299" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="172:295" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="222:289" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="327:463" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="583:781" ph="/** { value: Promise { &lt;pending&gt; }, done: false } ...*/" />
-                  <marker date="1518354955408" expanded="true" signature="855:1013" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="1784:1880" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="1908:1927" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="1952:1968" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2002:2027" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2132:2202" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2167:2198" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2235:2279" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2320:2359" ph="//..." />
-                  <marker date="1518354955408" expanded="true" signature="2470:2539" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2504:2535" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2572:2616" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2811:2829" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2875:3031" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2892:2922" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="2946:3029" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3296:3313" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3343:3393" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3512:3565" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3524:3563" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3589:3623" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3634:3656" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="3887:4012" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4060:4084" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4224:4260" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4282:4305" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4501:4554" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4576:4600" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4616:4638" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="4855:4956" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5140:5288" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5146:5201" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5209:5231" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5331:5381" ph="//..." />
-                  <marker date="1518354955408" expanded="true" signature="5475:5613" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5659:5710" ph="//..." />
-                  <marker date="1518354955408" expanded="true" signature="5815:5910" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5857:5907" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5932:5956" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5971:5993" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="5996:6064" ph="//..." />
-                  <marker date="1518354955408" expanded="true" signature="6249:6430" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6255:6355" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6298:6350" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6365:6389" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6439:6507" ph="//..." />
-                  <marker date="1518354955408" expanded="true" signature="6588:6809" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6594:6773" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6626:6646" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6681:6701" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6743:6769" ph="{...}" />
-                  <marker date="1518354955408" expanded="true" signature="6783:6807" ph="{...}" />
-                </folding>
-              </first_editor>
-              <second_editor />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -158,6 +94,11 @@
         <option value="$PROJECT_DIR$/TypeScript/05-class.md" />
         <option value="$PROJECT_DIR$/ECMAScript2015/promise.html" />
         <option value="$PROJECT_DIR$/ECMAScript2015/async.md" />
+        <option value="$PROJECT_DIR$/TypeScript/05-function.md" />
+        <option value="$PROJECT_DIR$/TypeScript/07-OOP.md" />
+        <option value="$PROJECT_DIR$/TypeScript/08-generics.md" />
+        <option value="$PROJECT_DIR$/TypeScript/09-enum.md" />
+        <option value="$PROJECT_DIR$/TypeScript/10-descripor.md" />
       </list>
     </option>
   </component>
@@ -167,10 +108,10 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1382" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="x" value="-64" />
+    <option name="y" value="109" />
+    <option name="width" value="1378" />
     <option name="height" value="754" />
   </component>
   <component name="ProjectLevelVcsManager">
@@ -202,7 +143,7 @@
             <path>
               <item name="js-ts" type="b2602c69:ProjectViewProjectNode" />
               <item name="js-ts" type="462c0819:PsiDirectoryNode" />
-              <item name="ECMAScript2015" type="462c0819:PsiDirectoryNode" />
+              <item name="TypeScript" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -246,18 +187,18 @@
       <updated>1518266524781</updated>
       <workItem from="1518266525963" duration="5836000" />
       <workItem from="1518273480994" duration="918000" />
-      <workItem from="1518352150982" duration="1946000" />
+      <workItem from="1518352150982" duration="3284000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8700000" />
+    <option name="totallyTimeSpent" value="10038000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="754" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="754" extended-state="7" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15625" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23958333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -270,7 +211,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -301,86 +241,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/05-DOM事件类.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="940">
-            <caret line="125" column="3" lean-forward="true" selection-start-line="125" selection-start-column="3" selection-end-line="125" selection-end-column="3" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/06-原型和原型链.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="368">
-            <caret line="160" column="0" lean-forward="true" selection-start-line="160" selection-start-column="0" selection-end-line="160" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/07-原型和原型链.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="434">
-            <caret line="33" column="60" lean-forward="false" selection-start-line="33" selection-start-column="60" selection-end-line="33" selection-end-column="60" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/08-作用域和闭包.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="324">
-            <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/09-异步和同步.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="236">
-            <caret line="100" column="21" lean-forward="false" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="21" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/10-面向对象编程.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="720">
-            <caret line="79" column="3" lean-forward="true" selection-start-line="79" selection-start-column="3" selection-end-line="79" selection-end-column="3" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/11-AJAX通信.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="66">
-            <caret line="3" column="0" lean-forward="true" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/JavaScript/Docs/12-AJAX通信.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="412">
-            <caret line="123" column="0" lean-forward="true" selection-start-line="123" selection-start-column="0" selection-end-line="123" selection-end-column="0" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/JavaScript/Docs/13-存储.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
@@ -426,6 +286,12 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="-1034">
             <caret line="54" column="7" lean-forward="false" selection-start-line="54" selection-start-column="7" selection-end-line="54" selection-end-column="7" />
+            <folding>
+              <marker date="1518269609597" expanded="true" signature="1465:1492" ph="{...}" />
+              <marker date="1518269609597" expanded="true" signature="1512:1540" ph="//..." />
+              <marker date="1518269609597" expanded="true" signature="1570:1578" ph="{...}" />
+              <marker date="1518269609597" expanded="true" signature="1597:1605" ph="//..." />
+            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -486,6 +352,45 @@
         <state split_layout="FIRST">
           <first_editor relative-caret-position="6204">
             <caret line="256" column="3" lean-forward="true" selection-start-line="256" selection-start-column="3" selection-end-line="256" selection-end-column="3" />
+            <folding>
+              <marker date="1518269706784" expanded="true" signature="1010:1516" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1039:1067" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1103:1490" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1141:1182" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1212:1478" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1298:1462" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1342:1425" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1665:1859" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1802:1840" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="1956:1994" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="2022:2101" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="2125:2193" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="2254:2300" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="2362:2408" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="2518:2564" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="2585:2652" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="2824:3249" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="2838:3021" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="3106:3245" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="3288:3316" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="3360:4187" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="3378:3695" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="3736:3862" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="3897:4152" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="3981:4142" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="4303:4712" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="4556:4692" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="4600:4645" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="4651:4686" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="4859:4999" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="5117:5334" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="5404:5640" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="5438:5617" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="5664:5690" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="5740:5762" ph="//..." />
+              <marker date="1518269706784" expanded="true" signature="5787:5922" ph="{...}" />
+              <marker date="1518269706784" expanded="true" signature="5854:5918" ph="{...}" />
+            </folding>
           </first_editor>
           <second_editor />
         </state>
@@ -550,6 +455,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4356">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -615,27 +521,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TypeScript/01-basic_data_type.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeScript/01-data_type.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="154">
-            <caret line="7" column="23" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TypeScript/01-typescript.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="88">
           <caret line="4" column="0" lean-forward="true" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -697,6 +587,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="144">
           <caret line="188" column="0" lean-forward="true" selection-start-line="188" selection-start-column="0" selection-end-line="188" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -704,28 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeScript/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeScript/09-descriptor.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-626">
-          <caret line="7" column="27" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TypeScript/05-function.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="7" column="1" lean-forward="false" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -800,8 +669,256 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ECMAScript2015/promise.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="79" column="9" lean-forward="true" selection-start-line="79" selection-start-column="9" selection-end-line="79" selection-end-column="9" />
+        <state relative-caret-position="854">
+          <caret line="75" column="28" lean-forward="false" selection-start-line="75" selection-start-column="16" selection-end-line="75" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/05-function.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="7" column="1" lean-forward="true" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/06-function.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="434">
+            <caret line="341" column="1" lean-forward="false" selection-start-line="341" selection-start-column="1" selection-end-line="341" selection-end-column="1" />
+            <folding>
+              <marker date="1518355709663" expanded="true" signature="114:168" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="130:166" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="222:276" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="238:274" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="712:766" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="728:764" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="867:921" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="883:919" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1043:1064" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1132:1153" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1246:1330" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1260:1293" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1299:1328" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1465:1490" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="1952:2071" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2016:2050" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2357:2381" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2423:2442" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2488:2509" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2592:2925" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2620:2923" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="2644:2686" ph="..." />
+              <marker date="1518355709663" expanded="true" signature="2709:2750" ph="..." />
+              <marker date="1518355709663" expanded="true" signature="2774:2834" ph="..." />
+              <marker date="1518355709663" expanded="true" signature="2851:2917" ph="..." />
+              <marker date="1518355709663" expanded="true" signature="3321:3580" ph="..." />
+              <marker date="1518355709663" expanded="true" signature="3814:3852" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="3863:3879" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="3907:4100" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="3920:4097" ph="{&quot;url&quot;: '/users'...}" />
+              <marker date="1518355709663" expanded="true" signature="3991:4029" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4052:4091" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4161:4184" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4220:4310" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4265:4308" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4327:4383" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4448:4471" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4511:4601" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4557:4599" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4680:4703" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4758:4848" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4803:4846" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4909:4999" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="4955:4997" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="5171:5186" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="5291:5690" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="5364:5688" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="5871:5907" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="5945:5997" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6127:6633" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6194:6227" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6241:6300" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6331:6445" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6358:6431" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6451:6470" ph="/**...*/" />
+              <marker date="1518355709663" expanded="true" signature="6505:6631" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6538:6617" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="6983:7064" ph="{...}" />
+              <marker date="1518355709663" expanded="true" signature="7593:7641" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/07-OOP.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="170">
+            <caret line="76" column="19" lean-forward="false" selection-start-line="76" selection-start-column="2" selection-end-line="76" selection-end-column="19" />
+            <folding>
+              <marker date="1518355709703" expanded="true" signature="537:841" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="680:745" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="759:839" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="855:1241" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="916:1069" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="957:1000" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="1006:1063" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="1112:1185" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="1205:1239" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="1997:2162" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="2046:2083" ph="{...}" />
+              <marker date="1518355709703" expanded="true" signature="2105:2160" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/06-OOP.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-220">
+          <caret line="4" column="17" lean-forward="false" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/08-generics.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="1094">
+            <caret line="116" column="23" lean-forward="false" selection-start-line="116" selection-start-column="9" selection-end-line="116" selection-end-column="23" />
+            <folding>
+              <marker date="1518356086926" expanded="true" signature="74:93" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="225:273" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="322:370" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="771:794" ph="..." />
+              <marker date="1518356086926" expanded="true" signature="831:850" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="948:993" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1080:1101" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1177:1200" ph="..." />
+              <marker date="1518356086926" expanded="true" signature="1256:1304" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1414:1438" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1585:1608" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1669:1694" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1712:1736" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1751:1775" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1802:1828" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1856:1882" ph="{...}" />
+              <marker date="1518356086926" expanded="true" signature="1944:1967" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/07-generics.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="0" lean-forward="true" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/08-enum.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="23" lean-forward="true" selection-start-line="9" selection-start-column="23" selection-end-line="9" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/09-enum.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="242">
+            <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+            <folding>
+              <marker date="1518356086997" expanded="true" signature="37:82" ph="..." />
+              <marker date="1518356086997" expanded="true" signature="100:216" ph="..." />
+              <marker date="1518356086997" expanded="true" signature="544:618" ph="..." />
+              <marker date="1518356086997" expanded="true" signature="926:1140" ph="{...}" />
+              <marker date="1518356086997" expanded="true" signature="982:1035" ph="{...}" />
+              <marker date="1518356086997" expanded="true" signature="1064:1118" ph="{...}" />
+              <marker date="1518356086997" expanded="true" signature="1153:1201" ph="{...}" />
+              <marker date="1518356086997" expanded="true" signature="1192:1199" ph="{...}" />
+              <marker date="1518356086997" expanded="true" signature="1222:1242" ph="..." />
+              <marker date="1518356086997" expanded="true" signature="1284:1346" ph="{...}" />
+              <marker date="1518356086997" expanded="true" signature="1296:1344" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/09-descriptor.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="11" column="24" lean-forward="false" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/10-descripor.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="280">
+            <caret line="58" column="13" lean-forward="true" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
+            <folding>
+              <marker date="1518356086963" expanded="true" signature="204:340" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="244:338" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="356:520" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="475:518" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="535:699" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="654:697" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="709:788" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="742:786" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="819:820" ph="/**...*/" />
+              <marker date="1518356086963" expanded="true" signature="819:900" ph="//..." />
+              <marker date="1518356086963" expanded="true" signature="1335:1408" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="1423:1507" ph="{...}" />
+              <marker date="1518356086963" expanded="true" signature="1473:1505" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="110">
+          <caret line="5" column="1" lean-forward="true" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/01-data_type.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="154">
+            <caret line="7" column="23" lean-forward="false" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+            <folding>
+              <marker date="1518271419614" expanded="true" signature="789:838" ph="..." />
+              <marker date="1518271419614" expanded="true" signature="1323:1389" ph="{...}" />
+              <marker date="1518271419614" expanded="true" signature="1572:1659" ph="//..." />
+              <marker date="1518271419614" expanded="true" signature="1704:1894" ph="//..." />
+              <marker date="1518271419614" expanded="true" signature="1934:1963" ph="{...}" />
+              <marker date="1518271419614" expanded="true" signature="2017:2051" ph="{...}" />
+              <marker date="1518271419614" expanded="true" signature="2127:2156" ph="{...}" />
+              <marker date="1518271419614" expanded="true" signature="2146:2154" ph="{...}" />
+            </folding>
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TypeScript/01-basic_data_type.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1364">
+          <caret line="61" column="7" lean-forward="true" selection-start-line="61" selection-start-column="7" selection-end-line="61" selection-end-column="7" />
           <folding />
         </state>
       </provider>
