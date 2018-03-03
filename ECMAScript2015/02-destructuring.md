@@ -256,15 +256,13 @@ console.log('x:', x);
 ```javascript
 let {log, sin, cos} = Math;
 ```
-> 数组的本质是特殊的对象,因此可以对数组进行对象属性的结垢
++ 数组的本质是特殊的对象,因此可以对数组进行对象属性的结垢
 ```javascript
 let arr = [1, 2, 3];
 let {0: first, [arr.length - 1]: last} = arr;
 console.log('first:', first);// first: 1
 console.log('last:', last);  // last: 3
 ```
-
-
 ## 3. 字符串的解构赋值
 ### 3.1 字符串被转换成类数组的对象
 ```javascript
