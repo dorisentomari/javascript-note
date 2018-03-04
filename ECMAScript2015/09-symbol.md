@@ -1,16 +1,22 @@
-# 9. Symbol
-## 9.1 概述
-ES5 的对象属性名都是字符串，这容易造成属性名的冲突。比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法`mixin`模式，新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是 ES6 引入`Symbol`的原因
+# `Symbol`
+## 1. `Symbol`概述
+### 1.1 引入`Symbol`类型
++ ES5的对象属性名都是字符串，这容易造成属性名的冲突。
+> 比如，你使用了一个他人提供的对象，但又想为这个对象添加新的方法`mixin`模式，新方法的名字就有可能与现有方法产生冲突。如果有一种机制，保证每个属性的名字都是独一无二的就好了，这样就从根本上防止属性名的冲突。这就是ES6引入`Symbol`的原因
 
-ES6 引入了一种新的原始数据类型Symbol，表示独一无二的值。它是`JavaScript`语言的第七种数据类型，前六种是：`undefined`、`null`、`Boolean`、`String`、`Number`、`Object`
-+ Symbol值通过`Symbol`函数生成
-对象的属性名现在可以有两种类型，一种是原来就有的字符串，另一种就是新增的`Symbol`类型。凡是属性名属于`Symbol`类型，就都是独一无二的，可以保证不会与其他属性名产生冲突
++ ES6引入了一种新的原始数据类型`Symbol`，表示独一无二的值。它是`JavaScript`语言的第七种数据类型，前六种是：`undefined`、`null`、`Boolean`、`String`、`Number`、`Object`
++ `Symbol`值通过`Symbol`函数生成
++ 对象的属性名现在可以有两种类型
+    * 一种是原来就有的字符串
+    * 另一种就是新增的`Symbol`类型。凡是属性名属于`Symbol`类型，就都是独一无二的，可以保证不会与其他属性名产生冲突
 ```javascript
 let sen = Symbol();
 console.log(typeof sen); // symbol
 ```
-注意，`Symbol`函数前不能使用`new`命令，否则会报错。这是因为生成的`Symbol`是一个原始类型的值，不是对象。也就是说，由于`Symbol`值不是对象，所以不能添加属性。基本上，它是一种类似于字符串的数据类型
-
++ 注意
+    * `Symbol`函数前不能使用`new`命令，否则会报错。这是因为生成的`Symbol`是一个原始类型的值，不是对象。
+    * 也就是说，由于`Symbol`值不是对象，所以不能添加属性。基本上，它是一种类似于字符串的数据类型
+### 1.2 `Symbol`的基本使用
 + `Symbol`函数可以接受一个字符串作为参数，表示对`Symbol`实例的描述，主要是为了在控制台显示，或者转为字符串时，比较容易区分
 ```javascript
 let sen = Symbol('sen');
@@ -20,36 +26,32 @@ console.log(ken); // Symbol(ken)
 console.log(sen.toString()); // Symbol(sen)
 console.log(ken.toString()); // Symbol(ken)
 ```
-如果不加参数，它们在控制台的输出都是`Symbol()`，不利于区分。有了参数以后，就等于为它们加上了描述，输出的时候就能够分清，到底是哪一个值
-
-+ 如果`Symbol`的参数是一个对象，就会调用该对象的`toString`方法，将其转为字符串，然后才生成一个 `Symbol`值
++ 如果不加参数，它们在控制台的输出都是`Symbol()`，不利于区分。有了参数以后，就等于为它们加上了描述，输出的时候就能够分清，到底是哪一个值
+### 1.3 `Symbol`参数是对象
++ 如果`Symbol`的参数是一个对象，就会调用该对象的`toString`方法，将其转为字符串，然后才生成一个`Symbol`值
 ```javascript
 const num = {
     one() {
         return 'one string';
     }
 }
-
 const person = {
     name: 'Mark'
 }
-
 const ball = {
     toString() {
         return 'ball string'
     }
 }
-
 let sen = Symbol(num);
 let ken = Symbol(person);
 let gen = Symbol(ball);
-
 console.log(sen); // Symbol([object Object])
 console.log(ken); // Symbol([object Object])
 console.log(gen); // Symbol(ball string)
 ```
-`Symbol`函数的参数只是表示对当前`Symbol`值的描述，因此相同参数的`Symbol`函数的返回值是不相等的
-+ `Symbol`值不能与其他类型的值进行运算
++ `Symbol`函数的参数只是表示对当前`Symbol`值的描述，因此相同参数的`Symbol`函数的返回值是不相等的
+### 1.4 `Symbol`值不能与其他类型的值进行运算
 ```javascript
 let sen = Symbol('sen symbol flags');
 console.log('sen' + sen);// TypeError: Cannot convert a Symbol value to a string
@@ -62,22 +64,21 @@ console.log(sen.toString()); // Symbol(sen symbol flags)
 
 let gen = Symbol();
 console.log(Boolean(gen)); // true
-console.log(Number(gen)); //TypeError
+console.log(Number(gen)); //TypeError Cannot convert a Symbol value to a number
 ```
-## 9.2 作为属性名的`Symbol`
-由于每一个`Symbol`值都是不相等的，这意味着`Symbol`值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖
+## 2. 作为属性名的`Symbol`
++ 由于每一个`Symbol`值都是不相等的，这意味着`Symbol`值可以作为标识符，用于对象的属性名，就能保证不会出现同名的属性。这对于一个对象由多个模块构成的情况非常有用，能防止某一个键被不小心改写或覆盖
 ```javascript
 let ken = Symbol();
-
 let one = {};
 one[ken] = 111;
-console.log(one); // {}
+console.log(one); // {Symbol(): 111}
 console.log(one[ken]); // 111
 
 let two = {
     [ken]: 222
 };
-console.log(two); // {}
+console.log(two); // {Symbol(): 222}
 console.log(two[ken]); // 222
 
 let three = {};
@@ -122,25 +123,26 @@ console.log(log.levels.WARN, 'warn message'); // Symbol(warn) 'warn message'
 ```
 ```javascript
 const COLOR_RED = Symbol('red line');
-const COLOR_GEREN = Symbol('green line');
+const COLOR_GREEN = Symbol('green line');
 
 function getColor(color) {
     switch (color) {
         case COLOR_RED:
             return COLOR_GEREN;
-        case COLOR_GEREN:
+        case COLOR_GREEN:
             return COLOR_RED;
         default:
             throw new Error('undefined color');
     }
 }
 console.log(getColor(COLOR_RED)); // Symbol(green line)
-console.log(getColor(COLOR_GEREN)); // Symbol(red line)
+console.log(getColor(COLOR_GREEN)); // Symbol(red line)
 ```
 常量使用`Symbol`值最大的好处，就是其他任何值都不可能有相同的值了，因此可以保证上面的`switch`语句会按设计的方式工作
 **`Symbol`值作为属性名时，该属性还是公开属性，不是私有属性。**
-## 9.3 消除魔术字符串
-魔术字符串指的是，在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值。风格良好的代码，应该尽量消除魔术字符串，改由含义清晰的变量代替
+## 3. 消除魔术字符串
++ 魔术字符串指的是，在代码之中多次出现、与代码形成强耦合的某一个具体的字符串或者数值。
++ 风格良好的代码，应该尽量消除魔术字符串，改由含义清晰的变量代替
 + 魔术字符串
 ```javascript
 function getArea(shape, options) {
@@ -174,17 +176,17 @@ function getArea(shape, options) {
 
 console.log(getArea(shapeType.triangle, {width: 10, height: 10})); // 50
 ```
-我们把`Triangle`写成`shapeType`对象的`triangle`属性，这样就消除了强耦合
++ 我们把`Triangle`写成`shapeType`对象的`triangle`属性，这样就消除了强耦合
 
-`shapeType.triangle`等于哪个值并不重要，只要确保不会跟其他`shapeType`属性的值冲突即可。因此，这里就很适合改用`Symbol`值
++ `shapeType.triangle`等于哪个值并不重要，只要确保不会跟其他`shapeType`属性的值冲突即可。因此，这里就很适合改用`Symbol`值
 ```javascript
 const shapeType = {
     triangle: Symbol()
 }
 ```
-## 9.4 属性名的遍历 
-`Symbol`作为属性名，该属性不会出现在`for...in`、`for...of`循环中，也不会被`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回。但是，它也不是私有属性，有一个`Object.getOwnPropertySymbols`方法，可以获取指定对象的所有`Symbol`属性名
-+ `Object.getOwnPropertySymbols`方法返回一个数组，成员是当前对象的所有用作属性名的 Symbol 值。
+## 4. 属性名的遍历 
++ `Symbol`作为属性名，该属性不会出现在`for...in`、`for...of`循环中，也不会被`Object.keys()`、`Object.getOwnPropertyNames()`、`JSON.stringify()`返回。但是，它也不是私有属性，有一个`Object.getOwnPropertySymbols`方法，可以获取指定对象的所有`Symbol`属性名
++ `Object.getOwnPropertySymbols`方法返回一个数组，成员是当前对象的所有用作属性名的`Symbol`值。
 ```javascript
 const obj = {};
 let one = Symbol('111');
@@ -253,8 +255,8 @@ console.log(Object.keys(x)); // [ '0' ]
 console.log(Object.getOwnPropertyNames(x)); // [ '0' ]
 console.log(Object.getOwnPropertySymbols(x)); // [ Symbol(size) ]
 ```
-对象`x`的`size`属性是一个`Symbol`值，所以`Object.keys(x)`、`Object.getOwnPropertyNames(x)`都无法获取它。这就造成了一种非私有的内部方法的效果
-## 9.5 `Symbol.for()`，`Symbol.keyFor()`
++ 对象`x`的`size`属性是一个`Symbol`值，所以`Object.keys(x)`、`Object.getOwnPropertyNames(x)`都无法获取它。这就造成了一种非私有的内部方法的效果
+## 5. `Symbol.for()`，`Symbol.keyFor()`
 有时，我们希望重新使用同一个`Symbol`值，`Symbol.for`方法可以做到这一点。它接受一个字符串作为参数，然后搜索有没有以该参数作为名称的`Symbol`值。如果有，就返回这个`Symbol`值，否则就新建并返回一个以该字符串为名称的`Symbol`值
 ```javascript
 let sen = Symbol.for('symbol flags');
@@ -267,7 +269,7 @@ console.log(sen === ken); // true
 console.log(Symbol.for('symbol flags') === Symbol.for('symbol flags')); // true
 console.log(Symbol('symbol flags') === Symbol('symbol flags')); // false
 ```
-由于`Symbol()`写法没有登记机制，所以每次调用都会返回一个不同的值
++ 由于`Symbol()`写法没有登记机制，所以每次调用都会返回一个不同的值
 + `Symbol.keyFor`方法返回一个已登记的`Symbol`类型值的`key`
 ```javascript
 let sen = Symbol.for('symbol flags');
