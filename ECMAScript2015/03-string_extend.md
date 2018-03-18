@@ -125,7 +125,7 @@ for (let code of 'STRING_OBJECT') {
  * code: B
  * code: J
  * code: E
- * code: C
+ * code: C系列
  * code: T
  */
 ```
