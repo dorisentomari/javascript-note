@@ -1,3 +1,3 @@
 export default {
-	a: 100
+    a: 100
 }
