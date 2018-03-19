@@ -217,7 +217,7 @@ let one = fu                                                                    
 // ES5
 console.log(one.name); // ''
 
-// ES6
+ES6模块化
 console.log(one.name); //one
 ```
 + 如果将一个具名函数赋值给一个变量,则ES5和ES6的`name`属性都返回这个具名函数原本的名字

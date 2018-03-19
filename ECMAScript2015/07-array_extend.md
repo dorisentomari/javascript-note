@@ -51,14 +51,14 @@ console.log(two === three);// false
 let arr = [7, 5, 4];
 // ES5
 [1, 2].concat(arr);
-// ES6
+ES6模块化
 [1, 2, ...arr];
 let one = [1, 2];
 let two = [3, 4];
 let three = [5, 6];
 // ES5
 one.concat(two, three);
-// ES6
+ES6模块化
 [...one, ...two, ...three];
 ```
 + 如果将扩展运算符用于数组赋值,只能放在参数的最后一位,否则会报错
