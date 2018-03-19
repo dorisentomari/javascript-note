@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zepto prototype</title>
+</head>
+<body>
+<p>jquery passage 1</p>
+<p>jquery passage 2</p>
+<p>jquery passage 3</p>
+<div id="div1">
+	<p>jQuery passage in div1</p>
+</div>
+<!--<script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script>-->
+<script src="./zepto.js"></script>
+<script>
+	let $p = $('p');
+	$p.css('font-size', '40px');
+	console.log($p.html());
+	let $div1 = $('#div1');
+	$div1.css('color', 'blue');
+	console.log($div1.html());
+</script>
+</body>
+</html>
