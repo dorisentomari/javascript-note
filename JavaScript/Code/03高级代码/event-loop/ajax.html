@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ajax</title>
+</head>
+<body>
+<h3>ajax</h3>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script>
+	$(function () {
+		console.log(100);
+		$.ajax({
+			url: './data.json',
+			success(result) {
+				console.log(200);
+				console.log(result);
+			}
+		});
+		
+		setTimeout(() => {
+			console.log(300);
+		}, 100);
+		
+		setTimeout(() => {
+			console.log(400);
+		});
+		
+		console.log(500);
+	});
+	/****
+	 * 100
+	 * 500
+	 * 200
+	 * result
+	 * 400
+	 * 300
+	 */
+</script>
+</body>
+</html>

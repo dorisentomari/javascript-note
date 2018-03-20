@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>setTimeout</title>
+</head>
+<body>
+<h3>setTimeout</h3>
+<script>
+	setTimeout(() => {
+		console.log(1);
+	}, 100);
+	
+	setTimeout(() => {
+		console.log(2);
+	}, 100);
+	
+	setTimeout(() => {
+		console.log(3);
+	});
+	
+	console.log(4);
+	
+	/***
+	 * 4
+	 * 3
+	 * 1
+	 * 2
+	 */
+	///////// 分割线 //////////
+	setTimeout(() => {
+		console.log(1);
+		setTimeout(() => {
+			console.log(2);
+		});
+		console.log(3);
+	});
+	
+	console.log(4);
+	
+	/****
+	 * 4
+	 * 1
+	 * 3
+	 * 2
+	 */
+
+
+</script>
+</body>
+</html>
