@@ -1,0 +1,81 @@
+{
+  "rating": {
+    "max": 10,
+    "numRaters": 106,
+    "average": "9.5",
+    "min": 0
+  },
+  "subtitle": "新版",
+  "author": [
+    "吴淼"
+  ],
+  "pubdate": "2012-9",
+  "tags": [
+    {
+      "count": 32,
+      "name": "漫画",
+      "title": "漫画"
+    },
+    {
+      "count": 21,
+      "name": "奇幻",
+      "title": "奇幻"
+    },
+    {
+      "count": 18,
+      "name": "吴淼",
+      "title": "吴淼"
+    },
+    {
+      "count": 16,
+      "name": "塔希里亚故事集",
+      "title": "塔希里亚故事集"
+    },
+    {
+      "count": 11,
+      "name": "中国",
+      "title": "中国"
+    },
+    {
+      "count": 6,
+      "name": "魔法",
+      "title": "魔法"
+    },
+    {
+      "count": 4,
+      "name": "西方奇幻",
+      "title": "西方奇幻"
+    },
+    {
+      "count": 4,
+      "name": "塔希里亚",
+      "title": "塔希里亚"
+    }
+  ],
+  "origin_title": "",
+  "image": "https://img3.doubanio.com\/mpic\/s24412503.jpg",
+  "binding": "平装",
+  "translator": [],
+  "catalog": "",
+  "pages": "222",
+  "images": {
+    "small": "https://img3.doubanio.com\/spic\/s24412503.jpg",
+    "large": "https://img3.doubanio.com\/lpic\/s24412503.jpg",
+    "medium": "https://img3.doubanio.com\/mpic\/s24412503.jpg"
+  },
+  "alt": "https:\/\/book.douban.com\/subject\/17604305\/",
+  "id": "17604305",
+  "publisher": "接力出版社",
+  "isbn10": "7544826449",
+  "isbn13": "9787544826440",
+  "title": "塔希里亚故事集",
+  "url": "https:\/\/api.douban.com\/v2\/book\/17604305",
+  "alt_title": "",
+  "author_intro": "",
+  "summary": "《幻•影小说:塔希里亚故事集(新版)》一改魔幻文学惯常创作思路，摒弃虚幻无谓的格斗厮杀，而以深邃的探索、思索见长。与这些思索遥相呼应的，是风格独具的绘画。作者吴淼利用剪影绘画技巧，营造出一个深沉凝重的塔希里亚世界。它是简约的，又是丰润的。这是魔幻的，也是烂漫的。《幻•影小说:塔希里亚故事集(新版)》不仅开创“幻·影小说”之先河，也在一个另类魔法传奇故事中，感悟生命，思索生命，创造生命。",
+  "series": {
+    "id": "4057",
+    "title": "塔希里亚故事集"
+  },
+  "price": "26.00元"
+}
