@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise.all & Promise.race</title>
+	<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<h3>Promise.all & Promise.race</h3>
+<div class="container">
+	<pre>
+	<code>
+	// Promise.all接收一个promise对象的数组
+	// 待全部完成之后，统一执行success
+	
+	Promise.al([result1, result2]).then(datas => {
+		// 接收到的datas是一个数组，依次包含了多个promise返回的内容
+		console.log(datas[0]);
+		console.log(datas[1]);
+	});
+	// Promise.race接收一个包含多个promise对象的数组
+	// 只要有一个完成，就执行success
+	
+	Promise.race([result1, result2]).then(data => {
+		// data即为最先在执行完成的promise的返回值
+		console.log(data);
+	});
+	</code>
+</pre>
+</div>
+<script>
+	function loadImg(src) {
+		const promise = new Promise((resolve, reject) => {
+			const img = document.createElement('img');
+			img.onload = function () {
+				resolve(img);
+			};
+			img.onerror = function () {
+				reject();
+			};
+			img.src = src;
+		});
+		return promise;
+	}
+	
+	let src1 = 'https://cn.vuejs.org/images/logo.png';
+	let result1 = loadImg(src1);
+	let src2 = 'https://www.baidu.com/img/bd_logo1.png';
+	let result2 = loadImg(src2);
+	let src3 = 'https://www.imooc.com/static/img/index/logo.png';
+	let result3 = loadImg(src3);
+	Promise.all([result1, result2, result3]).then(function (datas) {
+		console.log('Promise.all');
+		console.log(datas[0]);
+		console.log('Promise.all');
+		console.log(datas[1]);
+		console.log('Promise.all');
+		console.log(datas[2]);
+	});
+	
+	Promise.race([result1, result2, result3]).then(function (data) {
+		console.log('Promise.race');
+		console.log(data);
+	});
+
+</script>
+</body>
+</html>

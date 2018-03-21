@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise语法回顾</title>
+</head>
+<body>
+<h3>Promise语法回顾</h3>
+<script>
+	function loadImg(src) {
+		const promise = new Promise((resolve, reject) => {
+			const img = document.createElement('img');
+			img.onload = function () {
+				resolve(img);
+			};
+			img.onerror = function () {
+				reject();
+			};
+			img.src = src;
+		});
+		return promise;
+	}
+	
+	const src = 'https://cn.vuejs.org/images/logo.png';
+	let result = loadImg(src);
+	result.then(function (img) {
+		console.log(img.width);
+		return img;
+	}, function () {
+		console.log('img.width failed');
+	}).then(function (img) {
+		console.log(img.height);
+	}, function () {
+		console.log('img.height failed');
+	});
+
+</script>
+</body>
+</html>

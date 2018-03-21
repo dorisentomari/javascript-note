@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise多个串联</title>
+</head>
+<body>
+<h3>Promise多个串联</h3>
+<script>
+	function loadImg(src) {
+		const promise = new Promise((resolve, reject) => {
+			const img = document.createElement('img');
+			img.onload = function () {
+				resolve(img);
+			};
+			img.onerror = function () {
+				reject();
+			};
+			img.src = src;
+		});
+		return promise;
+	}
+	
+	let src1 = 'https://cn.vuejs.org/images/logo.png';
+	let result1 = loadImg(src1);
+	let src2 = 'https://www.baidu.com/img/bd_logo1.png';
+	let result2 = loadImg(src2);
+	let src3 = 'https://www.imooc.com/static/img/index/logo.png';
+	let result3 = loadImg(src3);
+	result1.then(function (img) {
+		console.log('第一个图片加载完成');
+		console.log(img);
+		return result2;
+	}).then(function (img) {
+		console.log('第二个图片加载完成');
+		console.log(img);
+		return result3;
+	}).then(function (img) {
+		console.log('第三个图片加载完成');
+		console.log(img);
+	}).catch(function (error) {
+		console.error(error);
+	});
+</script>
+</body>
+</html>

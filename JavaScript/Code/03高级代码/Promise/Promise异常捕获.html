@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Promise异常捕获</title>
+</head>
+<body>
+<h3>Promise异常捕获</h3>
+<script>
+	function loadImg(src) {
+		const promise = new Promise((resolve, reject) => {
+			const img = document.createElement('img');
+			// 错误1
+			// throw  new Error('自定义的错误信息');
+			img.onload = function () {
+				resolve(img);
+			};
+			img.onerror = function () {
+				reject('图片加载失败');
+			};
+			img.src = src;
+		});
+		return promise;
+	}
+	
+	// 错误2
+	// const src = 'https://cn.vuejs.org/images/logo1.png';
+	const src = 'https://cn.vuejs.org/images/logo.png';
+	let result = loadImg(src);
+	result.then(function (img) {
+		console.log(img.width);
+		return img;
+	}).then(function (img) {
+		console.log(img.height);
+	}).catch(function (err) {
+		console.error(err);
+	});
+
+</script>
+</body>
+</html>
