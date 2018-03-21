@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery Deferred</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.min.js"></script>
+<script>
+	$(function () {
+//		let wait = function () {
+//			let task = function () {
+//				console.log('task 执行完成');
+//			};
+//			setTimeout(task, 2000);
+//		};
+//		wait();
+		
+		function waitHandle() {
+			let dtd = $.Deferred();             //创建一个deferred对象
+			let wait = function (dtd) {         // 要求传入一个deferred对象
+				let task = function () {
+					console.log('task 执行完成');
+//					dtd.resolve();              // 表示异步任务已经完成
+					dtd.reject();               // 表示异步任务失败或出错
+				};
+				setTimeout(task, 1000);
+				return dtd;                     // 要求返回deferred对象
+			};
+			return wait(dtd);                   // 一定要有返回值
+		}
+		
+		let w = waitHandle();
+		w.reject(); //修改w的状态，不报错
+		w.then(function () {
+			console.log('ok 1');
+		}, function () {
+			console.log('err 1');
+		}).then(function () {
+			console.log('ok 2');
+		}, function () {
+			console.log('err 2');
+		}).done(function () {
+			console.log('done 1');
+		}).fail(function (err) {
+			console.log('err1:' + err);
+		}).then(function () {
+			console.log('ok 3');
+		}, function () {
+			console.log('err 3');
+		}).done(function () {
+			console.log('done 2');
+		}).fail(function (err) {
+			console.log('err2:' + err);
+		});
+	})
+</script>
+</body>
+</html>

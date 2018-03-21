@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery 1.5 之后</title>
+</head>
+<body>
+<script src="https://cdn.bootcss.com/jquery/1.8.0/jquery.min.js"></script>
+<script>
+	$(function () {
+		let ajax = $.ajax('./data.json');
+		// 第一种写法
+		ajax.done(function () {
+			console.log('success1');
+		}).fail(function () {
+			console.log('error');
+		}).done(function () {
+			console.log('success2');
+		});
+		console.log(ajax); // 返回一个deferred对象
+		
+		// 第二种写法
+		ajax.then(function () {
+			console.log('success1');
+		}, function () {
+			console.log('error1');
+		}).then(function () {
+			console.log('success2');
+		}, function () {
+			console.log('error2');
+		});
+	});
+</script>
+</body>
+</html>
