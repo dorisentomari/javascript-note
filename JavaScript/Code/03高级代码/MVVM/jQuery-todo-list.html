@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery todo list</title>
+</head>
+<body>
+<div>
+	<input type="text" id="txt-title">
+	<button id="btn-submit">submit</button>
+</div>
+<div>
+	<ul id="ul-list"></ul>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+<script>
+	$(function () {
+		let $txtTitle = $('#txt-title');
+		let $ulList = $('#ul-list');
+		let $btnSubmit = $('#btn-submit');
+		$btnSubmit.click(function () {
+			let title = $txtTitle.val();
+			let $li = $('<li>' + title + '</li>');
+			$ulList.append($li);
+			$txtTitle.val('');
+		});
+	});
+</script>
+</body>
+</html>

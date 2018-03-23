@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>VUE todo list</title>
+</head>
+<body>
+<h3>VUE todo list</h3>
+<div id="app">
+	<div>
+		<input type="text" v-model="title">
+		<button v-on:click="add">submit</button>
+	</div>
+	<ul>
+		<li v-for="item in list">{{item}}</li>
+	</ul>
+</div>
+<script src="https://cdn.bootcss.com/vue/2.5.2/vue.min.js"></script>
+<script>
+	let vm = new Vue({
+		el: '#app',
+		data: {
+			title: '',
+			list: []
+		},
+		methods: {
+			add() {
+				this.list.push(this.title);
+				this.title = '';
+			}
+		}
+	});
+</script>
+</body>
+</html>
