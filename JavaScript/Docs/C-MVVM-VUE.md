@@ -81,3 +81,124 @@ for (key in data) {
     * 有逻辑，必须用JS才能实现
     * 转换为HTML渲染页面，必须用JS才能实现
     * 模板最重要转换成一个JS函数(render函数)
+
+## 4. render函数
+### 4.1 with用法
+```javascript
+let obj = {
+    name: 'zhangsan',
+    age: 20,
+    getAddress() {
+        console.log('beijing');
+    }
+}
+
+function fn() {
+    console.log(obj.name);
+    console.log(obj.age);
+    obj.getAddress();
+}
+fn();
+
+// with用法
+function tn() {
+    with(obj) {
+        console.log(name);
+        console.log(age);
+        getAddress();
+    }
+}
+tn();
+```
+
+### 4.2 render用法
++ 模板中所有的信息都包含在render函数中
++ this即vm
++ price即this.price即vm.price，即data中的price
++ vm._c相当于snabbdom的h函数
+```javascript
+ let vm = new Vue({
+    el: '#app',
+    data: {
+        price: 25
+    }
+});
+
+// render函数
+function render() {
+    with(this) { // this就是vm
+        return _c(
+            'div', {
+                attrs: {
+                    id: 'app'
+                }
+            }, [
+                _c('p', [_v(_s(price))])
+            ]
+        )
+    }
+}
+// 不使用with的方式
+function renderNoWith() {
+    return vm._c(
+        'div', {
+            attrs: {
+                id: 'app'
+            }
+        }, [
+            vm._c('p', [vm._v(vm._s(price))])
+        ]
+    )
+}
+```
+
+### 4.3 vm._update函数
+```javascript
+vm._update(vnode) {
+    const prevNode = vm._vnode;
+    vm._vnode = vnode;
+    if (!prevNode) {
+        vm.$el = vm.__patch__(vm.$el, vnode);
+    } else {
+        vm.$el = vm.__patch__(prevNode, vnode);
+    }
+}
+
+function updateComponent() {
+    vm._update(vm._render());
+}
+```
+
+### 4.4 render函数和vdom
++ updateComponent中实现了vdom和patch
++ 页面首次渲染执行updateComponent
++ data中每次修改属性，执行updateComponent
+
+## 5. VUE的整体实现流程
+### 5.1 VUE的三要素
++ 模板解析引擎
++ 响应式
++ 渲染
+
+### 5.2 实现流程
++ 解析模板成render函数
+    * with的用法
+    * 模板中的所有信息都被render函数包含
+    * 模板中用到的data中的属性，都变成了JS变量
+    * 模板中的v-model，v-for，v-on都变成了JS变量
+    * render函数返回vnode
++ 响应式开始监听
+    * Object.defineProperty
+    * 将data的属性代理到vm上
++ 首次渲染，显示页面，绑定依赖
+    * 初次渲染，执行updateComponent，执行vm._render
+    * 执行render函数，会访问到vm.list和vm.title
+    * 会被响应式的get方法监听到
+    * 执行updateComponent，会走到vdom和patch方法
+    * patch将vnode渲染成DOM，初次渲染完成
++ data属性变化，触发re-render
+    * 修改属性，被响应式的set监听到
+    * set中执行updateComponent
+    * updateComponent重新执行vm._render()
+    * 生成的vnode和prevVnode，通过patch进行对比
+    * 渲染到HTML中

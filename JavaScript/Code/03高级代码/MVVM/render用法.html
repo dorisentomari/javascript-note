@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>render用法</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="./vue.js"></script>
+</head>
+<body>
+<h3>render用法</h3>
+<div id="app">
+	<p>{{price}}</p>
+</div>
+<script>
+	let vm = new Vue({
+		el: '#app',
+		data: {
+			price: 25
+		}
+	});
+	
+	// render函数
+	function render() {
+		with (this) { // this就是vm
+			return _c(
+				'div', {
+					attrs: {
+						id: 'app'
+					}
+				}, [
+					_c('p', [_v(_s(price))])
+				]
+			)
+		}
+	}
+	
+	// 不使用with的方式
+	function renderNoWith() {
+		return vm._c(
+			'div', {
+				attrs: {
+					id: 'app'
+				}
+			}, [
+				vm._c('p', [vm._v(vm._s(price))])
+			]
+		)
+	}
+</script>
+</body>
+</html>

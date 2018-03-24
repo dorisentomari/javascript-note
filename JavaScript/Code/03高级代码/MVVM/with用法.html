@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>with用法</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h3>with用法</h3>
+<script>
+	let obj = {
+		name: 'zhangsan',
+		age: 20,
+		getAddress() {
+			console.log('beijing');
+		}
+	}
+	
+	function fn() {
+		console.log(obj.name);
+		console.log(obj.age);
+		obj.getAddress();
+	}
+	
+	fn();
+	
+	// with用法
+	function tn() {
+		with (obj) {
+			console.log(name);
+			console.log(age);
+			getAddress();
+		}
+	}
+	
+	tn();
+</script>
+</body>
+</html>
