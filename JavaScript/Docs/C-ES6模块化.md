@@ -1,4 +1,11 @@
 # 1. ES6模块化
+
+# 问题
++ ES6模块化如何使用，开发环境如何打包
++ Class和普通构造函数有何区别
++ Promise的基本使用和原理
++ 总结一下ES6的其他常用功能
+
 ## 1.1 模块化的基本语法
 + 示例代码
 ```javascript
@@ -22,6 +29,7 @@ fn1();
 fn2();
 ```
 ## 1.2 开发环境配置
+
 ### 1.2.1 使用`babel`进行编译
 + `npm install -S babel-core babel-preset-es2015 babel-preset-latest`
 + 安装全局`babel` `npm install -g babel-cli`，当前版本6.26.0
@@ -36,8 +44,9 @@ fn2();
 + `index.js`代码内容`[1, 2, 3].map(item => item + 2);`
 + `babel`编译`babel ./src/index.js`
 + 会在控制台把编译后的代码输出
+
 ### 1.2.2 使用`webpack`进行编译
-+ `npm install webpack@3.11.0 babel-core@6.26.0 -S`
++ `npm install webpack@3.11.0 babel-core babel-loader -S`
 + 配置`webpack.config.js`文件
 ```javascript
 module.exports = {
@@ -63,6 +72,7 @@ module.exports = {
 ```
 + 运行`npm start`
 `npm start`实际上运行的是`webpack`项目内命令，而不是全局命令
+
 ### 1.2.3 使用`rollup.js`进行编译
 + `npm install rollup rollup-plugin-node-resolve rollup-plugin-babel babel-plugin-external-helpers babel-preset-latest -S`
 + 配置`.babelrc`
@@ -107,6 +117,7 @@ export default {
 + 缺点：功能比较单一，只能模块化打包，`webpack`功能强大
 + 参考设计原则和《Linux/Unix设计思想》
 + 工具尽量功能单一，可集成，可扩展
+
 ### 1.3 关于JS众多标准
 + 没有模块化
 + AMD称为标准，`require.js`(也有CMD)
