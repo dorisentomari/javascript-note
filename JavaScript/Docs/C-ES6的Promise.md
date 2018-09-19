@@ -1,5 +1,5 @@
 # Promise的基本使用
-## 1. 回调地狱
+## 1. 回调地狱(Callback Hell)
 ```javascript
 function loadImg(src, callback, fail) {
 	let img = document.createElement('img');

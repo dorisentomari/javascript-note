@@ -29,7 +29,7 @@ const sum = new MathAddHandle(3, 4);
 console.log(sum.add());
 ```
 ## 3. 语法糖
-+ 实际上`Class`是`function`，这种写法是普通构造函数的语法糖，，写法不一样，但本质是一样的
++ 实际上`Class`是`function`，这种写法是普通构造函数的语法糖，写法不一样，但本质是一样的
 + `typeof MathAddHandle;` "function"
 + `MathAddHandle === MathAddHandle.prototype.constructor;` true
 + `sum.__proto__ === MathAddHandle.prototype;` true
