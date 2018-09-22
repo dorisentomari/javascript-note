@@ -1,54 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>snabbdom Virtual DOM</title>
+  <meta charset="UTF-8">
+  <title>snabbdom Virtual DOM</title>
 </head>
 <body>
 <h3>snabbdom Virtual DOM</h3>
 <div>
-	<button id="btn-change">change</button>
-	<div id="container"></div>
+  <button id="btn-change">change</button>
+  <div id="container"></div>
 </div>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.min.js"></script>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom.js"></script>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-class.min.js"></script>
+<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-eventlisteners.min.js"></script>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-props.min.js"></script>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-style.min.js"></script>
-<script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-eventlisteners.min.js"></script>
-<script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.min.js"></script>
 <script>
-	window.onload = function () {
-		let snabbdom = window.snabbdom;
-		// 定义patch
-		let patch = snabbdom.init([
-			snabbdom_class,
-			snabbdom_props,
-			snabbdom_style,
-			snabbdom_eventlisteners
-		]);
-		// 定义h函数
-		let h = snabbdom.h;
-		
-		// 定义一个容器
-		let container = document.getElementById('container');
-		
-		// 生成vnode
-		let vnode = h('ul#list', {}, [
-			h('li.item', {}, 'Item 1'),
-			h('li.item', {}, 'Item 2')
-		]);
-		patch(container, vnode);
-		
-		document.getElementById('btn-change').addEventListener('click', function () {
-			let newVnode = h('ul#list', {}, [
-				h('li.item', {}, 'Item 1'),
-				h('li.item', {}, 'Item B'),
-				h('li.item', {}, 'Item C')
-			]);
-			patch(vnode, newVnode);
-		})
-		
-	}
+  window.onload = function () {
+    let snabbdom = window.snabbdom;
+    // 定义patch
+    let patch = snabbdom.init([
+      snabbdom_class,
+      snabbdom_props,
+      snabbdom_style,
+      snabbdom_eventlisteners
+    ]);
+    // 定义h函数
+    let h = snabbdom.h;
+
+    // 定义一个容器
+    let container = document.getElementById('container');
+
+    // 生成vnode
+    let vnode = h('ul#list', {}, [
+      h('li.item', {}, 'Item 1'),
+      h('li.item', {}, 'Item 2')
+    ]);
+    patch(container, vnode);
+
+    document.getElementById('btn-change').addEventListener('click', function () {
+      let newVnode = h('ul#list', {}, [
+        h('li.item', {}, 'Item A'),
+        h('li.item', {}, 'Item B'),
+        h('li.item', {}, 'Item C')
+      ]);
+      patch(vnode, newVnode);
+    })
+
+  }
 </script>
 </body>
 </html>

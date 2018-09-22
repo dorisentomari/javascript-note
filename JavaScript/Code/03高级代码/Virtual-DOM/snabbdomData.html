@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>snabbdom Data Virtual DOM</title>
+  <meta charset="UTF-8">
+  <title>snabbdom Data Virtual DOM</title>
 </head>
 <body>
 <h3>snabbdom Data Virtual DOM</h3>
 <div>
-	<button id="btn-change">change</button>
-	<div id="container"></div>
+  <button id="btn-change">change</button>
+  <div id="container"></div>
 </div>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom.js"></script>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-class.min.js"></script>
@@ -17,72 +17,72 @@
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/snabbdom-eventlisteners.min.js"></script>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.min.js"></script>
 <script>
-	window.onload = function () {
-		let snabbdom = window.snabbdom;
-		
-		// 定义patch
-		let patch = snabbdom.init([
-			snabbdom_class,
-			snabbdom_props,
-			snabbdom_style,
-			snabbdom_eventlisteners
-		]);
-		// 定义h函数
-		let h = snabbdom.h;
-		
-		const data = [{
-			name: '张三',
-			age: 20,
-			address: '北京'
-		},
-			{
-				name: '李四',
-				age: 21,
-				address: '上海'
-			},
-			{
-				name: '王五',
-				age: 22,
-				address: '广州'
-			}];
-		
-		// 定义一个容器
-		let container = document.getElementById('container');
-		
-		// 渲染函数
-		let vnode;
-		
-		function render(data) {
-			let newVnode = h('table', {}, data.map((item) => {
-				let tds = [];
-				let i;
-				for (i in item) {
-					if (item.hasOwnProperty(i)) {
-						tds.push(h('td', {}, item[i] + ''))
-					}
-				}
-				return h('tr', {}, tds)
-			}));
-			if (vnode) {
-				// re-render
-				patch(vnode, newVnode);
-			} else {
-				// 初次渲染
-				patch(container, newVnode);
-			}
-			
-			// 存储当前vnode
-			vnode = newVnode;
-		}
-		
-		let btnChange = document.getElementById('btn-change');
-		btnChange.addEventListener('click', function () {
-			data[1].age = 30;
-			data[2].address = '深圳';
-			render(data);
-		});
-		render(data);
-	}
+  window.onload = function () {
+    let snabbdom = window.snabbdom;
+
+    // 定义patch
+    let patch = snabbdom.init([
+      snabbdom_class,
+      snabbdom_props,
+      snabbdom_style,
+      snabbdom_eventlisteners
+    ]);
+    // 定义h函数
+    let h = snabbdom.h;
+
+    const data = [{
+      name: '张三',
+      age: 20,
+      address: '北京'
+    },
+      {
+        name: '李四',
+        age: 21,
+        address: '上海'
+      },
+      {
+        name: '王五',
+        age: 22,
+        address: '广州'
+      }];
+
+    // 定义一个容器
+    let container = document.getElementById('container');
+
+    // 渲染函数
+    let vnode;
+
+    function render(data) {
+      let newVnode = h('table', {}, data.map((item) => {
+        let tds = [];
+        let i;
+        for (i in item) {
+          if (item.hasOwnProperty(i)) {
+            tds.push(h('td', {}, item[i] + ''))
+          }
+        }
+        return h('tr', {}, tds)
+      }));
+      if (vnode) {
+        // re-render
+        patch(vnode, newVnode);
+      } else {
+        // 初次渲染
+        patch(container, newVnode);
+      }
+
+      // 存储当前vnode
+      vnode = newVnode;
+    }
+
+    let btnChange = document.getElementById('btn-change');
+    btnChange.addEventListener('click', function () {
+      data[1].age = 30;
+      data[2].address = '深圳';
+      render(data);
+    });
+    render(data);
+  }
 </script>
 </body>
 </html>
