@@ -10,26 +10,63 @@
 <script>
   $(function () {
     let ajax = $.ajax('./data.json');
-    // 第一种写法
-    ajax.done(function () {
-      console.log('success1');
-    }).fail(function () {
-      console.log('error');
-    }).done(function () {
-      console.log('success2');
+    ajax.done(() => {
+      console.log('success 1');
+      return 'return success 1';
+    }).fail((a) => {
+      console.log('a: ', a);
+      console.log('fail 1');
+      return 'return fail 1';
+    }).done((b) => {
+      console.log('b: ', b);
+      console.log('success 2');
+      return 'return success 2';
+    }).fail((c) => {
+      console.log('c: ', c);
+      console.log('fail 2');
+      return 'return fail 2';
+    }).done((d) => {
+      console.log('d: ', d);
+      console.log('success 3');
+      return 'return success 3';
+    }).fail((e) => {
+      console.log('e: ', e);
+      console.log('fail 3');
+      return 'return fail 3';
     });
-    console.log(ajax); // 返回一个deferred对象
+    // 每次done得到的参数，都是ajax请求后得到的结果，不是上一层done函数return的结果
 
-    // 第二种写法
-    ajax.then(function () {
-      console.log('success3');
-    }, function () {
-      console.log('error3');
-    }).then(function () {
-      console.log('success4');
-    }, function () {
-      console.log('error4');
+    ajax = $.ajax('./data.json');
+    ajax.then((a) => {
+      console.log('a: ', a);
+      console.log('success 1');
+      return 'return success 1';
+    }, (b) => {
+      console.log('b: ', b);
+      console.log('fail 1');
+      return 'return fail 1';
+    }).then((c) => {
+      console.log('c: ', c);
+      console.log('success 2');
+      return 'return success 2';
+    }, (d) => {
+      console.log('d: ', d);
+      console.log('fail 2');
+      return 'return fail 2';
+    }).then((e) => {
+      console.log('e: ', e);
+      console.log('success 3');
+    }, (f) => {
+      console.log('f: ', f);
+      console.log('fail 1');
     });
+    // 每次上一个then成功的return结果会被下一个then的成功函数接收。
+
+
+
+
+
+
   });
 </script>
 </body>

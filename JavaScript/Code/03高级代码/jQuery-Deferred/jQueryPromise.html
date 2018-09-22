@@ -14,11 +14,11 @@
       let wait = function (dtd) {         // 要求传入一个deferred对象
         let task = function () {
           console.log('task 执行完成');
-          dtd.resolve();              // 表示异步任务已经完成
-//					dtd.reject();               // 表示异步任务失败或出错
+          dtd.resolve();                  // 表示异步任务已经完成
+					// dtd.reject();                // 表示异步任务失败或出错
         };
         setTimeout(task, 1000);
-        return dtd.promise();           // 这里返回的是promise,而不是直接返回deferred对象
+        return dtd.promise();             // 这里返回的是promise,而不是直接返回deferred对象
       };
       return wait(dtd);                   // 一定要有返回值
     }

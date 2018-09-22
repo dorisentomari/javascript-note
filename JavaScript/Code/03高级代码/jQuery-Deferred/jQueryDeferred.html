@@ -22,17 +22,17 @@
       let wait = function (dtd) {         // 要求传入一个deferred对象
         let task = function () {
           console.log('task 执行完成');
-//					dtd.resolve();              // 表示异步任务已经完成
-          dtd.reject();               // 表示异步任务失败或出错
+          // dtd.resolve();               // 表示异步任务已经完成
+          dtd.reject();                   // 表示异步任务失败或出错
         };
         setTimeout(task, 1000);
-        return dtd;                     // 要求返回deferred对象
+        return dtd;                       // 要求返回deferred对象
       };
       return wait(dtd);                   // 一定要有返回值
     }
 
     let w = waitHandle();
-    w.reject(); //修改w的状态，不报错
+    // w.reject(); //修改w的状态，不报错
     w.then(function () {
       console.log('ok 1');
     }, function () {
@@ -41,14 +41,18 @@
       console.log('ok 2');
     }, function () {
       console.log('err 2');
+      return 'return err 2';
     }).done(function () {
       console.log('done 1');
     }).fail(function (err) {
       console.log('err1:' + err);
-    }).then(function () {
+      return 'return fail';
+    }).then(function (res) {
       console.log('ok 3');
+      console.log(res);
     }, function () {
       console.log('err 3');
+      return 'return err 3';
     }).done(function () {
       console.log('done 2');
     }).fail(function (err) {

@@ -150,3 +150,5 @@ $.when(w).then(function () {
 + 可以jQuery1.5对ajax的改变举例
 + 说明如何简单的封装，使用Deferred
 + 说明promise和Deferred的区别
+	- Defered可以主动修改他的then,done,fail,resolve,reject方法
+	- Promise只能够被动的使用then
