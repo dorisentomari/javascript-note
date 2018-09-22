@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<title>jQuery 1.5 之前</title>
+  <meta charset="UTF-8">
+  <title>jQuery 1.5 之前</title>
 </head>
 <body>
 <h3>jQuery 1.5 之前</h3>
 <script src="https://cdn.bootcss.com/jquery/1.4.4/jquery.min.js"></script>
 <script>
-	$(function () {
-		let ajax = $.ajax({
-			url: './data.json',
-			success: function (result) {
-				console.log(result);
-			},
-			error: function () {
-				console.log(error);
-			}
-		});
-		console.log(ajax);
-	});
+  $(function () {
+    let ajax = $.ajax({
+      url: './data.json',
+      success: function (result) {
+        console.log(result);
+      },
+      error: function () {
+        console.log(error);
+      }
+    });
+    console.log(ajax);
+  });
 </script>
 </body>
 </html>
