@@ -1,4 +1,7 @@
 {
-    "presets": ["es2015", "latest"],
-    "plugins": []
+  "presets": [
+    "es2015",
+    "latest"
+  ],
+  "plugins": []
 }
