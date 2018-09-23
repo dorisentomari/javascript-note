@@ -7,7 +7,7 @@
 <body>
 <h3>snabbdom Virtual DOM</h3>
 <div>
-  <button id="btn-change">change</button>
+  <button id="btn">changeElement</button>
   <div id="container"></div>
 </div>
 <script src="https://cdn.bootcss.com/snabbdom/0.7.1/h.min.js"></script>
@@ -33,21 +33,33 @@
     let container = document.getElementById('container');
 
     // 生成vnode
-    let vnode = h('ul#list', {}, [
-      h('li.item', {}, 'Item 1'),
-      h('li.item', {}, 'Item 2')
-    ]);
+    let vnode = h('div#container',
+      {},
+      [
+        h('span', {}, 'This is bold~\n'),
+        h('a', {}, 'I will buy it'),
+      ]
+    );
     patch(container, vnode);
 
-    document.getElementById('btn-change').addEventListener('click', function () {
-      let newVnode = h('ul#list', {}, [
-        h('li.item', {}, 'Item A'),
-        h('li.item', {}, 'Item B'),
-        h('li.item', {}, 'Item C')
-      ]);
-      patch(vnode, newVnode);
-    })
+    document.getElementById('btn').addEventListener('click', changeElement, false);
 
+    function changeElement() {
+      let vnode = h('div#container',
+        {},
+        [
+          h('span',
+            {style: {fontWeight: 'normal'}},
+            'This is normal'
+          ),
+          h('a',
+            {props: {href: '/foo'}},
+            'I will buy it'
+          )
+        ]
+      );
+      patch(container, vnode);
+    }
   }
 </script>
 </body>
