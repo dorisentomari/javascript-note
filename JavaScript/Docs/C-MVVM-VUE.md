@@ -6,9 +6,9 @@
 + ViewModel - 连接Model和View
 
 ### 1.2 MVVM框架的三要素
-+ 响应式：VUE如何监听到data的每个属性变化
-+ 模板引擎：VUE的模板如何被解析，指令如何处理
-+ 渲染：VUE的模板如何被渲染成HTML,以及渲染过程
++ 响应式: VUE如何监听到data的每个属性变化?
++ 模板引擎: VUE的模板如何被解析，指令如何处理?
++ 渲染: VUE的模板如何被渲染成HTML,以及渲染过程?
 
 ## 2. VUE中如何实现响应式
 + 什么是响应式
@@ -44,10 +44,11 @@ let vm = {};
 let data = {
     age: 30,
     name: 'orange'
-}
+};
 
 let key, value;
 for (key in data) {
+  // 命中闭包，新建一个函数，保证key的独立的作用域
     (function (key) {
         Object.defineProperty(vm, key, {
             get() {
@@ -73,14 +74,30 @@ for (key in data) {
 + render函数与vdom
 
 ### 3.1 模板是什么
-+ 本质：字符串
-+ 有逻辑：如v-if，v-for等
+```vue
+<div id="app">
+	<div>
+		<input type="text" v-model="username">
+		<button @click="submit">click</button>
+	</div>
+	<ul>
+		<li v-for="item in items">{{item}}</li>
+	</ul>
+</div>
+```
++ 本质: 字符串
++ 有逻辑: 如`v-if`，`v-for`等
 + 与HTML格式很像，但是有很大区别
 + 最终要转换为HTML来显示
 + 模板最终必须转换为JS代码
     * 有逻辑，必须用JS才能实现
     * 转换为HTML渲染页面，必须用JS才能实现
     * 模板最重要转换成一个JS函数(render函数)
+
+### 3.2 对MVVM的理解
++ MVC(View, Controller, Model)
++ MVVM(Model, View, ViewModel)不是一种创新
++ 结合真正的场景使用
 
 ## 4. render函数
 ### 4.1 with用法
@@ -91,7 +108,7 @@ let obj = {
     getAddress() {
         console.log('beijing');
     }
-}
+};
 
 function fn() {
     console.log(obj.name);
