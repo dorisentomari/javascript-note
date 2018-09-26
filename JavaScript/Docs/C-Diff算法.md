@@ -22,6 +22,7 @@
 + `patch(container, vnode);`
 + `patch(vnode, newVnode);`
 
-
+## 5. Diff算法基本逻辑实现流程
++ 可以查看代码目录下的`diff详讲`代码
 
 
