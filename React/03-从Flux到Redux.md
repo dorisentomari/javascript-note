@@ -42,6 +42,9 @@ Action ----> Dispatcher ----> Store -----> View <br/>
 	+ `mapStateToProps`和`mapDispatchToProps`都可以包含第二个参数，代表`ownProps`，就是直接传递给外层容器组件的`props`
 + **Provider**提供包含`store`和`context`
 	+ store必须是包含三个函数的object，这三个函数分别是`subscribe`，`dispatch`，`getState`
+
+### 5. mini-redux
+##### 5.1 createStore的实现
 ```javascript
 // 创建仓库
 export const createStore = (reducer) => {
@@ -73,4 +76,84 @@ export const createStore = (reducer) => {
     dispatch,   // 发送action
   };
 };
+```
+
+##### 5.2 applyMiddleware的实现
+```javascript
+const applyMiddleware = (middleware) => {
+  return (createStore) => reducer => {
+    let store = createStore(reducer);
+    middleware = middleware(store);
+    let dispatch = middleware(store.dispatch);
+    return {
+      ...store,
+      dispatch,
+    }
+  }
+};
+```
+
+##### 5.3 reducer的实现
+```javascript
+let counter = (state = 0, action) => {
+  if (action) {
+    switch (action.type) {
+      case 'ADD':
+        return state + 1;
+      case 'SUB':
+        return state - 1;
+      default:
+        return state;
+    }
+  } else {
+    return state;
+  }
+};
+```
+
+##### 5.4 mini-logger中间件的实现
+```javascript
+let logger = store => next => action => {
+  console.log('before ', store.getState());
+  console.log(action);
+  next(action);
+  console.log('after ', store.getState());
+};
+let store = applyMiddleware(logger)(createStore)(counter);
+
+console.log(store.getState());
+store.dispatch({type: 'ADD'});
+store.dispatch({type: 'SUB'});
+console.log(store.getState());
+```
+##### 5.5 dispatch异步的操作
+```javascript
+let thunk = store => next => action => {
+  if (typeof action === 'function') {
+    return action(next);
+  } else {
+    return next();
+  }
+};
+
+let store = applyMiddleware(thunk)(createStore)(counter);
+```
+
+##### 5.6 redux-promise的实现
+```javascript
+let isPromise = obj => obj.then;
+
+let promise = store => next => action => {
+  if (isPromise(action)) {
+    action.then((data) => next(data));
+  } else {
+    next(action);
+  }
+};
+
+store.dispatch(new Promise((resolve, reject) => {
+  setTimeout(()=>{
+    resolve({type: 'ADD'});
+  }, 3000);
+}));
 ```
