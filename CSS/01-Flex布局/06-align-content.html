@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>align-content</title>
+  <style>
+    body {
+      padding: 20px;
+      margin: 0 auto;
+      background-color: #9d9d9d;
+      max-width: 1024px;
+      color: #595B66;
+      font-family: 'Microsoft Yahei', sans-serif;
+    }
+
+    .box {
+      display: flex;
+      background-color: white;
+      margin: 0 0 55px;
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-content: flex-start;
+      /*align-content: flex-end;*/
+      /*align-content: center;*/
+      /*align-content: space-between;*/
+      /*align-content: space-around;*/
+      /*align-content: stretch;*/
+    }
+
+    .box-tall {
+      height: 880px;
+    }
+
+    .box-item {
+      width: 200px;
+      height: 200px;
+      line-height: 200px;
+      vertical-align: middle;
+      margin: 5px;
+      background-color: #2bff29;
+      font-size: 100px;
+      color: white;
+      text-align: center;
+    }
+
+  </style>
+</head>
+<body>
+<div class="box box-tall">
+  <div class="box-item">1</div>
+  <div class="box-item">2</div>
+  <div class="box-item">3</div>
+  <div class="box-item">4</div>
+  <div class="box-item">5</div>
+  <div class="box-item">6</div>
+  <div class="box-item">7</div>
+  <div class="box-item">8</div>
+  <div class="box-item">9</div>
+</div>
+</body>
+</html>
