@@ -4,47 +4,47 @@
 + Model(模型)负责管理数据，大部分业务逻辑也应该放在Model中
 + View(视图)负责渲染用户页面，应该避免在View中设计业务逻辑
 + Controller(控制器)负责接受用户输入，根据用户输入调用对应的Model部分逻辑，把产生的数据结果交给View部分，让View渲染出必要的输出
-```
+```html
 							 ----> Model
 							|
 请求----> Controller--------|
 							|
-							----> View
+							 ----> View
 
 ```
 **问题**
 对于非常巨大的代码库和庞大的组织，MVC真的很快就变得非常复杂。每当工程师想要增加一个新的功能时，对代码的修改很容易引起新的bug，因为不同模块之间的依赖关系让系统变得`脆弱而且不可预测`
 
-### 2. Flux
+### 2. `Flux`
 **特点：更严格的数据流控制**
 
 ```html
 Action ----> Dispatcher ----> Store -----> View <br/>
-									/|\												|
-									--------  Action  --------
+                /|\							|
+                  --------  Action  --------
 ```
 + 一个Flux应用包含四个部分
-+ Dispatcher处理动作分发，维持Store之间的依赖关系
-+ Store负责存储数据和处理数据相关逻辑
-+ Action驱动Dispatcher的JavaScript对象
-+ View视图部分，负责显示用户界面
++ `Dispatcher`处理动作分发，维持`Store`之间的依赖关系
++ `Store`负责存储数据和处理数据相关逻辑
++ `Action`驱动`Dispatcher`的`JavaScript`对象
++ `View`视图部分，负责显示用户界面
 
-### 3. Redux
+### 3. `Redux`
 **原则**
 + 唯一数据源(Single Source of Truth)
 + 保持状态只读(State is read-only)
 + 数据改变只能通过纯函数完成(Changed are made with pure functions)
 
-### 4. react-redux
+### 4. `react-redux`
 + **connect**连接容器组件和傻瓜组件
 	+ 把`Store`上的状态转化为内层傻瓜组件的`props`，内层傻瓜对象的输入，其实就是一个映射关系，去掉框架
 	+ 把内层傻瓜组件中的用户动作转化为派送给`Store`的动作，内层傻瓜对象的输出，就是把内层傻瓜组件暴露出来的函数类型的`prop`关联上的`dispatch`函数的调用，每个`prop`代表的回调函数的主要区别就是`dispatch`函数的参数不同，这就是`mapDispatchToProps`函数要做的事情。
 	+ `mapStateToProps`和`mapDispatchToProps`都可以包含第二个参数，代表`ownProps`，就是直接传递给外层容器组件的`props`
 + **Provider**提供包含`store`和`context`
-	+ store必须是包含三个函数的object，这三个函数分别是`subscribe`，`dispatch`，`getState`
+	+ `store`必须是包含三个函数的`object`，这三个函数分别是`subscribe`，`dispatch`，`getState`
 
-### 5. mini-redux
-##### 5.1 createStore的实现
+### 5. `mini-redux`
+##### 5.1 `createStore`的实现
 ```javascript
 // 创建仓库
 export const createStore = (reducer) => {
@@ -78,7 +78,7 @@ export const createStore = (reducer) => {
 };
 ```
 
-##### 5.2 applyMiddleware的实现
+##### 5.2 `applyMiddleware`的实现
 ```javascript
 const applyMiddleware = (middleware) => {
   return (createStore) => reducer => {
@@ -93,7 +93,7 @@ const applyMiddleware = (middleware) => {
 };
 ```
 
-##### 5.3 reducer的实现
+##### 5.3 `reducer`的实现
 ```javascript
 let counter = (state = 0, action) => {
   if (action) {
@@ -111,7 +111,7 @@ let counter = (state = 0, action) => {
 };
 ```
 
-##### 5.4 mini-logger中间件的实现
+##### 5.4 `mini-logger`中间件的实现
 ```javascript
 let logger = store => next => action => {
   console.log('before ', store.getState());
@@ -126,7 +126,7 @@ store.dispatch({type: 'ADD'});
 store.dispatch({type: 'SUB'});
 console.log(store.getState());
 ```
-##### 5.5 dispatch异步的操作
+##### 5.5 `dispatch`异步的操作
 ```javascript
 let thunk = store => next => action => {
   if (typeof action === 'function') {
@@ -139,7 +139,7 @@ let thunk = store => next => action => {
 let store = applyMiddleware(thunk)(createStore)(counter);
 ```
 
-##### 5.6 redux-promise的实现
+##### 5.6 `redux-promise`的实现
 ```javascript
 let isPromise = obj => obj.then;
 

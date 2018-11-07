@@ -316,7 +316,7 @@ body {
 
 ![align-items: stretch;图例](./01-Flex布局/images/05-align-items-stretch.png)
 
-# 6. [align-content](./01-Flex布局/05-align-content.html)
+# 6. [align-content](./01-Flex布局/06-align-content.html)
 + `align-content`定义的是多根轴线(多行)的对齐方式，如果元素只有一根轴线，该属性不起作用
 + `flex-start`交叉轴的起点对齐
 + `flex-end`交叉轴的终点对齐
