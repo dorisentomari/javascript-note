@@ -321,8 +321,8 @@ body {
 + `flex-start`交叉轴的起点对齐
 + `flex-end`交叉轴的终点对齐
 + `center`交叉轴的中点对齐
-+ `space-between` 与交叉轴两端对齐，轴线之间的间隔平均分布
-+ `space-around` 每根轴线两侧的间隔相等
++ `space-between`与交叉轴两端对齐，轴线之间的间隔平均分布
++ `space-around`每根轴线两侧的间隔相等
 + `stretch`默认值，如果元素未设置高度或设为auto，轴线占满整个交叉轴
 
 ### 6.1 `align-content: flex-start;`
@@ -342,7 +342,7 @@ body {
 ![align-content: flex-start;图例](./01-Flex布局/images/06-align-content-flex-start.png)
 
 ### 6.2 `align-content: flex-end;`
-+ 交叉轴的起点对齐
++ 交叉轴的终点对齐
 
 ```css
 .box {
@@ -358,7 +358,7 @@ body {
 ![align-content: flex-end;图例](./01-Flex布局/images/06-align-content-flex-end.png)
 
 ### 6.3 `align-content: center;`
-+ 交叉轴的起点对齐
++ 交叉轴的中点对齐
 
 ```css
 .box {
@@ -374,7 +374,7 @@ body {
 ![align-content: center;图例](./01-Flex布局/images/06-align-content-center.png)
 
 ### 6.4 `align-content: space-between;`
-+ 交叉轴的起点对齐
++ 与交叉轴两端对齐，轴线之间的间隔平均分布
 
 ```css
 .box {
@@ -390,7 +390,7 @@ body {
 ![align-content: space-between;图例](./01-Flex布局/images/06-align-content-space-between.png)
 
 ### 6.5 `align-content: space-around;`
-+ 交叉轴的起点对齐
++ 每根轴线两侧的间隔相等
 
 ```css
 .box {
@@ -406,7 +406,7 @@ body {
 ![align-content: space-around;图例](./01-Flex布局/images/06-align-content-space-around.png)
 
 ### 6.6 `align-content: stretch;`
-+ 交叉轴的起点对齐
++ 轴线占满整个交叉轴
 
 ```css
 .box {
