@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>flex-wrap</title>
+  <title>justify-content</title>
   <style>
     body {
       padding: 20px;
@@ -17,7 +17,11 @@
       background-color: white;
       margin: 0 0 55px;
       flex-direction: row;
-      flex-wrap: wrap-reverse;
+      /*justify-content: flex-start;*/
+      /*justify-content: flex-end;*/
+      /*justify-content: center;*/
+      /*justify-content: space-between;*/
+      justify-content: space-around;
     }
     .box-item {
       width: 200px;
@@ -39,9 +43,6 @@
   <div class="box-item">2</div>
   <div class="box-item">3</div>
   <div class="box-item">4</div>
-  <div class="box-item">5</div>
-  <div class="box-item">6</div>
-  <div class="box-item">7</div>
 </div>
 </body>
 </html>
