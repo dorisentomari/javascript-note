@@ -1,130 +1,135 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>盒模型</title>
-	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
-	</style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>盒模型</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
 </head>
 <body>
 
-	<section id="sec">
-		<style>
-			.child{
-				height:100px;
-				background: orange;
-				margin-top:10px;
-			}
-			#sec{
-				background: blue;
-			}
-		</style>
-		<article class="child">
-			
-		</article>
-	</section>
-	
-	<section id="margin">
-		<style>
-			#margin{
-				background: pink;
-				overflow: hidden;
-			}
-			#margin p{
-				margin:5px auto 25px;
-				background: orange;
-			}
-		</style>
-		<p>1</p>
-		<div style="overflow: hidden;">
-			<p>2</p>
-		</div>
-		<p>BFC垂直方向边距重叠问题</p>
-	</section>
-	
-	<section id="layout">
-		<style>
-			#layout{
-				background: red;
-			}
-			#layout .left{
-				float:left;
-				width:100px;
-				height:100px;
-				background: pink;
-			}
-			#layout .right{
-				height:100px;
-				background: #eee;
-				overflow: auto;
-			}
-		</style>
-		<div class="left"></div>
-		<div class="right">创建布局的时候的BFC的应用</div>
-	</section>
-	<section id="float">
-		<style>
-			#float{
-				background: red;
-				overflow: auto;
-				/*float:left;*/
-			}
-			#float .float{
-				float:left;
-				font-size:18px;
+<section id="sec">
+  <style>
+    .child {
+      height: 100px;
+      background: orange;
+      margin-top: 10px;
+    }
 
-			}
-		</style>
-		<div class="float">浮动元素,BFC子元素即使是float,也会参与计算</div>
-	</section>
+    #sec {
+      background: blue;
+    }
+  </style>
+  <article class="child">
 
-	<hr color="green">
-	<hr color="blue">
-	<section id="box-sizing">
-		<style>
-			#box-sizing{
-				box-sizing: content-box;
-				width:100px;
-				height:100px;
-				padding:10px;
-				border:2px solid blue;
-				margin:20px;
-				background-color: orange;
-			}
-		</style>
-	</section>
-	<hr color="green">
-	<hr color="blue">
-	<section id="border-sizing">
-		<style>
-			#border-sizing{
-				box-sizing: border-box;
-				width:100px;
-				height:100px;
-				padding:10px;
-				border:2px solid blue;
-				margin:20px;
-				background-color: orange;
-			}
-		</style>
-	</section>
-	<hr color="green">
-	<hr color="blue">
-	<section style="width:80px;height:90px;" id="styleWidthHeight">
-		<style>
-			#styleWidthHeight{
-				box-sizing: border-box;
-				padding:10px;
-				border:2px solid blue;
-				margin:20px;
-				background-color: orange;
-			}
-		</style>
-	</section>
+  </article>
+</section>
+
+<section id="margin">
+  <style>
+    #margin {
+      background: pink;
+      overflow: hidden;
+    }
+
+    #margin p {
+      margin: 5px auto 25px;
+      background: orange;
+    }
+  </style>
+  <p>1</p>
+  <div style="overflow: hidden;">
+    <p>2</p>
+  </div>
+  <p>BFC垂直方向边距重叠问题</p>
+</section>
+
+<section id="layout">
+  <style>
+    #layout {
+      background: red;
+    }
+
+    #layout .left {
+      float: left;
+      width: 100px;
+      height: 100px;
+      background: pink;
+    }
+
+    #layout .right {
+      height: 100px;
+      background: #eee;
+      overflow: auto;
+    }
+  </style>
+  <div class="left"></div>
+  <div class="right">创建布局的时候的BFC的应用</div>
+</section>
+<section id="float">
+  <style>
+    #float {
+      background: red;
+      overflow: auto;
+      /*float:left;*/
+    }
+
+    #float .float {
+      float: left;
+      font-size: 18px;
+
+    }
+  </style>
+  <div class="float">浮动元素,BFC子元素即使是float,也会参与计算</div>
+</section>
+
+<hr color="green">
+<hr color="blue">
+<section id="box-sizing">
+  <style>
+    #box-sizing {
+      box-sizing: content-box;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: 2px solid blue;
+      margin: 20px;
+      background-color: orange;
+    }
+  </style>
+</section>
+<hr color="green">
+<hr color="blue">
+<section id="border-sizing">
+  <style>
+    #border-sizing {
+      box-sizing: border-box;
+      width: 100px;
+      height: 100px;
+      padding: 10px;
+      border: 2px solid blue;
+      margin: 20px;
+      background-color: orange;
+    }
+  </style>
+</section>
+<hr color="green">
+<hr color="blue">
+<section style="width:80px;height:90px;" id="styleWidthHeight">
+  <style>
+    #styleWidthHeight {
+      box-sizing: border-box;
+      padding: 10px;
+      border: 2px solid blue;
+      margin: 20px;
+      background-color: orange;
+    }
+  </style>
+</section>
 </body>
 </html>

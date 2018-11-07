@@ -1,173 +1,238 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>页面布局 - Layout</title>
-	<style>
-		*{
-			margin:0;
-			padding:0;
-		}
-		.layout{
-			margin-top:20px;
-		}
-		.layout article div{
-			height:100px;
-		}
-	</style>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>页面布局 - Layout</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .layout {
+      margin-top: 20px;
+    }
+
+    .layout article div {
+      height: 100px;
+    }
+  </style>
 </head>
+
+
 <body>
-	<section class="layout float">
-		<style media="screen">
-			.layout.float .left{
-				float:left;
-				width:300px;
-				background: red;
-			}
-			.layout.float .right{
-				float:right;
-				width:300px;
-				background:green;
-			}
-			.layout.float .center{
-				background: orange;
-			}
+<section class="layout float">
+  <style media="screen">
+    .layout.float .left {
+      float: left;
+      width: 300px;
+      background: red;
+    }
 
-		</style>
-		<article class="left-right-center">
-			<div class="left"></div>
-			<div class="right"></div>
-			<div class="center">
-				<h1>浮动解决方案</h1>
-				这是三栏布局的中间部分。
-			</div>
-		</article>
-	</section>
+    .layout.float .right {
+      float: right;
+      width: 300px;
+      background: green;
+    }
 
-	
-	<section class="layout absolute">
-		<style>
-			.layout.absolute .left-center-right>div{
-				position: absolute;
-			}
-			.layout.absolute .left{
-				left:0;
-				width:300px;
-				background: red;
-			}
-			.layout.absolute .center{
-				left:300px;
-				right:300px;
-				background: yellow;
-			}
-			.layout.absolute .right{
-				right:0;
-				width:300px;
-				background: blue;
-			}
+    .layout.float .center {
+      background: orange;
+    }
 
-		</style>
-		<article class="left-center-right">
-			<div class="left"></div>
-			<div class="center">
-				<h2>绝对定位绝对方案</h2>
-				这是三栏布局中绝对定位的中间部分。
-			</div>
-			<div class="right"></div>
-		</article>
-	</section>
+  </style>
+  <article class="left-right-center">
+    <div class="left"></div>
+    <div class="right"></div>
+    <div class="center">
+      <h1>浮动解决方案</h1>
+      这是三栏布局的中间部分。
+    </div>
+  </article>
+</section>
 
-	<section class="layout flexbox">
-		<style>
-			.layout.flexbox{
-				margin-top:140px;
-			}
-			.layout.flexbox .left-center-right{
-				display: flex;
-			} 
-			.layout.flexbox .left{
-				width: 300px;
-				background: red;
-			}
-			.layout.flexbox .center{
-				flex:1;
-				background: green;
-			}
-			.layout.flexbox .right{
-				width:300px;
-				background: blue;
-			}
-		</style>
-		<article class="left-center-right">
-			<div class="left"></div>
-			<div class="center">
-				<h2>flexbox解决方案</h2>
-				这是三栏布局中flexbox的中间部分
-			</div>
-			<div class="right"></div>
-		</article>
-	</section>
-	
-	<section class="layout table">
-		<style>
-			.layout.table .left-center-right{
-				width:100%;
-				display: table;
-				height:100px;
-			}
-			.layout.table .left-center-right>div{
-				display: table-cell;
-			}
-			.layout.table .left{
-				width:300px;
-				background: red;
-			}
-			.layout.table .center{
-				background: yellow;
-			}
-			.layout.table .right{
-				width:300px;
-				background: green;
-			}
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
 
-		</style>
-		<article class="left-center-right">
-			<div class="left"></div>
-			<div class="center">
-				<h2>table布局</h2>
-				这是三栏布局中的table的中间部分
-			</div>
-			<div class="right"></div>
-		</article>
-	</section>
+<section class="layout absolute">
+  <style>
+    .layout.absolute .left-center-right > div {
+      position: absolute;
+    }
 
-	<section class="layout grid">
-		<style>
-			.layout.grid .left-center-right{
-				display:grid;
-				width:100%;
-				grid-template-rows:100px;
-				grid-template-columns:300px auto 300px;
-			}
-			.layout.grid .left{
-				background: red;
-			}
-			.layout.grid .center{
-				background: yellow;
-			}
-			.layout.grid .right{
-				background: green;
-			}
-		</style>
-		<article class="left-center-right">
-			<div class="left"></div>
-			<div class="center">
-				<h2>grid布局</h2>
-				这是三栏布局中网格布局的中间部分
-			</div>
-			<div class="right"></div>
-		</article>
-	</section>
+    .layout.absolute .left {
+      left: 0;
+      width: 300px;
+      background: red;
+    }
+
+    .layout.absolute .center {
+      left: 300px;
+      right: 300px;
+      background: yellow;
+    }
+
+    .layout.absolute .right {
+      right: 0;
+      width: 300px;
+      background: blue;
+    }
+
+  </style>
+  <article class="left-center-right">
+    <div class="left"></div>
+    <div class="center">
+      <h2>绝对定位绝对方案</h2>
+      这是三栏布局中绝对定位的中间部分。
+    </div>
+    <div class="right"></div>
+  </article>
+</section>
+
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+
+<section class="layout flexbox">
+  <style>
+    .layout.flexbox {
+      margin-top: 140px;
+    }
+
+    .layout.flexbox .left-center-right {
+      display: flex;
+    }
+
+    .layout.flexbox .left {
+      width: 300px;
+      background: red;
+    }
+
+    .layout.flexbox .center {
+      flex: 1;
+      background: green;
+    }
+
+    .layout.flexbox .right {
+      width: 300px;
+      background: blue;
+    }
+  </style>
+  <article class="left-center-right">
+    <div class="left"></div>
+    <div class="center">
+      <h2>flexbox解决方案</h2>
+      这是三栏布局中flexbox的中间部分
+    </div>
+    <div class="right"></div>
+  </article>
+</section>
+
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+
+<section class="layout table">
+  <style>
+    .layout.table .left-center-right {
+      width: 100%;
+      display: table;
+      height: 100px;
+    }
+
+    .layout.table .left-center-right > div {
+      display: table-cell;
+    }
+
+    .layout.table .left {
+      width: 300px;
+      background: red;
+    }
+
+    .layout.table .center {
+      background: yellow;
+    }
+
+    .layout.table .right {
+      width: 300px;
+      background: green;
+    }
+
+  </style>
+  <article class="left-center-right">
+    <div class="left"></div>
+    <div class="center">
+      <h2>table布局</h2>
+      这是三栏布局中的table的中间部分
+    </div>
+    <div class="right"></div>
+  </article>
+</section>
+
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+
+<section class="layout grid">
+  <style>
+    .layout.grid .left-center-right {
+      display: grid;
+      width: 100%;
+      grid-template-rows: 100px;
+      grid-template-columns: 300px auto 300px;
+    }
+
+    .layout.grid .left {
+      background: red;
+    }
+
+    .layout.grid .center {
+      background: yellow;
+    }
+
+    .layout.grid .right {
+      background: green;
+    }
+  </style>
+  <article class="left-center-right">
+    <div class="left"></div>
+    <div class="center">
+      <h2>grid布局</h2>
+      这是三栏布局中网格布局的中间部分
+    </div>
+    <div class="right"></div>
+  </article>
+</section>
+
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+<!---->
+
 </body>
 </html>

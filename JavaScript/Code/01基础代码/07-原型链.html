@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>原型链</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>原型链</title>
 </head>
 <body>
-	<script>
-		//字面量方式创建对象
-		var o1={name:"jack"}
-		var o2=new Object({name:"jack"})
+<script>
+  //字面量方式创建对象
+  var o1 = {name: "jack"};
+  var o2 = new Object({name: "jack"});
 
-		//通过构造函数
-		var M=function(name){
-			this.name=name;
-		}
-		var o3=new M("jack");
+  //通过构造函数
+  var M = function (name) {
+    this.name = name;
+  }
+  var o3 = new M("jack");
 
-		//Object.create方法创建
-		var p={name:"jack"}
-		var o4=Object.create(p);
-		
-		var new2=function(func){
-			var o=Object.create(func.prototype);
-			var k=func.call(o);
-			if(typeof k ==="object"){
-				return k;
-			}else{
-				return o;
-			}
-		}
+  //Object.create方法创建
+  var p = {name: "jack"};
+  var o4 = Object.create(p);
 
-	</script>
+  var new2 = function (func) {
+    var o = Object.create(func.prototype);
+    var k = func.call(o);
+    if (typeof k === "object") {
+      return k;
+    } else {
+      return o;
+    }
+  }
+
+</script>
 </body>
 </html>

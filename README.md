@@ -1,4 +1,2 @@
-# JavaScript-And-TypeScript
-+ JavaScript内容主要是基础内容，来自于慕课网的视频课程总结。
-+ ECMAScript2015内容主要来自于阮一峰老师的[《ECMAScript6入门》](http://es6.ruanyifeng.com/)
-+ TypeScript内容主要来自于[TypeScript中文网](https://www.tslang.cn/)
+# 介绍
+这个仓库是为了存放一些关于前端的一些知识总结，包括CSS，JavaScript，TypeScript，还会包括ES6语法，React以及未来可能会对一些JS库做一些专项的介绍。
