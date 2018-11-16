@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <script>
+      // let arr = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14'];
+      // arr.map((item, index, array) => {
+      //   console.log(`item: ${item}---index: ${index}`);
+      //   console.log(`parseInt(item, index): ${parseInt(item, index)}`);
+      // });
+      // function instance_of(L, R) {
+      // 	let O = R.prototype;
+      // 	L = L.__proto__;
+      // 	while(true){
+      // 		if (L === null){
+      // 			return false;
+      // 		}
+      // 		if (O === L) {
+      // 			return true;
+      // 		}
+      // 		L = L.__proto__;
+      // 	}
+      // }
+      // console.log(instance_of(Object, Object));
+      // console.log(instance_of(Function, Function));
+      // console.log(instance_of(String, String));
+      // let foo = {};
+      // let F = function () {};
+      //
+      // Object.prototype.a = 'value a';
+      // Function.prototype.b = 'value b';
+      //
+      // console.log(foo.a);
+      // console.log(foo.b);
+      // console.log(F.a);
+      // console.log(F.b);
+
+      // let user = [
+      //   {name: 'mark', age: 18},
+      //   {name: 'sherry', age: 18},
+      //   {name: 'jack', age: 20},
+      // ];
+      //
+      // function groupBy(arr, key) {
+      //   return arr.reduce((acc, obj) => {
+      //     let value = obj[key];
+      //     if (!acc[value]) {
+      //       acc[value] = [];
+      //     }
+      //     acc[value].push(obj);
+      //     return acc;
+      //   }, {});
+      // }
+      //
+      // let res = groupBy(user, 'age');
+
+
+      // let arr = [0, 1, 2, 3, 4, 3, 4, 5, 2, 1, 5];
+      // arr = arr.sort();
+      // let res = arr.reduce((acc, current, index) => {
+      //   if (acc.length === 0 || acc[acc.length -1] !== current) {
+      //     acc.push(current);
+      //   }
+      //   return acc;
+      // }, []);
+      //
+      // console.log(res);
+
+
+      // function p1(a) {
+      //   return new Promise((resolve, reject) => {
+      //     resolve(a + 1);
+      //   });
+      // }
+      //
+      // function p2(a) {
+      //   return new Promise((resolve, reject) => {
+      //     resolve(a * 2);
+      //   });
+      // }
+      //
+      // function p3(a) {
+      //   return a + 3;
+      // }
+      //
+      // function p4(a) {
+      //   return new Promise((resolve, reject) => {
+      //     resolve(a * 4);
+      //   });
+      // }
+      //
+      // function runPromise(arr, input) {
+      //   return arr.reduce((promiseChain, currentFunction) => {
+      //     return promiseChain.then(currentFunction)
+      //   }, Promise.resolve(input));
+      // }
+      //
+      // const promiseArray = [p1, p2, p3, p4];
+      //
+      // runPromise(promiseArray, 10).then(res => console.log(res));
+
+
+      const double = x => x + x;
+      const triple = x => x * 3;
+      const quadruple = x => x * 4;
+
+      const pipe = (...functions) => value => functions.reduce((acc, fn) => fn(acc), value);
+
+      const mutiply6 = pipe(double, triple, quadruple);
+
+      console.log(mutiply6(6));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+  </body>
+</html>
