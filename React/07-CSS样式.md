@@ -51,11 +51,11 @@ export default Home;
 ```
 
 # 2. 使用 CSS Modules
-### 2.2.1 CSS模块化解决方案主要有两类
+### 2.1 CSS模块化解决方案主要有两类
 + Inline Style，彻底抛弃CSS，使用JavaScript或JSON书写样式，能给CSS提供JavaScript同样强大的模块化能力。但是缺点很明显，Inline Style几乎不能利用CSS本身的特性，比如级联，媒体查询，:hover等伪类，这些还需要依赖框架实现，与React相关的有 `Radium`，`jsxstyle`和`react-style`
 + CSS Modules，依然使用CSS，但是使用JavaScript来管理样式依赖。CSS Modules能最大化地结合现有CSS生态和JavaScript模块化能力，发布时依旧编译出单独的JavaScript和CSS 文件。现在webpack css-loader内置CSS Modules功能。
 
-### 2.2.1 CSS模块化遇到的问题
+### 2.2 CSS模块化遇到的问题
 + CSS模块化解决了CSS样式的导入和导出。灵活按照需要导入以便复用代码，导出时能够隐藏内部作用域，避免全局污染
 
 + Sass，Less，PostCSS视图解决CSS编程能力弱的问题，但是没有解决模块化的问题。
@@ -67,12 +67,12 @@ export default Home;
 
 + 在webpack.config.js中配置CSS Modules，可以直接在js文件中引入`***.css`文件，在webpack中配置`localIdentName`自动生成的`class`名称，其中类名最后的文字就是给定算法生成的序列码。经过混淆处理之后，`class`类名基本就是唯一的，降低了项目中样式覆盖的几率。在生产环境下修改规则，生成更短的class名，可以提高css压缩率
 
-### 2.2.2 CSS Modules实现了以下几点
+### 2.3 CSS Modules实现了以下几点
 + 所有的样式都是局部化的，解决了命名冲突和全局污染的问题
 + class名的生成规则配置灵活，可以压缩class名
 + 只需要引用组件的JavaScript，就可以搞定组件所有的JavaScript和CSS
 
-### 2.2.3 局部默认样式
+### 2.4 局部默认样式
 + 使用CSS Modules后，相当于给每一个class名外加了`:local`，依次来实现样式的局部化。如果像要切换到全局模式，可以使用`:global`包裹
 
 ```css
@@ -101,7 +101,7 @@ export default Home;
 
 ```
 
-### 2.2.4 使用`composes`来组合样式
+### 2.5 使用`composes`来组合样式
 + 对于样式复用，CSS Modules只提供了唯一的方式来处理`composes`组合
 
 ```css
@@ -151,7 +151,7 @@ buttonElem.outerHTML = `<button class=${styles.normal}></button>`;
 }
 ```
 
-### 2.3 class命名技巧
+### 2.6 class命名技巧
 + CSS Modules的命名规范是从BEM扩展而来的，BEM把样式名分为3个级别
 + Block: 对应的模块名，如 Dialog
 + Element: 对应模块中的节点名 Comfirm Button
@@ -161,19 +161,19 @@ BEM最终得到的class名为`dialog__confirm-button--hightlight`，使用双符
 
 CSS Modules中的CSS文件名恰好对应Block名，只需要考虑Element和Modifier即可。
 
-### 2.4 CSS Modules使用技巧
+### 2.7 CSS Modules使用技巧
 + 不使用选择器，只使用class类名来定义样式
 + 不层叠多个class，只使用一个class把所有的样式定义好
 + 所有样式通过composes组合来实现复用
 + 不要使用嵌套
 
-### 2.5 使用CSS Modules遇到的问题
+### 2.8 使用CSS Modules遇到的问题
 + 对一个元素使用多个class？ 样式照样生效
 + 在一个style文件中使用同名的class？ 同名class编译后虽然可能是随机码，但仍是同名的
 + 在style文件中使用id，伪类选择器？这些选择器不会被替换，原封不动地出现在编译后CSS文件中，也就是说，CSS Modules只会转换class名相关的样式。
 + CSS Modules结合历史遗留项目？CSS Modules能够做到现有的项目能平滑迁移。
 
-### 2.6 外部如何覆盖局部样式
+### 2.9 外部如何覆盖局部样式
 + 给现有的组件节点上加上`data-role`属性，通过属性选择器来覆盖样式
 
 ```javascript
@@ -194,7 +194,7 @@ const DialogComponent = () => {
 }
 ```
 
-### 2.7 CSS Modules与React
+### 2.10 CSS Modules与React
 + 在className处直接使用CSS中的class名即可。
 + 一般把组件最外层节点对应的class名称为root
 + // TODO 如果不想频繁的输入`style.**`，可以使用`react-css-modules`，通过高阶组件的形式避免重复输入`style.**`
