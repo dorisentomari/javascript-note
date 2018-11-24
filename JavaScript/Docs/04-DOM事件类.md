@@ -34,7 +34,7 @@
 #### ****自定义事件`(custome,CustomEvent())`
 ```javascript
 var eve = new Event("custome");
-ev.addEventListener("custome",function(){
+ev.addEventListener("custome", function(){
     console.log("custome");    
 });
 ev.dispatchEvent(eve);//dispatch触发这个事件.

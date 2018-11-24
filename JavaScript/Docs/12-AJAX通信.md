@@ -23,24 +23,7 @@
 + 事件的触发条件
 + 事件的触发顺序
 ```javascript
-var xhr;
-if(window.XMLHttpRequest){
-    xhr=new window.XMLHttpRequest;
-}else{
-    xhr=new ActiveXObject("Microsoft.XMLHTTP");
-}
-xhr.onreadystatechange=function(){
-    if(xhr.readyState===4 && xhr.status===200){
-        console.log(responseText);
-    }
-}
-//GET
-xhr.open("GET","./data.json",true);
-xhr.send();
-//POST
-xhr.open("POST","./data.json",true);
-xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-xhr.send(data);
+
 ```
 
 #### 跨域通信的几种方式?

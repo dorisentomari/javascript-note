@@ -15,18 +15,17 @@
 
 #### XMLHttpRequest
 ```javascript
-var xhr=new XMLHttpRequest();
-xhr.open("GET","/data",false);
-xhr.onreadystatechange=function(){
-    //这里的函数是异步执行
-    if(xhr.readyState == 4){
-        if(xhr.status === 200){
-            alert(xhr.responseText);
-        }
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "/data", false);
+xhr.onreadystatechange = function () {
+  //这里的函数是异步执行
+  if (xhr.readyState == 4) {
+    if (xhr.status === 200) {
+      alert(xhr.responseText);
     }
-}
+  }
+};
 xhr.send(null);
-
 ```
 
 #### IE兼容性问题
@@ -74,9 +73,9 @@ xhr.send(null);
 
 ```html
 <script>
-    window.callback=function(data){
-        console.log(data);
-    }
+window.callback=function(data) {
+	console.log(data);
+}
 </script>
 <script src="http://192.168.0.116:8080/data.js"></script>
 

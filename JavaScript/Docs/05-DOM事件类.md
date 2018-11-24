@@ -21,20 +21,20 @@
 #### 通用事件绑定
 
 ```javascript
-var btn=document.getElementById("btn");
-btn.addEventListener('click',function(event){
-    console.log("clicked");
-})
+var btn = document.getElementById("btn");
+btn.addEventListener('click', function (event) {
+  console.log("clicked");
+});
 
-function bindEvent(elem,type,fn){
-    elem.addEventListener(type,fn)
+function bindEvent(elem, type, fn) {
+  elem.addEventListener(type, fn)
 }
 
-var a=document.getElementById("link");
-bindEvent(a,"click",function(e){
-    e.preventDefault();//阻止默认行为
-    console.log("clicked")
-})
+var a = document.getElementById("link");
+bindEvent(a, "click", function (e) {
+  e.preventDefault();//阻止默认行为
+  console.log("clicked")
+});
 ```
 
 #### 关于IE低版本的兼容性问题
@@ -45,7 +45,7 @@ bindEvent(a,"click",function(e){
 
 #### 事件冒泡
 ```html
-   <body>
+<body>
     <div id="div1">
         <p id="p1">激活</p>
         <p id="p2">取消</p>
@@ -60,15 +60,15 @@ bindEvent(a,"click",function(e){
 ```
 
 ```javascript
-var p1=document.getElementByID("P1");
-var body=document.body;
-bindEvent(p1,'click',function(e){
-    e.stopPropatation();
-    console.log("激活")
-})
-bindEvent(body,'click',function(e){
-    console.log("取消")
-})
+var p1 = document.getElementById("P1");
+var body = document.body;
+bindEvent(p1, 'click', function (e) {
+  e.stopPropatation();
+  console.log("激活")
+});
+bindEvent(body, 'click', function (e) {
+  console.log("取消")
+});
 ```
 
 #### 代理
@@ -83,46 +83,47 @@ bindEvent(body,'click',function(e){
 ```
 
 ```javascript
-var div1=document.getElementById("div1");
-div1.addEventListener("click",function(){
-    var target=e.target;
-    if(target.nodeName==="A"){
-        alert(target.innerHTML)
-    }
-})
+var div1 = document.getElementById("div1");
+div1.addEventListener("click", function () {
+  var target = e.target;
+  if (target.nodeName === "A") {
+    alert(target.innerHTML);
+  }
+});
 ```
 
 #### 完善通过绑定事件的函数
 
 ```javascript
-function bindEvent(elem,type,selector,fn){
-    if(fn==null){
-        fn=selector;
-        selector=null;
+function bindEvent(elem, type, selector, fn) {
+  if (fn == null) {
+    fn = selector;
+    selector = null;
+  }
+  elem.addEventListener(type, function (e) {
+    var target;
+    if (selector) {
+      target = e.target;
+      if (target.matches(selector)) {
+        fn.call(target, e)
+      }
+    } else {
+      fn(e)
     }
-    elem.addEventListener(type,function(e){
-        var target;
-        if(selector){
-            target=e.target;
-            if(target.matches(selector)){
-                fn.call(target,e)
-            }
-        }else{
-            fn(e)
-        }
-    })
+  })
 }
+
 //使用代理，传四个值
-var div1=document.getElementById("div1");
-bindEvent(div1,"click",'a',function(e){
-    console.log(this.innerHTML)
-})
+var div1 = document.getElementById("div1");
+bindEvent(div1, "click", 'a', function (e) {
+  console.log(this.innerHTML)
+});
 
 //不使用代理，传三个值
-var a=document.getElementById("a1");
-bindEvent(div1,"click",function(e){
-    console.log(a.innerHTML);
-})
+var a = document.getElementById("a1");
+bindEvent(div1, "click", function (e) {
+  console.log(a.innerHTML);
+});
 ```
 
 #### 代理的好处
