@@ -22,9 +22,6 @@
 + 兼容性处理
 + 事件的触发条件
 + 事件的触发顺序
-```javascript
-
-```
 
 #### 跨域通信的几种方式?
 ##### `JSONP`
@@ -41,7 +38,7 @@ jsonp({
     data:{}    
 })
 ```
-        
+    
 ##### Hash
 + `#`改变，页面不刷新，所以可以做跨域通信
 + `?`查询后面的内容改变，页面刷新，不可以做跨域通信
@@ -56,12 +53,12 @@ window.onhashchange=function(){
     var data=window.location.hash;//得到的结果需要特殊处理
 }
 ```
-    
+
 ##### `postMessage`
 + HTML5中的新方式
 ```javascript
 //窗口A(http:A.com)向跨域的窗口B(http://B.com)发送信息
-Bwindow.postMessage("data","http://B.com")
+Bwindow.postMessage("data","http://B.com");
 //这里的第二个参数就是第一个源，可以为url地址，也可以为*，
 //为了安全，一般都用url地址
 //在窗口B中监听
