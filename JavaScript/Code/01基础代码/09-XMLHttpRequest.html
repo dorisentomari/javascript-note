@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XMLHttpRequest</title>
+</head>
+<body>
+<button id="button">click</button>
+<script>
+  let button = document.getElementById('button');
+
+  function sendAjax() {
+    var xhr = new XMLHttpRequest();
+    xhr.timeout = 3000;
+    xhr.responseType = "text";
+    xhr.open('get', 'http://localhost:3000/user', true);
+    xhr.onload = function (e) {
+      if (this.status === 200) {
+        console.log(this.responseText);
+      }
+    };
+    xhr.send();
+  }
+
+  button.addEventListener('click', function () {
+    sendAjax();
+  });
+</script>
+</body>
+</html>

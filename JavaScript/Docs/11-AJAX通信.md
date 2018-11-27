@@ -1,25 +1,25 @@
 [TOC]
 
-### AJAX
+# AJAX
 
-#### 题目
+# 1. 题目
 + 手动编写一个`AJAX`,不依赖第三方库
 + 跨域的几种实现方式
     + `JSONP`
     + 服务器端设置`http`和`header`
 
-#### 知识点
+# 2. 知识点
 + `XMLHttpRequest`
 + 状态码说明
 + 跨域
 
-#### XMLHttpRequest
+# 3. XMLHttpRequest
 ```javascript
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "/data", false);
 xhr.onreadystatechange = function () {
   //这里的函数是异步执行
-  if (xhr.readyState == 4) {
+  if (xhr.readyState === 4) {
     if (xhr.status === 200) {
       alert(xhr.responseText);
     }
@@ -28,11 +28,11 @@ xhr.onreadystatechange = function () {
 xhr.send(null);
 ```
 
-#### IE兼容性问题
+# 4. IE兼容性问题
 
 + IE低版本使用`ActiveXObject`
 
-#### `readyState`状态码说明
+# 5. `readyState`状态码说明
 
 + `0`-(未初始化)还没有调用`send()`方法
 + `1`-(载入)已调用`send()`方法,正在发送请求
@@ -40,14 +40,14 @@ xhr.send(null);
 + `3`-(交互)正在解析相应内容
 + `4`-(完成)相应内容解析完成,可以在客户端调用了
 
-#### status
+# 6. status
 
 + `2xx`-表示成功处理请求,如200
 + `3xx`-表示需要重定向,浏览器直接跳转
 + `4xx`-表示客户端请求错误,如404
 + `5xx`-服务器端错误
 
-#### 跨域
+# 7. 跨域
 + 什么是跨域？
     + 浏览器有同源策略,不允许ajax访问其他域的接口
     + 跨域条件:协议,域名,端口,只要有一个不同就算跨域

@@ -1,7 +1,7 @@
 [TOC]
 
-### 事件
-#### 题目
+# 事件
+# 1. 题目
 + 编写一个通用的事件监听函数
     + 通用事件绑定
 + 描述事件冒泡流程
@@ -13,12 +13,14 @@
     + 使用代理
     + 知道代理的两个优点
 
-#### 知识点
+# 2. 知识点
 + 通用事件绑定
 + 事件冒泡
 + 代理
 
-#### 通用事件绑定
+# 3. 通用事件绑定
++ addEventListener第三个参数为true，表示在捕获阶段触发
++ addEventListener第三个参数为false，表示在冒泡阶段触发，默认值
 
 ```javascript
 var btn = document.getElementById("btn");
@@ -37,13 +39,13 @@ bindEvent(a, "click", function (e) {
 });
 ```
 
-#### 关于IE低版本的兼容性问题
+# 4. 关于IE低版本的兼容性问题
 
 + IE低版本使用`attachEvent`绑定事件,和W3C标准不一样。
 + IE低版本使用量非常少,很多网站都已经不支持了。
 + 建议对IE低版本的兼容性:了解即可,无需深究。
 
-#### 事件冒泡
+# 5. 事件冒泡
 ```html
 <body>
     <div id="div1">
@@ -63,15 +65,15 @@ bindEvent(a, "click", function (e) {
 var p1 = document.getElementById("P1");
 var body = document.body;
 bindEvent(p1, 'click', function (e) {
-  e.stopPropatation();
-  console.log("激活")
+  e.stopPropagation();
+  console.log("激活");
 });
 bindEvent(body, 'click', function (e) {
-  console.log("取消")
+  console.log("取消");
 });
 ```
 
-#### 代理
+# 6. 代理
 ```html 
 <div id="div1">
     <a href="#">a1</a>
@@ -79,7 +81,6 @@ bindEvent(body, 'click', function (e) {
     <a href="#">a3</a>
     <a href="#">a4</a>
 </div>
-
 ```
 
 ```javascript
@@ -92,8 +93,8 @@ div1.addEventListener("click", function () {
 });
 ```
 
-#### 完善通过绑定事件的函数
-
+# 7. 完善通过绑定事件的函数
++ 给elem元素绑定事件，但是代理到selector元素上
 ```javascript
 function bindEvent(elem, type, selector, fn) {
   if (fn == null) {
@@ -126,6 +127,6 @@ bindEvent(div1, "click", function (e) {
 });
 ```
 
-#### 代理的好处
+# 8. 代理的好处
 + 代码简洁
 + 减少浏览器的内存占用
