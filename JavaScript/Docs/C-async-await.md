@@ -1,8 +1,8 @@
-# async/await
+# 1. async/await
 + then只是将callback拆分了
 + async/await是最直接的同步写法
 
-## 1. promise的写法
+# 2. promise的写法
 ```javascript
 result1.then(function (img) {
     console.log('第一个图片加载完成');
@@ -20,7 +20,7 @@ result1.then(function (img) {
 });
 ```
 
-## 2. async/await写法
+# 3. async/await写法
 ```javascript
 let src1 = 'https://cn.vuejs.org/images/logo.png';
 let src2 = 'https://www.baidu.com/img/bd_logo1.png';
@@ -39,12 +39,12 @@ const load = async function () {
 load();
 ```
 
-## 3. 用法
+# 4. 用法
 + 使用await，函数必须用async标识
 + await后面跟的是一个Promise对象
 + 可以使用babel编译
 
-## 4. 问题解答
+# 5. 问题解答
 + 基本语法使用
 + async/await使用了Promise，但是不和Promise冲突
 + 完全是同步的写法，再也没有回调函数

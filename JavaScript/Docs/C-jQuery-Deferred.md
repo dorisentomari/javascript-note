@@ -1,6 +1,6 @@
 # jQuery Deferred
 
-## 1. jQuery1.5之前
+# 1. jQuery1.5之前
 ```javascript
 $(function () {
     let ajax = $.ajax({
@@ -16,7 +16,7 @@ $(function () {
 });
 ```
 
-## 2. jQuery1.5之后
+# 2. jQuery1.5之后
 ```javascript
 $(function () {
     let ajax = $.ajax('./data.json');
@@ -43,13 +43,13 @@ $(function () {
 });
 ```
 
-## 3. jQuery1.5的变化
+# 3. jQuery1.5的变化
 + 无法改变JS异步和单线程的本质
 + 只能从写法上杜绝callback这种形式
 + 只是一种语法糖，但是解耦了代码
 + **开放封闭原则(扩展开放，修改封闭)**
 
-## 4. 使用jQuery Deferred
+# 4. 使用jQuery Deferred
 + 异步示例代码
 ```javascript
 let wait = function () {
@@ -99,13 +99,13 @@ w.then(function () {
     console.log('err 4:' + err);
 });
 ```
-## 5. deferred总结
+# 5. deferred总结
 + dtd的API可以分为两类，用意不同
 + 第一类：`dtd.resolve`, `dtd.reject`
 + 第二类：`dtd.then`, `dtd.done`, `dtd.fail`
 + 这两类应该分开写
 
-## 6. 使用dtd.promise()
+# 6. 使用dtd.promise()
 ```javascript
 function waitHandle() {
     let dtd = $.Deferred();             //创建一个deferred对象
@@ -146,7 +146,7 @@ $.when(w).then(function () {
     console.log('fail 2');
 });
 ```
-## 7. 问题解答
+# 7. 问题解答
 + 可以jQuery1.5对ajax的改变举例
 + 说明如何简单的封装，使用Deferred
 + 说明promise和Deferred的区别

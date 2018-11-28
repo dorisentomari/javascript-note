@@ -1,11 +1,11 @@
-# Promise
+# 1. Promise
 + 基本语法回顾
 + 异常捕获(Error和reject都要考虑)
 + 多个串联(链式执行)
 + Promise.all和Promise.race
 + Promise的标准(状态变化，then函数)
 
-## 1. Promise语法回顾
+# 2. Promise语法回顾
 ```javascript
 function loadImg(src) {
     const promise = new Promise((resolve, reject) => {
@@ -35,7 +35,7 @@ result.then(function (img) {
 });
 ```
 
-## 2. 异常捕获
+# 3. 异常捕获
 + 规定： then只能接受一个参数，最后统一用catch捕获异常
 + `loadImg`函数不变
 ```javascript
@@ -51,7 +51,7 @@ result.then(function (img) {
 });
 ```
 
-## 3. 多个串联
+# 4. 多个串联
 + `loadImg`函数不变
 ```javascript
 let src1 = 'https://cn.vuejs.org/images/logo.png';
@@ -76,7 +76,7 @@ result1.then(function (img) {
 });
 ```
 
-## 4. Promise.all & Promise.race
+# 5. Promise.all & Promise.race
 + `loadImg`函数不变
 ```javascript
 let src1 = 'https://cn.vuejs.org/images/logo.png';
@@ -100,17 +100,17 @@ Promise.race([result1, result2, result3]).then(function (data) {
 });
 ```
 
-## 5. 标准
+# 6. 标准
 + 任何技术推广使用都需要一套标准来支撑
 + 任何不符合标准的东西，终将会被用户抛弃
 + 不要挑战标准，不要自造标准
 
-## 6. Promise标准 - 状态变化
+# 7. Promise标准 - 状态变化
 + 三种状态：pending, fulfilled, rejected
 + 初始状态是pending
 + pending变为fulfilled，或者pending变为rejected
 
-## 7. Promise标准 - then
+# 8. Promise标准 - then
 + Promise实例必须实现then这个方法
 + then()必须可以接收两个函数作为参数
 + then()返回的必须是一个Promise实例

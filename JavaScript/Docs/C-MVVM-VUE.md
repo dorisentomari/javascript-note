@@ -1,5 +1,4 @@
-# MVVM
-## 1. MVVM
+# 1. MVVM
 ### 1.1 对MVVM的理解(Model View ViewModel)
 + Model - 模型，数据
 + View - 视图，模板(视图和模型是分离的)
@@ -10,7 +9,7 @@
 + 模板引擎: VUE的模板如何被解析，指令如何处理?
 + 渲染: VUE的模板如何被渲染成HTML,以及渲染过程?
 
-## 2. VUE中如何实现响应式
+# 2. VUE中如何实现响应式
 + 什么是响应式
 + Object.defineProperty
 + 模拟
@@ -68,7 +67,7 @@ for (key in data) {
 + 理解Object.defineProperty
 + 将data的属性代理到vm上
 
-## 3. VUE中如何解析模板
+# 3. VUE中如何解析模板
 + 模板是什么
 + render函数
 + render函数与vdom
@@ -99,7 +98,7 @@ for (key in data) {
 + MVVM(Model, View, ViewModel)不是一种创新
 + 结合真正的场景使用
 
-## 4. render函数
+# 4. render函数
 ### 4.1 with用法
 ```javascript
 let obj = {
@@ -191,7 +190,7 @@ function updateComponent() {
 + 页面首次渲染执行updateComponent
 + data中每次修改属性，执行updateComponent
 
-## 5. VUE的整体实现流程
+# 5. VUE的整体实现流程
 ### 5.1 VUE的三要素
 + 模板解析引擎
 + 响应式

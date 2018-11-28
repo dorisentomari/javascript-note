@@ -1,4 +1,4 @@
-## 1. zepto如何使用原型
+# 1. zepto如何使用原型
 + zepto源码
 ```javascript
 (function (window) {
@@ -43,7 +43,7 @@
 	Z.prototype = $.fn;
 })(window);
 ```
-## 2. jQuery如何使用原型
+# 2. jQuery如何使用原型
 ```javascript
 (function (window) {
 	var jQuery = function (selector) {
@@ -80,7 +80,7 @@
 	window.$ = jQuery;
 })(window);
 ```
-## 3. 问题解答
+# 3. 问题解答
 + jQuery和zepto如何使用原型
 + jQuery和zepto的插件机制
 + 个人基于原型的库

@@ -1,15 +1,15 @@
-# Virtual DOM 虚拟DOM
+# 1. Virtual DOM 虚拟DOM
 + VDOM是vue和react的核心
 + VDOM比较独立，使用起来相对简单
 + vue和react中VDOM的实现
 
-# 问题
+# 2. 问题
 + VDOM是什么？为何会存在VDOM？
 + VDOM如何应用，核心API的使用
 + diff算法
 
-## 1. 什么是VDOM，为何使用VDOM
-### 1.1 什么是VDOM
+# 3. 什么是VDOM，为何使用VDOM
+### 3.1 什么是VDOM
 + Virtual DOM，虚拟DOM
 + 用JS模拟DOM结构
 + DOM变化的对比，放在JS层来做(图灵完备语言)
@@ -49,7 +49,7 @@
 }
 ```
 
-### 1.2 设计一个需求场景
+### 3.2 设计一个需求场景
 + 需求
 + 1. 将该数据展示成一个表格
 + 2. 任意修改一个信息，表格也跟着修改
@@ -70,7 +70,7 @@
     address: '广州'
 }]
 ```
-### 1.3 用jQuery实现
+### 3.3 用jQuery实现
 ```javascript
 $(function () {
 	const data = [{
@@ -111,13 +111,13 @@ $(function () {
 	render(data);
 });
 ```
-### 1.4 遇到的问题
+### 3.4 遇到的问题
 + DOM操作是昂贵的，JS的运行效率高
 + 尽量减少DOM操作，而不是推倒重来
 + 项目越复杂，影响就越严重
 + VDOM可以解决这个问题
 
-## 2. VDOM如何应用，核心API是什么
+# 4. VDOM如何应用，核心API是什么
 + 介绍snabbdom
 + 重新做jQuery的virtual dom
 + 核心API
@@ -151,7 +151,7 @@ var newVnode = h('div#container.two.classes', {on: {click: anotherEventHandler}}
 patch(vnode, newVnode); // Snabbdom efficiently updates the old view to the new state
 ```
 
-### 2.1 snabbdom的h函数
+# 5. snabbdom的h函数
 + h函数
 ```javascript
 var vnode = h('ul#list', {}, [
@@ -185,7 +185,7 @@ var vnode = h('ul#list', {}, [
 }
 ```
 
-### 2.2 snabbdom的patch函数
+# 5.1 snabbdom的patch函数
 ```javascript
 let vnode = h('ul#list', {}, [
 	h('li.item', {}, 'Item 1'),
@@ -204,34 +204,32 @@ btnChange.addEventListener('click', () => {
 	patch(vnode, newVnode);
 });
 ```
-## 3. 核心API
+# 5.2 核心API
 + h函数`h(标签名, 属性, [子元素])`
 + h函数`h(标签名, 属性, '...')`
 + patch函数初次渲染`patch(container, vnode);`
 + patch函数re-render`patch(vnode, newVnode);`
 
-## 4. diff算法
+# 5.3 diff算法
 + 什么是diff算法(linux的基础命令)
 + 去繁就简
 + VDOM为何用diff算法(找出需要更新的节点)
 + diff算法的实现流程(`patch(container, vnode)`和`patch(vnode, newVnode)`);
 + 核心逻辑(createElement, updateChildren)
 
-### 4.1 去繁就简
+# 5.4 去繁就简
 + diff算法非常复杂，实现难度很大，源码量很大
 + 去繁就简，理解核心流程，不关心细节
 + 去繁就简之后，依然很复杂很难
 
-### 4.2 VDOM为何使用diff算法
+# 5.5 VDOM为何使用diff算法
 + DOM操作是昂贵的，因此尽量减少DOM操作
 + 找出本次DOM必须跟新的节点类更新，其他的不更新
 + “找出”的过程，就需要diff算法
 
-### 4.3 diff实现过程
+# 5.6 diff实现过程
 + `patch(container, vnode);`
 + `patch(vnode, newVnode);`
-
-### 4.4 简单的例子
 + vnode
 ```
  {
@@ -310,23 +308,23 @@ function replaceNode(vnode, newVnode) {
 	let newElem = createElement(newVnode);
 }
 ```
-### 4.5 其他
+# 6. 其他
 + 节点新增和删除
 + 节点重新排序
 + 节点属性，样式，事件绑定
 + 如何极致的压榨性能
 + ...
 
-### 4.6 diff实现过程
+# 7. diff实现过程
 + patch();
 + createElement();
 + updateChildren();
 
-### 4.7 VDOM如何使用，核心函数
+# 8. VDOM如何使用，核心函数
 + 以snabbdom用法举例
 + 核心API: h函数，patch函数
 
-### 4.8 diff算法是什么，为什么使用diff算法
+# 9. diff算法是什么，为什么使用diff算法
 + 什么是diff算法，linux的基础命令
 + VDOM中应用diff算法时为了找出需要更新的节点
 + 实现`patch(container, vnode)`和`patch(vnode, newVnode)`

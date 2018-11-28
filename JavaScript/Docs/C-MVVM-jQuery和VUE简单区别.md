@@ -1,17 +1,17 @@
-# MVVM
+# 1. MVVM
 + 如何理解MVVM
 + 如何实现MVVM
 + VUE源码
 
-# 问题
+# 2. 问题
 + jQuery与MVVM框架的区别
 + 对MVVM的理解
 + VUE如何实现响应式
 + VUE如何解析模板
 + VUE整个实现流程
 
-## 1. jQuery与MVVM框架的区别
-### 1.1 jQuery实现todo-list
+# 3. jQuery与MVVM框架的区别
+### 3.1 jQuery实现todo-list
 ```html
 <div>
 	<input type="text" id="txt-title">
@@ -36,7 +36,7 @@
 </script>
 ```
 
-### 1.2 VUE实现todo-list
+### 3.2 VUE实现todo-list
 ```html
 <div id="app">
 	<div>
@@ -65,6 +65,6 @@
 </script>
 ```
 
-### 1.3 jQuery和VUE的区别
+### 3.3 jQuery和VUE的区别
 + 数据和视图的分离，解耦(开发封闭原则)
 + 以数据驱动视图，只关心数据变化，DOM操作被封装
