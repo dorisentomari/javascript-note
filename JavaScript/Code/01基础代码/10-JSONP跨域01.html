@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JSONP跨域01</title>
+</head>
+
+<body>
+<button id="button">点我</button>
+<ul id="list"></ul>
+<script type="text/javascript">
+  let button = document.getElementById('button');
+
+  function jsonp(option) {
+    if (!option.url) {
+      throw new Error('jsonp url 不能为空');
+    }
+
+    let scriptElem = document.createElement('script');
+    let url = '';
+    let data = option.data || {};
+    if (Object.keys(data).length > 0) {
+      for(let key in data) {
+        url += key + '=' + data[key] + '&';
+      }
+    }
+    let html = option.url + '?' + url.substr(0, url.length - 1);
+    scriptElem.src = html;
+    document.head.appendChild(scriptElem);
+    document.head.removeChild(scriptElem);
+  }
+
+  function handleGetList (content) {
+    console.log(content);
+    let lis = '';
+    if (Object.prototype.toString.call(content) === '[object Object]') {
+      for(let key in content) {
+        lis += '<li>' + key + ': ' + content[key] + '</li>';
+      }
+    }
+    document.getElementById('list').innerHTML = lis;
+  }
+
+  button.addEventListener('click', function() {
+    jsonp({
+      url: 'http://localhost:9599/list',
+      data: {
+        callback: 'handleGetList'
+      }
+    });
+  });
+
+
+
+
+
+
+</script>
+</body>
+
+</html>
