@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>封装ajax</title>
+</head>
+
+<body>
+<button id="btnGet">get</button>
+<button id="btnPost">post</button>
+
+<script type="text/javascript">
+
+  function ajax(option) {
+    option.url = option.url || '';
+    option.method = option.method || 'get';
+    option.data = option.data || {};
+    option.dataType = option.dataType || 'json';
+    option.success = option.success || function () {
+    };
+    option.error = option.error || function () {
+    };
+
+    let html = '';
+    for (let key in option.data) {
+      html += key + '=' + option.data[key] + '&';
+    }
+    let xml = new XMLHttpRequest();
+    xml.onload = function () {
+      if (xml.status === 200) {
+        if (option.dataType.toLowerCase() === 'text') {
+          option.success(xml.responseText);
+        } else if (option.dataType.toLowerCase() === 'json') {
+          let json = JSON.parse(xml.responseText);
+          option.success(json);
+        }
+      }
+    };
+
+    html = html.substr(0, html.length - 1);
+
+    if (option.method.toLowerCase() === 'get') {
+      html = option.url + '?' + html;
+      xml.open(option.method, html, true);
+      xml.send(option.data);
+    }
+
+    if (option.method.toLowerCase() === 'post') {
+      xml.open(option.method, option.url, true);
+      xml.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+      xml.send("username=mark&password=123456");
+    }
+  }
+
+  let btnGet = document.getElementById('btnGet');
+
+  btnGet.addEventListener('click', function (e) {
+    ajax({
+      url: 'http://localhost:8000/getList',
+      data: {
+        name: 'tom',
+        age: 18
+      },
+      method: 'get',
+      success: function (e) {
+        console.log('get success');
+        console.log(e);
+      }
+    });
+  });
+
+  let btnPost = document.getElementById('btnPost');
+
+  btnPost.addEventListener('click', function (e) {
+    ajax({
+      url: 'http://localhost:8000/postList',
+      data: {
+        name: 'tom',
+        age: 18
+      },
+      method: 'post',
+      success: function (e) {
+        console.log('post success');
+        console.log(e);
+      }
+    });
+  });
+</script>
+</body>
+
+</html>
