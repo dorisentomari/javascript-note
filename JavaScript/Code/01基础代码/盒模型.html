@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>盒模型</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+<section id="sec">
+  <style>
+    #sec {
+      background: orange;
+    }
+
+    .child {
+      height: 100px;
+      margin-top: 10px;
+      background: red;
+    }
+  </style>
+  <article class="child"></article>
+</section>
+
+<h2>BFC垂直方向边距重叠</h2>
+<section id="margin">
+  <style>
+    #margin {
+      background: #0078ff;
+      overflow: hidden;
+    }
+
+    #margin > p {
+      margin-top: 5px;
+      margin-bottom: 25px;
+      background: #00f56b;
+    }
+  </style>
+  <p>1</p>
+  <div style="overflow: hidden">
+    <p>2</p>
+  </div>
+  <p>3</p>
+</section>
+
+<h2>布局相关</h2>
+<section id="layout">
+  <style>
+    #layout {
+      background: red;
+    }
+
+    #layout .left {
+      width: 100px;
+      height: 100px;
+      float: left;
+      background: #00ff47;
+    }
+
+    #layout .right {
+      height: 120px;
+      background: #6942f5;
+      overflow: auto;
+    }
+  </style>
+  <div class="left"></div>
+  <div class="right"></div>
+</section>
+
+<h2>清除浮动，BFC不与浮动重叠</h2>
+<h2>BFC子元素即使是float，也会参与高度计算</h2>
+<section id="float">
+  <style>
+    #float {
+      background: red;
+      overflow: auto;
+    }
+    #float .float {
+      float: left;
+      background: #00ff47;
+    }
+  </style>
+  <div class="float">浮动元素</div>
+</section>
+</body>
+</html>
