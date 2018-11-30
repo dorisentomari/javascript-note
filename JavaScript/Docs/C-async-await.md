@@ -22,6 +22,20 @@ result1.then(function (img) {
 
 # 3. async/await写法
 ```javascript
+function loadImg(src) {
+  const promise = new Promise((resolve, reject) => {
+    const img = document.createElement('img');
+    img.onload = function () {
+      resolve(img);
+    };
+    img.onerror = function () {
+      reject();
+    };
+    img.src = src;
+  });
+  return promise;
+}
+
 let src1 = 'https://cn.vuejs.org/images/logo.png';
 let src2 = 'https://www.baidu.com/img/bd_logo1.png';
 let src3 = 'https://www.imooc.com/static/img/index/logo.png';
