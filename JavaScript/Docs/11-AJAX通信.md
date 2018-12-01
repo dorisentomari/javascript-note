@@ -17,13 +17,10 @@
 ```javascript
 var xhr = new XMLHttpRequest();
 xhr.open("GET", "/data", false);
-xhr.onreadystatechange = function () {
-  //这里的函数是异步执行
-  if (xhr.readyState === 4) {
-    if (xhr.status === 200) {
-      alert(xhr.responseText);
-    }
-  }
+xhr.onload = function () {
+  if (xhr.status === 200 || xhr.status === 304) {
+		alert(xhr.responseText);
+	}
 };
 xhr.send(null);
 ```
