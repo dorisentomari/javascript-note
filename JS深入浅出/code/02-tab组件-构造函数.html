@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>tab组件</title>
+  <style>
+    .tabs ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .tabs ol.tabs-bar:first-child {
+      display: flex;
+      border-bottom: 1px solid red;
+    }
+
+    .tabs > ol.tabs-bar:first-child > li {
+      padding: 4px 8px;
+      border: 1px solid transparent;
+      border-bottom: 0;
+    }
+
+    .tabs > ol.tabs-bar:first-child > li:hover {
+      border-color: red;
+    }
+
+    .tabs > ol.tabs-bar:first-child > li.active {
+      border-color: blue;
+    }
+
+    .tabs > ol.tabs-content > li {
+      display: none;
+    }
+
+    .tabs > ol.tabs-content li.active {
+      display: block;
+    }
+
+
+  </style>
+</head>
+<body>
+<div class="tabs">
+  <ol class="tabs-bar">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ol>
+  <ol class="tabs-content">
+    <li>content 1</li>
+    <li>content 2</li>
+    <li>content 3</li>
+  </ol>
+</div>
+<div class="tabs">
+  <ol class="tabs-bar">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ol>
+  <ol class="tabs-content">
+    <li>content 1</li>
+    <li>content 2</li>
+    <li>content 3</li>
+  </ol>
+</div>
+
+<div class="tabs">
+  <ol class="tabs-bar">
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+  </ol>
+  <ol class="tabs-content">
+    <li>content 1</li>
+    <li>content 2</li>
+    <li>content 3</li>
+  </ol>
+</div>
+<script src="https://cdn.bootcss.com/jquery/3.2.0/jquery.min.js"></script>
+<script>
+  // 假设已经有jQuery了
+  function Tabs(selector) {
+    // this.__proto__ === Tabs.prototype;
+    // 此时已经把原型上的属性绑定给this了
+    // 初始化
+    this.elements = $(selector);
+    // 调用原型上的方法
+    this.init();
+    this.bindEvents();
+  }
+
+  Tabs.prototype.init = function () {
+    this.elements.each(function (index, element) {
+      $(element).children('.tabs-bar').children('li').eq(0).addClass('active');
+      $(element).children('.tabs-content').children('li').eq(0).addClass('active');
+    });
+  };
+
+  Tabs.prototype.bindEvents = function () {
+    this.elements.on('click', '.tabs-bar > li', function (e) {
+      var $li = $(e.currentTarget);
+      $li.addClass('active').siblings().removeClass('active');
+      var index = $li.index();
+      var $content = $li.closest('.tabs').find('.tabs-content > li').eq(index);
+      $content.addClass('active').siblings().removeClass('active');
+    });
+  };
+
+  /*****
+   * 或者使用ES6的class语法，实际上是一样的
+   */
+  class Tabs {
+    constructor(selector) {
+      this.elements = $(selector);
+      this.init();
+      this.bindEvents();
+    }
+
+    init() {
+      this.elements.each(function (index, element) {
+        $(element).children('.tabs-bar').children('li').eq(0).addClass('active');
+        $(element).children('.tabs-content').children('li').eq(0).addClass('active');
+      });
+    }
+
+    bindEvents() {
+      this.elements.on('click', '.tabs-bar > li', function (e) {
+        var $li = $(e.currentTarget);
+        $li.addClass('active').siblings().removeClass('active');
+        var index = $li.index();
+        var $content = $li.closest('.tabs').find('.tabs-content > li').eq(index);
+        $content.addClass('active').siblings().removeClass('active');
+      });
+    }
+  }
+
+  var tabs = new Tabs('.xxx');
+</script>
+</body>
+</html>
