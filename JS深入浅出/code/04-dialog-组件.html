@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>JS Bin</title>
+  <style>
+    .kaiserDialog {
+      background: rgba(0, 0, 0, 0.5);
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .kaiserDialog-wrapper {
+      background: white;
+      padding: 20px;
+      min-width: 200px;
+    }
+
+    .kaiserDialog-header {
+      border-bottom: 1px solid;
+      text-align: center;
+    }
+
+    .kaiserDialog-main {
+      padding: 10px auto;
+    }
+
+    .kaiserDialog-footer {
+      text-align: right;
+    }
+
+    .kaiserDialog-footer button {
+      margin-left: 10px;
+    }
+
+    /*******/
+    .userDialog {
+      z-index: 100;
+    }
+  </style>
+</head>
+<body>
+<button id="btn">点击</button>
+</body>
+<script src="//code.jquery.com/jquery-1.9.1.min.js"></script>
+<script>
+  class Dialog {
+    constructor(options) {
+      this.options = options;
+      this.init();
+    }
+
+    init() {
+      let {className} = this.options;
+      var $dialog = $(this.template.trim());
+      $dialog.find('footer').append(this.generatorButtons());
+      $dialog.addClass(className);
+      this.$dialog = $dialog;
+    }
+
+    get template() {
+      let {title, className, content, buttons} = this.options;
+      return `<div class="kaiserDialog">
+        <div class="kaiserDialog-wrapper">
+          <header class="kaiserDialog-header">${title}</header>
+          <main class="kaiserDialog-main">${content}</main>
+          <footer class="kaiserDialog-footer"></footer>
+        </div>
+      </div>`;
+    }
+
+    generatorButtons() {
+      let {buttons} = this.options;
+      return buttons.map(buttonOption => {
+        let $b = $('<button></button>');
+        $b.text(buttonOption.text);
+        $b.on('click', buttonOption.action);
+        return $b;
+      });
+    }
+
+    open() {
+      $('body').append(this.$dialog);
+    }
+
+    close() {
+      this.$dialog.detach();
+    }
+
+  }
+
+  document.getElementById('btn').addEventListener('click', function () {
+    var dialog = new Dialog({
+      title: '标题',
+      content: '欢迎',
+      className: 'userDialog',
+      buttons: [
+        {
+          text: '确定',
+          action() {
+            setTimeout(() => {
+              dialog.close();
+            }, 3000);
+          }
+        },
+        {
+          text: '取消',
+          action() {
+            dialog.close();
+          }
+        },
+      ]
+    });
+    dialog.open();
+  });
+</script>
+</html>
