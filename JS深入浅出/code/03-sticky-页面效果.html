@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>sticky组件</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    .topbarPlaceholder {
+      height: 60px;
+    }
+
+    #topbar {
+      background: green;
+      height: 60px;
+      color: white;
+      text-align: center;
+      opacity: 0.25;
+    }
+
+    #topbar.sticky {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      opacity: 0.25;
+    }
+
+    main {
+      background: #ddd;
+      height: 1500px;
+    }
+
+    button.sticky {
+      position: fixed;
+      left: 0;
+      top: 60px;
+    }
+  </style>
+</head>
+<body>
+<div class="topbarPlaceholder">
+  <div id="topbar">
+    topbar
+  </div>
+</div>
+<main>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>空行段落</p>
+  <p>
+    <button>粘住的按钮</button>
+  </p>
+  主要显示内容
+</main>
+<script src="//code.jquery.com/jquery-2.1.1.min.js"></script>
+<script>
+  var buttonOffset = $('button').offset();
+
+  $(window).on('scroll', function () {
+    var scrollY = window.scrollY;
+    if (scrollY > 0) {
+      $('#topbar').addClass('sticky');
+    } else {
+      $('#topbar').removeClass('sticky');
+    }
+
+    if (scrollY + 60 > buttonOffset.top) {
+      $('button').addClass('sticky');
+    } else {
+      $('button').removeClass('sticky');
+    }
+
+  });
+
+  $('button').on('click', function () {
+    console.log($('button').offset());
+  })
+</script>
+</body>
+</html>
