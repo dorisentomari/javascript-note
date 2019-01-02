@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue life cycle</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <button @click="add">add</button>
+    <p>{{number}}</p>
+    <ul>
+        <li>beforeCreate的时候，没有dom，没有data</li>
+        <li>created的时候，没有dom，有data</li>
+        <li>beforeMount的时候，有dom，有data，但是数据还没有挂载到dom元素上</li>
+        <li>mounted的时候，数据已经挂载到dom元素上</li>
+    </ul>
+</div>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                number: 1,
+                message: 'hello, vue'
+            }
+        },
+        methods: {
+            add () {
+                this.number += 1;
+            }
+        },
+        beforeCreate() {
+            console.group('------beforeCreate创建前状态------');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el); // undefined
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data); // undefined
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+        },
+        created() {
+            console.group('------created创建完毕状态------');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el); // undefined
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data); // 已被初始化
+            console.log('%c%s', 'color:red', 'message: ' + this.message); // 已被初始化
+        },
+        beforeMount() {
+            // 服务端渲染不会被执行，因为服务端没有dom
+            console.group('------beforeMount挂载前状态------');
+            console.log('%c%s', 'color:red', 'el     : ' + (this.$el)); // 已被初始化
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data); // 已被初始化
+            console.log('%c%s', 'color:red', 'message: ' + this.message); // 已被初始化
+        },
+        mounted() {
+            // 服务端渲染不会被执行，因为服务端没有dom
+            console.group('------mounted 挂载结束状态------');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el); // 已被初始化
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data); // 已被初始化
+            console.log('%c%s', 'color:red', 'message: ' + this.message); // 已被初始化
+        },
+        beforeUpdate() {
+            // 服务端渲染会被执行
+            console.group('beforeUpdate 更新前状态===============》');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+            console.log('%c%s', 'color:red', 'number: ' + this.number);
+        },
+        updated() {
+            // 服务端渲染会被执行
+            console.group('updated 更新完成状态===============》');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+            console.log('%c%s', 'color:red', 'number: ' + this.number);
+        },
+        activated() {
+            // activated和deactivated在keep-alive中被触发
+            console.group('activated 完成状态===============》');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+        },
+        deactivated() {
+            console.group('deactivated 完成状态===============》');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+        },
+        beforeDestroy() {
+            console.group('beforeDestroy 销毁前状态===============》');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+        },
+        destroyed() {
+            // 解除所有的事件监听和watch
+            console.group('destroyed 销毁完成状态===============》');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log(this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+        },
+        // render(h) {
+        //     console.group('------render 执行时间------');
+        //     console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+        //     console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+        //     console.log('%c%s', 'color:red', 'message: ' + this.message);
+        //     throw new Error('渲染错误');
+        //     return h('div', {}, [
+        //         h('b', {}, this.message),
+        //         h('button', {}, 'updateMessage'),
+        //         h('button', {}, 'destroy')
+        //     ]);
+        // },
+        renderError(h, err) {
+            // 本组件出错的时候会被调用，子组件不会影响到
+            // 在正式环境不会被调用到，开发环境可以被调用
+            console.group('------renderError 执行时间------');
+            console.log('%c%s', 'color:red', 'el     : ' + this.$el);
+            console.log('%c%s', 'color:red', 'data   : ' + this.$data);
+            console.log('%c%s', 'color:red', 'message: ' + this.message);
+            return h('div', {}, err.stack);
+        },
+        errorCaptured() {
+            // 会向上冒泡，正式环境可以使用
+        }
+    })
+</script>
+</body>
+</html>
