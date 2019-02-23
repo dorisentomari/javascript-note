@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>socket</title>
+</head>
+<body>
+<h1>高级 api，兼容性问题</h1>
+<h1>一般使用 socket.io 这个库</h1>
+<script>
+  let socket = new WebSocket('ws://localhost:3000');
+  socket.onopen = function () {
+    socket.send('乖o(*^＠^*)o');
+  };
+
+  socket.onmessage = function (e) {
+    console.log(e.data);
+  }
+
+</script>
+</body>
+</html>

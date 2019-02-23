@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A</title>
+</head>
+<body>
+<h1>PAGE A</h1>
+<h1>域名</h1>
+<h1>一级域名 www.qq.com</h1>
+<h1>二级域名 www.v.qq.com</h1>
+<h1>A是通过 http://a.test.com:3000/a.html</h1>
+<iframe src="http://b.test.com:3000/b.html" frameborder="1" onload="load()" id="iframe"></iframe>
+<script>
+  function load () {
+    document.domain = 'test.com';
+    let iframe = document.getElementById('iframe');
+    console.log(iframe.contentWindow.num);
+  }
+</script>
+</body>
+</html>

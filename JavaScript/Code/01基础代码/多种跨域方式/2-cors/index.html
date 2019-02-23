@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS</title>
+</head>
+<body>
+<h1>CRS</h1>
+<script>
+  let xhr = new XMLHttpRequest();
+  document.cookie = 'sherry';
+  xhr.open('PUT', 'http://localhost:4000/user', true);
+  xhr.setRequestHeader('name', 'markman');
+  xhr.withCredentials = true
+  xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4) {
+      if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+        console.log(xhr.response);
+        let resHeader = xhr.getAllResponseHeaders();
+        console.log(JSON.stringify(resHeader).split('\\r\\n'));
+      } else {
+        console.log('request error');
+      }
+    }
+  };
+  xhr.send();
+
+</script>
+</body>
+</html>

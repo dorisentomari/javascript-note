@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>B postMessage</title>
+</head>
+<body>
+<h2>PAGE B POSTMESSAGE</h2>
+<script>
+  window.onmessage = function (e) {
+    console.log(e);
+    e.source.postMessage('Thanks♪(･ω･)ﾉ', e.origin);
+  }
+</script>
+</body>
+</html>

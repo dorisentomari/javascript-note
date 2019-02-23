@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A</title>
+</head>
+<body>
+<h1>PAGE A</h1>
+<h1>路径后边的hash值可以用来通信</h1>
+<h1>目的：A想访问C</h1>
+<h1>A给C传递一个hash值，C收到hash值后，C把hash值传递给B，B将结果放到A的hash值当中</h1>
+<iframe src="http://localhost:4000/c.html#NAMEISSHHERRY" frameborder="0"></iframe>
+<script>
+  window.onhashchange = function () {
+    console.log('location.hash');
+    console.log(location.hash);
+  }
+</script>
+</body>
+</html>

@@ -8,11 +8,12 @@
     + 只能发送 get 请求
     + 不安全 xss 攻击，不采用
 2. cors
+	+ 后端负责管理
 3. postMessage
-4. document.domain，域和父域
-5. window.name
-6. location.hash
-7. http-proxy
+	+ iframe 页面发送信息
+4. window.name
+5. location.hash
+6. document.domain，域和父域
+7. websocket
 8. nginx
-9. websocket
-
+9. http-proxy

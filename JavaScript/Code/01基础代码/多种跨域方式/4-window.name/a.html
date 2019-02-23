@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>A</title>
+</head>
+<body>
+<h1>A和B是同域 http://localhost:3000</h1>
+<h1>C是独立的 http://localhost:4000</h1>
+<h1>A获取C的数据，A需要引用C，C把值放在 window.name 里，把A引用的地址改到B</h1>
+<iframe src="http://localhost:4000/c.html" frameborder="0" onload="load()" id="frame"></iframe>
+<script>
+  let first = true;
+  let iframe = document.getElementById('frame');
+
+  function load() {
+    if (first) {
+      iframe.src = 'http://localhost:3000/b.html';
+      first = false;
+    } else {
+      console.log(iframe.contentWindow.name);
+    }
+  }
+</script>
+
+</body>
+</html>
