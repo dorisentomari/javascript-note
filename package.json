@@ -3,13 +3,30 @@
   "version": "1.0.0",
   "description": "这个仓库是为了存放一些关于前端的一些知识总结，包括CSS，JavaScript，TypeScript，还会包括ES6语法，React以及未来可能会对一些JS库做一些专项的介绍。",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "webpack"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-core": "^6.26.3",
+    "babel-types": "^6.26.0",
+    "escodegen": "^1.11.1",
+    "esprima": "^4.0.1",
+    "estraverse": "^4.2.0",
     "express": "^4.16.4",
+    "lodash": "^4.17.11",
     "ws": "^6.1.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/types": "^7.3.4",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-stage-0": "^6.24.1",
+    "webpack": "^4.29.5",
+    "webpack-cli": "^3.2.3"
   }
 }
