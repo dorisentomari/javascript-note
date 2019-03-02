@@ -1,8 +1,14 @@
 const path = require('path');
 const Webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
+// 清理不需要的目录文件
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+// 复制文件
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+// 压缩 CSS
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// 压缩 JS
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -13,6 +19,20 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              ['@babel/plugin-proposal-decorators', {legacy: true}],
+              ['@babel/plugin-proposal-class-properties', {loose: true}]
+            ]
+          }
+        }
+      },
       {
         test: /\.css$/,
         exclude: /node_modules/,
@@ -34,7 +54,7 @@ module.exports = {
         use: ['style-loader', 'css-loader', 'stylus-loader']
       },
       {
-        test: /\.(jpe?g|png|gif|svg|bmp)$/,
+        test: /\.(jpe?g|png|gif|svg|bmp|eot|woff|woff2|ttf)$/,
         loader: 'url-loader',
         options: {
           // 指定最大转换为 base64 的图片的大小
@@ -54,6 +74,8 @@ module.exports = {
     contentBase: './dist',
     host: 'localhost',
     port: 3000,
+    // 显示打包时的进度
+    progress: true,
     // open: true,
     compress: true
   },
@@ -96,6 +118,34 @@ module.exports = {
     // 热更新插件
     new Webpack.HotModuleReplacementPlugin(),
     // 打印更新的模块路径
-    new Webpack.NamedModulesPlugin()
-  ]
+    new Webpack.NamedModulesPlugin(),
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, './src/public'),
+        to: path.resolve(__dirname, './dist/public')
+      }
+    ]),
+    new OptimizeCSSAssetsPlugin(),
+    new UglifyjsPlugin({
+      cache: true,
+      parallel: true,
+      sourceMap: false
+    })
+  ],
+  // 打包时的监控
+  watch: false,
+  watchOptions: {
+    // 忽略的目录
+    ignored: /node_modules/,
+    // 每秒向服务发出多少次询问，是否要重新编译
+    poll: 10,
+    // 源代码文件编译 500 毫秒后，不再修改，重新编译
+    aggregateTimeout: 500
+  },
+  resolve: {
+    extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      // bootstrap: 'bootstrap/dist/css/bootstrap.min.css'
+    }
+  }
 };

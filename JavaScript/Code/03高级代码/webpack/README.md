@@ -270,6 +270,7 @@ module.exports = {
   + 建立本地 devServer 所需要的文件
   + 发射 emit 事件
   + 我们自己写的源代码
++ 添加 watch 配置项，可以监控代码的修改，适时的编译
 
 ```javascript
 devServer: {
@@ -278,6 +279,15 @@ devServer: {
   port: 3000,
   open: true,
   compress: true
+},
+watch: true,
+watchOptions: {
+  // 忽略的目录
+	ignored: /node_modules/,
+	// 每秒向服务发出多少次询问，是否要重新编译
+	poll: 10,
+	// 源代码文件编译 500 毫秒后，不再修改，重新编译
+	aggregateTimeout: 500
 }
 ```
 
@@ -399,4 +409,44 @@ require('style-loader!css-loader!./index.css');
 		options: '$'
 	}
 }
+```
+
+## 2.7 使用 babel 编译
++ 使用最新的 babel@7，配置比较少
++ 下载 babel-loader，@babel/core，@babel/preset-env，安装后就可以编译 es6 语法了，但是还不能编译一些比较特殊的语法，比如装饰器，所以如果需要的语法 babel 不能编译，那么就需要去安装专门的 babel 插件
++ 如果需要配置解析 react，那么需要下载安装 @babel/preset-react
++ 配置装饰器，需要下载插件 @babel/plugin-proposal-class-properties，@babel/plugin-proposal-decorators
+```javascript
+{
+	test: /\.(js|jsx)$/,
+	exclude: /node_modules/,
+	use: {
+		loader: 'babel-loader',
+		options: {
+			presets: ['@babel/preset-env', '@babel/preset-react'],
+			plugins: [
+				['@babel/plugin-proposal-decorators', { legacy: true }],
+				['@babel/plugin-proposal-class-properties', { loose: true }]
+			]
+		}
+	}
+}
+```
+
+## 2.8 优化打包
++ 压缩 js 和 css
+```javascript
+// 压缩 CSS
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+// 压缩 JS
+const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
+
+[
+  new OptimizeCSSAssetsPlugin(),
+	new UglifyjsPlugin({
+		cache: true,
+		parallel: true,
+		sourceMap: false
+	})
+]
 ```
