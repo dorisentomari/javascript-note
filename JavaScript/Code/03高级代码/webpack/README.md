@@ -1,3 +1,6 @@
+# 0. webpack 精品文章
++ ![Webpack Hot Module Replacement 的原理解析](https://github.com/Jocs/jocs.github.io/issues/15)
+
 # 1. 什么是 webpack
 + Webpack 可以看做是模块打包机，它所做的事情是，分析你的项目结构，找到 JavaScript 模块以及它的一些浏览器不能直接运行的扩展语言，并将其打包为合适的格式以供浏览器使用。
 + 构建就是把源代码抓换成线上发布的可执行的 JavaScript，CSS，HTML 代码等，包括
@@ -31,9 +34,14 @@
 |——package.json
 ```
 + index.js
+  + output 的 filename 可以为变量值，就是对应的 entry 的文件的名字
+  + filename 的 hash 是根据文件内容计算出来的，8是指取前八位哈希值
+
 ```javascript
 console.log('hi, how r u?');
 ```
++ webpack.config.js
+
 ```javascript
 const path = require('path');
 
@@ -41,11 +49,12 @@ module.exports = {
   mode: 'development',
   entry: './src/index.js',
   output: {
-    filename: 'bundle.js',
+    filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist')
   }
 };
 ```
+
 + package.json
 ```json
 {
@@ -73,15 +82,15 @@ module.exports = {
   var installedModules = {};
 
   // The require function
-  // 定义了一个 __webpack_require_ 的函数
+  // 定义了一个 __webpack_require_ 的函数，模拟 commonjs 的 require
   function __webpack_require__(moduleId) {
     // Check if module is in cache
-    // 判断缓存里是否有该模块，如果有的话，直接返回该模块
+    // 判断缓存里是否有该模块，如果有的话，表示模块已经加载过，直接返回该模块
     if (installedModules[moduleId]) {
       return installedModules[moduleId].exports;
     }
     // Create a new module (and put it into the cache)
-    // 创建一个新的模块，并把这个模块放入缓存
+    // 如果没有加载过，那么就创建一个新的模块，并把这个模块放入缓存
     var module = installedModules[moduleId] = {
       // 模块的 id
       i: moduleId,
@@ -91,13 +100,76 @@ module.exports = {
     };
 
     // Execute the module function
+    // 执行模块的函数
     modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
     // Flag the module as loaded
     // 标志模块已经被载入
     module.l = true;
+  // expose the modules object (__webpack_modules__)
+  // 向外暴露模块对象
+  __webpack_require__.m = modules;
 
+  // expose the module cache
+  // 模块的缓存
+  __webpack_require__.c = installedModules;
+
+  // define getter function for harmony exports
+  // 定义 getter 方法，兼容 exports
+  __webpack_require__.d = function (exports, name, getter) {
+    if (!__webpack_require__.o(exports, name)) {
+      Object.defineProperty(exports, name, {
+        // 在 exports 对象上定义 name 属性，他的值是可枚举的，并指定获取器
+        enumerable: true,
+        get: getter
+      });
+    }
+  };
+
+  // define __esModule on exports
+  // 在导出对象上，定义 _esModule，做兼容
+  // es6 modules，使用的是 commonjs，在 export 导出的模块里，如果用 require 引入，那么实际上我们需要 require('./config').default ，使用的是 default 属性
+  // export default name = 'mark'
+  // require('./config.js').default
+  __webpack_require__.r = function (exports) {
+    if (typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+      Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+    }
+    Object.defineProperty(exports, '__esModule', { value: true });
+  };
+
+  // create a fake namespace object
+  // mode & 1: value is a module id, require it
+  // mode & 2: merge all properties of value into the ns
+  // mode & 4: return value when already ns object
+  // mode & 8|1: behave like require
+  __webpack_require__.t = function (value, mode) {
+    if (mode & 1) value = __webpack_require__(value);
+    if (mode & 8) return value;
+    if ((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+    var ns = Object.create(null);
+    __webpack_require__.r(ns);
+    Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+    if (mode & 2 && typeof value != 'string') for (var key in value) __webpack_require__.d(ns, key, function (key) { return value[key]; }.bind(null, key));
+    return ns;
+  };
+
+  // getDefaultExport function for compatibility with non-harmony modules
+  __webpack_require__.n = function (module) {
+    var getter = module && module.__esModule ?
+      function getDefault() { return module['default']; } :
+      function getModuleExports() { return module; };
+    __webpack_require__.d(getter, 'a', getter);
+    return getter;
+  };
+
+  // Object.prototype.hasOwnProperty.call
+  __webpack_require__.o = function (object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+
+  // __webpack_public_path__
+  // 公开路径，对应于 output，publicPath
+  __webpack_require__.p = "";
     // Return the exports of the module
-    // 返回 module.exports， modules[moduleId].call 的时候，module.exports 会被修改
+    // 返回模块的导出对象， modules[moduleId].call 的时候，module.exports 会被修改
     return module.exports;
   }
   return __webpack_require__(__webpack_require__.s = "./src/index.js");
@@ -113,3 +185,161 @@ module.exports = {
 	+ [深入剖析 webpack 打包生成的一大堆代码到底是啥](https://blog.csdn.net/haodawang/article/details/77126686)
 	+ 本质上 bundle.js 里是一个自执行的函数，简化一下就是 `(function(module){})({a: function () {}, b: function () {} })`
 	+ `modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);` call 能确保当模块使用 this 的时候，this 是指向 module.exports。
+
+## 2.3 使用 loader 解析各种资源
++ loader 的使用
+  + 单个 loader ，可以用字符串
+  + 多个 loader ，可以用数组，多个 loader 顺序，默认是从右向左执行
+  + loader 还可以写成对象的形式
++ loader 有三种写法
+	+ use
+	+ loader
+	+ use + loader
++ 直接解析 css
+  + 使用 css-loader 用来解析 css 文件
+  + 使用 style-loader 负责把 css 插入到 head 标签中
+```
+{
+  test: /\.css$/,
+  use: ['style-loader', 'css-loader']
+}
+```
+
+## 2.4 使用 webpack-dev-server 启动本地服务器
++ 配置这个服务器，可以在本地服务上查看编译后的页面效果
++ 可以配置文件目录，主机，端口，是否启用 gzip 压缩，html 的模板，是否热重载等
++ 在输出日志里，会看到很多引用的资源
+  + 建立 socket 服务的资源，用来检测代码是否修改，是否要重新启动 devServer
+  + 建立本地 devServer 所需要的文件
+  + 发射 emit 事件
+  + 我们自己写的源代码
+
+```
+devServer: {
+  contentBase: './dist',
+  host: '0.0.0.0',
+  port: 3000,
+  open: true,
+  compress: true
+}
+```
+
+## 2.5 html-webpack-plugin 建立 html 模板
++ 如果多页面应用里需要生成不同的 HTML，可以建立数组规则，循环 new
+```javascript
+new HTMLWebpackPlugin({
+	// 引入的模板的路径
+	template: './src/index.html',
+	// 生成的 html 的文件名
+	filename: 'index.html',
+	// 生成的 html 文件的 title 标签的内容
+	title: 'HTML的模板',
+	// 在引入的文件后边添加哈希字符串，避免缓存
+	hash: true,
+	minify: {
+		// 压缩代码，去掉所有的空白
+		collapseWhitespace: true,
+		// 去掉注释
+		removeComments: true,
+		// 去掉冗余的属性
+		removeRedundantAttributes: true,
+		// 如果 script 标签上有 type="text/javascript"，就去掉这个属性
+		removeScriptTypeAttributes: true,
+		// 如果 link 标签上有 type="text/css"，就去掉这个属性
+		removeStyleLinkTypeAttributes: true,
+		// 去掉标签上属性值的引号
+		removeAttributeQuotes: true
+	},
+	meta: {
+		viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+		'theme-color': '#4285f4'
+	}
+})
+```
+
+## 2.6 webpack 配置多入口
++ 先找到每个入口，然后从各个入口分别出发，找到依赖的模块，然后生成一个 Chunk 代码块，最后会把 Chunk 写入到文件系统中(Assets)
+  一个入口对应多个模块，对应一个 Chunk
++ webpack.config.js
+
+```javascript
+const path = require('path');
+const Webpack = require('webpack');
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+
+module.exports = {
+  mode: 'development',
+  entry: {
+    index: './src/index.js',
+    base: './src/base.js',
+    // 如果在多页面应用中，需要使用公共的代码，可以写在 common 入口文件里，在每一个 html 的模板中，添加 common 这个 chunk
+    // 如果有多个不同功能的公共代码，可以写多个不同的入口文件，供不同的页面使用
+    common: './src/common.js'
+  },
+  output: {
+    filename: '[name].[hash:8].js',
+    path: path.resolve(__dirname, 'dist')
+  },
+  plugins: [
+    new HTMLWebpackPlugin({
+      // 引入的模板的路径
+      template: './src/index.html',
+      // 生成的 HTML 的文件名
+      filename: 'index.html',
+      // 生成的 HTML 文件的 title 标签的内容
+      title: 'index 的模板',
+      // 在引入的文件后边添加哈希字符串，避免缓存
+      hash: true,
+      // 在产出的 HTML 文件里引入哪些代码块
+      chunks: ['index', 'common']
+    }),
+    new HTMLWebpackPlugin({
+      // 引入的模板的路径
+      template: './src/index.html',
+      // 生成的 HTML 的文件名
+      filename: 'base.html',
+      // 生成的 HTML 文件的 title 标签的内容
+      title: 'base 的模板',
+      // 在引入的文件后边添加哈希字符串，避免缓存
+      hash: true,
+      // 在产出的 HTML 文件里引入哪些代码块
+      chunks: ['base', 'common']
+    }),
+    new CleanWebpackPlugin([path.resolve(__dirname, 'dist')])
+  ]
+};
+```
++ 配置每个模块都使用到的变量
+```javascript
+// 添加插件
+new Webpack.ProvidePlugin({
+	$: 'jquery'
+})
+```
++ **有问题** 每个模块内部的变量都是该模块自身的私有变量，一般我们不会去获取其他模块的变量，但是如果我们一定要这么做，可以采用 expose-loader 暴露变量，在自身模块内部，会加载其他模块的变量，并且挂载到 window 对象上，`npm install expose-loader -D`
+
+```javascript
+// 引入
+require('expose-loader?$!jquery');
+require('expose-loader?libraryName!./user.js');
+// 使用
+console.log(window.$);
+console.log(window.libraryName);
+
+// 引入 css 的普通用法
+require('./index.css');
+// 等价于，此时不能在 webpack.module.rules 里配置 css 的 loader，否则会编译失败
+require('style-loader!css-loader!./index.css');
+```
+  
++ **有问题** 如果不想在代码中写 expose-loader，可以在 webpack.module.rules 里添加规则
+```
+{
+	test: require.resolve('jquery'),
+	use: {
+		loader: 'expose-loader',
+		options: '$'
+	}
+}
+```
