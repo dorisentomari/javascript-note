@@ -1,5 +1,5 @@
 # 0. webpack 精品文章
-+ ![Webpack Hot Module Replacement 的原理解析](https://github.com/Jocs/jocs.github.io/issues/15)
++ [Webpack Hot Module Replacement 的原理解析](https://github.com/Jocs/jocs.github.io/issues/15)
 
 # 1. 什么是 webpack
 + Webpack 可以看做是模块打包机，它所做的事情是，分析你的项目结构，找到 JavaScript 模块以及它的一些浏览器不能直接运行的扩展语言，并将其打包为合适的格式以供浏览器使用。
@@ -186,7 +186,7 @@ module.exports = {
 	+ 本质上 bundle.js 里是一个自执行的函数，简化一下就是 `(function(module){})({a: function () {}, b: function () {} })`
 	+ `modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);` call 能确保当模块使用 this 的时候，this 是指向 module.exports。
 
-## 2.3 使用 loader 解析各种资源
+## 2.3 使用 loader 解析各种 css 和文件资源
 + loader 的使用
   + 单个 loader ，可以用字符串
   + 多个 loader ，可以用数组，多个 loader 顺序，默认是从右向左执行
@@ -195,13 +195,70 @@ module.exports = {
 	+ use
 	+ loader
 	+ use + loader
-+ 直接解析 css
-  + 使用 css-loader 用来解析 css 文件
-  + 使用 style-loader 负责把 css 插入到 head 标签中
-```
++ 解析 css
+  + 使用 css-loader，解析css代码，主要是为了处理 css 中的依赖，比如 @import 和 url() 等引用外部文件的声明
+  + 使用 style-loader 将会把 css-loader 解析的结果转变成 js 代码，运行时动态插入 style 标签让 css 的代码生效
+  
+```javascript
 {
   test: /\.css$/,
   use: ['style-loader', 'css-loader']
+}
+```
+
++ 解析 less/sass/stylus
+```javascript
+{
+	test: /\.less$/,
+	exclude: /node_modules/,
+	use: ['style-loader', 'css-loader', 'less-loader']
+},
+{
+	test: /\.scss/,
+	exclude: /node_modules/,
+	use: ['style-loader', 'css-loader', 'sass-loader']
+},
+{
+	test: /\.styl/,
+	exclude: /node_modules/,
+	use: ['style-loader', 'css-loader', 'stylus-loader']
+}
+```
+
++ 根据浏览器的兼容性给 CSS 样式添加不同的前缀
+	+ 使用 postcss-loader autoprefixer
+	+ 在 module.rules 里 test css 的 user 里添加 postcss-loader
+
+```javascript
+// postcss.config.js
+module.exports = {
+  plugins: [require('autoprefixer')]
+};
+```
+
++ 解析二进制文件
+	+ 可以解析图片，字体，word 等文件
+	+ 使用 file-loader 用来解析二进制文件地址
+	+ 把文件从原位置拷贝到目标位置并修改原引用地址
+	+ 在 img 标签内使用 ./、../ 等查找本地的图片资源，需要使用 html-withimg-loader
+	+ 如果在 img 标签中引入的是 web 图片，可以不使用 html-withimg-loader
+	+ 注意： html-withimg-loader 会影响到 html-webpack-plugin 里的 title 的值
+	+ 如果图片体积比较小，可以使用 url-loader 直接把图片转成 base64 字符串内嵌到 html 页面中
+	
+```javascript
+{
+	test: /\.(jpg|jpeg|png|gif|svg|bmp)$/,
+	loader: {
+		loader: 'file-loader',
+		options: {
+			// 指定输出的图片文件目录，指定目录后，需要在 server 下才能使用，在 file 下找不到图片
+			outputPath: '/images'
+		}
+	}
+},
+{
+	test: /\.(html|htm)/,
+	loader: 'html-withimg-loader'
 }
 ```
 
@@ -214,7 +271,7 @@ module.exports = {
   + 发射 emit 事件
   + 我们自己写的源代码
 
-```
+```javascript
 devServer: {
   contentBase: './dist',
   host: '0.0.0.0',
@@ -259,7 +316,7 @@ new HTMLWebpackPlugin({
 
 ## 2.6 webpack 配置多入口
 + 先找到每个入口，然后从各个入口分别出发，找到依赖的模块，然后生成一个 Chunk 代码块，最后会把 Chunk 写入到文件系统中(Assets)
-  一个入口对应多个模块，对应一个 Chunk
++ 一个入口对应多个模块，对应一个 Chunk
 + webpack.config.js
 
 ```javascript
@@ -334,7 +391,7 @@ require('style-loader!css-loader!./index.css');
 ```
   
 + **有问题** 如果不想在代码中写 expose-loader，可以在 webpack.module.rules 里添加规则
-```
+```javascript
 {
 	test: require.resolve('jquery'),
 	use: {

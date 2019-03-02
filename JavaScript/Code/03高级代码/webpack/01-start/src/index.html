@@ -2,11 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title><%= htmlWebpackPlugin.options.title%></title>
+  <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
 <!-- 这是 webpack 引用的 html 的模板 -->
-<div id="base" class="wrapper"></div>
-<div id="app" class="wrapper"></div>
+<!--<div id="app" class="wrapper"></div>-->
+<div>
+  <img width="300px" height="200px" src="./assets/bootstrap.jpg" alt="bootstrap">
+  <img width="300px" height="200px" src="./assets/avatar.jpg" alt="avatar">
+  <div class="header"><h1>less</h1></div>
+  <div class="body"><h1>sass</h1></div>
+  <div class="footer"><h1>stylus</h1></div>
+  <div class="square">postcss</div>
+</div>
 </body>
 </html>
