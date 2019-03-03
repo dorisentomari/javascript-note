@@ -37,7 +37,16 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: 'happypack/loader?id=babel'
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [ '@babel/preset-react',  '@babel/preset-env' ],
+            plugins: [
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              ['@babel/plugin-proposal-class-properties', { loose: true }]
+            ]
+          }
+        }
       }
     ]
   },
@@ -55,21 +64,6 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         removeAttributeQuotes: true
       }
-    }),
-    new HappyPack({
-      id: 'babel',
-      loaders: [
-        {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: [
-              ['@babel/plugin-proposal-decorators', { legacy: true }],
-              ['@babel/plugin-proposal-class-properties', { loose: true }]
-            ]
-          }
-        }
-      ]
     }),
     new HappyPack({
       id: 'css',
@@ -94,20 +88,5 @@ module.exports = {
         }
       }
     }),
-    // 定义环境变量
-    new Webpack.DefinePlugin({
-      __development__: JSON.stringify(process.env.NODE_ENV) === "'development'"
-    }),
-    new HtmlIncludeAssetsPlugin({
-      assets: ['./react_dll.js'],
-      append: false
-    })
-  ],
-  resolve: {
-    extensions: ['.js', '.jsx', '.json'],
-    modules: ['node_modules'],
-    alias: {
-      '@': '/src'
-    }
-  }
+  ]
 };

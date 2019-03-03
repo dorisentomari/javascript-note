@@ -13,7 +13,7 @@ module.exports = merge(baseConfig, {
   },
   plugins: [
     new Webpack.HotModuleReplacementPlugin(),
-    new Webpack.NamedModulesPlugin(),
+    new Webpack.NamedModulesPlugin()
   ]
 });
 

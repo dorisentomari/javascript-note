@@ -1,5 +1,7 @@
-function getName () {
-  return 'hello, webpack';
+export function getName() {
+  return 'mark';
 }
 
-exports.getName = getName;
+export function getAge () {
+  return 'your age is 18';
+}

@@ -6,8 +6,9 @@
   "scripts": {
     "dev": "cross-env process.env.NODE_ENV=development && webpack-dev-server --config webpack.config.dev.js",
     "build": "npm-run-all --parallel build:**",
-    "build:react": "webpack --config webpack.config.react.js",
-    "build:production": "cross-env process.env.NODE_ENV=production && webpack --config webpack.config.prod.js",
+    "build:production": "rimraf dist && cross-env process.env.NODE_ENV=production && webpack --display-used-exports --config webpack.config.prod.js",
+    "build-react": "webpack --config webpack.config.react.js",
+    "build-react-production": "cross-env process.env.NODE_ENV=production && webpack --config webpack.config.react.prod.js",
     "build-lib": "webpack --config webpack.config.lib.js"
   },
   "devDependencies": {

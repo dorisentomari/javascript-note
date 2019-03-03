@@ -200,28 +200,40 @@ module.exports = {
   + 使用 style-loader 将会把 css-loader 解析的结果转变成 js 代码，运行时动态插入 style 标签让 css 的代码生效
   
 ```javascript
-{
-  test: /\.css$/,
-  use: ['style-loader', 'css-loader']
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
+      }
+    ]
+  }
 }
 ```
 
 + 解析 less/sass/stylus
 ```javascript
-{
-	test: /\.less$/,
-	exclude: /node_modules/,
-	use: ['style-loader', 'css-loader', 'less-loader']
-},
-{
-	test: /\.scss/,
-	exclude: /node_modules/,
-	use: ['style-loader', 'css-loader', 'sass-loader']
-},
-{
-	test: /\.styl/,
-	exclude: /node_modules/,
-	use: ['style-loader', 'css-loader', 'stylus-loader']
+module.exports = {
+  module: {
+    rules: [
+      {
+      	test: /\.less$/,
+      	exclude: /node_modules/,
+      	use: ['style-loader', 'css-loader', 'less-loader']
+      },
+      {
+      	test: /\.scss/,
+      	exclude: /node_modules/,
+      	use: ['style-loader', 'css-loader', 'sass-loader']
+      },
+      {
+      	test: /\.styl/,
+      	exclude: /node_modules/,
+      	use: ['style-loader', 'css-loader', 'stylus-loader']
+      }
+    ]
+  }
 }
 ```
 
@@ -246,19 +258,25 @@ module.exports = {
 	+ 如果图片体积比较小，可以使用 url-loader 直接把图片转成 base64 字符串内嵌到 html 页面中
 	
 ```javascript
-{
-	test: /\.(jpg|jpeg|png|gif|svg|bmp)$/,
-	loader: {
-		loader: 'file-loader',
-		options: {
-			// 指定输出的图片文件目录，指定目录后，需要在 server 下才能使用，在 file 下找不到图片
-			outputPath: '/images'
-		}
-	}
-},
-{
-	test: /\.(html|htm)/,
-	loader: 'html-withimg-loader'
+module.exports = {
+  module: {
+    rules: [
+      {
+      	test: /\.(jpg|jpeg|png|gif|svg|bmp)$/,
+      	loader: {
+      		loader: 'file-loader',
+      		options: {
+      			// 指定输出的图片文件目录，指定目录后，需要在 server 下才能使用，在 file 下找不到图片
+      			outputPath: '/images'
+      		}
+      	}
+      },
+      {
+      	test: /\.(html|htm)/,
+      	loader: 'html-withimg-loader'
+      }
+    ]
+  }
 }
 ```
 
@@ -273,55 +291,61 @@ module.exports = {
 + 添加 watch 配置项，可以监控代码的修改，适时的编译
 
 ```javascript
-devServer: {
-  contentBase: './dist',
-  host: '0.0.0.0',
-  port: 3000,
-  open: true,
-  compress: true
-},
-watch: true,
-watchOptions: {
-  // 忽略的目录
-	ignored: /node_modules/,
-	// 每秒向服务发出多少次询问，是否要重新编译
-	poll: 10,
-	// 源代码文件编译 500 毫秒后，不再修改，重新编译
-	aggregateTimeout: 500
+module.exports = {
+  devServer: {
+    contentBase: './dist',
+    host: '0.0.0.0',
+    port: 3000,
+    open: true,
+    compress: true
+  },
+  watch: true,
+  watchOptions: {
+    // 忽略的目录
+  	ignored: /node_modules/,
+  	// 每秒向服务发出多少次询问，是否要重新编译
+  	poll: 10,
+  	// 源代码文件编译 500 毫秒后，不再修改，重新编译
+  	aggregateTimeout: 500
+  }
 }
 ```
 
 ## 2.5 html-webpack-plugin 建立 html 模板
 + 如果多页面应用里需要生成不同的 HTML，可以建立数组规则，循环 new
 ```javascript
-new HTMLWebpackPlugin({
-	// 引入的模板的路径
-	template: './src/index.html',
-	// 生成的 html 的文件名
-	filename: 'index.html',
-	// 生成的 html 文件的 title 标签的内容
-	title: 'HTML的模板',
-	// 在引入的文件后边添加哈希字符串，避免缓存
-	hash: true,
-	minify: {
-		// 压缩代码，去掉所有的空白
-		collapseWhitespace: true,
-		// 去掉注释
-		removeComments: true,
-		// 去掉冗余的属性
-		removeRedundantAttributes: true,
-		// 如果 script 标签上有 type="text/javascript"，就去掉这个属性
-		removeScriptTypeAttributes: true,
-		// 如果 link 标签上有 type="text/css"，就去掉这个属性
-		removeStyleLinkTypeAttributes: true,
-		// 去掉标签上属性值的引号
-		removeAttributeQuotes: true
-	},
-	meta: {
-		viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
-		'theme-color': '#4285f4'
-	}
-})
+module.exports = {
+  plugins: [
+    new HTMLWebpackPlugin({
+    	// 引入的模板的路径
+    	template: './src/index.html',
+    	// 生成的 html 的文件名
+    	filename: 'index.html',
+    	// 生成的 html 文件的 title 标签的内容
+    	title: 'HTML的模板',
+    	// 在引入的文件后边添加哈希字符串，避免缓存
+    	hash: true,
+    	minify: {
+    		// 压缩代码，去掉所有的空白
+    		collapseWhitespace: true,
+    		// 去掉注释
+    		removeComments: true,
+    		// 去掉冗余的属性
+    		removeRedundantAttributes: true,
+    		// 如果 script 标签上有 type="text/javascript"，就去掉这个属性
+    		removeScriptTypeAttributes: true,
+    		// 如果 link 标签上有 type="text/css"，就去掉这个属性
+    		removeStyleLinkTypeAttributes: true,
+    		// 去掉标签上属性值的引号
+    		removeAttributeQuotes: true
+    	},
+    	meta: {
+    		viewport: 'width=device-width, initial-scale=1, shrink-to-fit=no',
+    		'theme-color': '#4285f4'
+    	}
+    })
+  ]
+}
 ```
 
 ## 2.6 webpack 配置多入口
@@ -380,10 +404,14 @@ module.exports = {
 ```
 + 配置每个模块都使用到的变量
 ```javascript
-// 添加插件
-new Webpack.ProvidePlugin({
-	$: 'jquery'
-})
+module.exports = {
+  plugins: [
+    // 添加插件
+    new Webpack.ProvidePlugin({
+    	$: 'jquery'
+    })
+  ]
+}
 ```
 + **有问题** 每个模块内部的变量都是该模块自身的私有变量，一般我们不会去获取其他模块的变量，但是如果我们一定要这么做，可以采用 expose-loader 暴露变量，在自身模块内部，会加载其他模块的变量，并且挂载到 window 对象上，`npm install expose-loader -D`
 
@@ -403,12 +431,18 @@ require('style-loader!css-loader!./index.css');
   
 + **有问题** 如果不想在代码中写 expose-loader，可以在 webpack.module.rules 里添加规则
 ```javascript
-{
-	test: require.resolve('jquery'),
-	use: {
-		loader: 'expose-loader',
-		options: '$'
-	}
+module.exports = {
+  module: {
+    rules: [
+      {
+      	test: require.resolve('jquery'),
+      	use: {
+      		loader: 'expose-loader',
+      		options: '$'
+      	}
+      }
+    ]
+  }
 }
 ```
 
@@ -418,19 +452,25 @@ require('style-loader!css-loader!./index.css');
 + 如果需要配置解析 react，那么需要下载安装 @babel/preset-react
 + 配置装饰器，需要下载插件 @babel/plugin-proposal-class-properties，@babel/plugin-proposal-decorators
 ```javascript
-{
-	test: /\.(js|jsx)$/,
-	exclude: /node_modules/,
-	use: {
-		loader: 'babel-loader',
-		options: {
-			presets: ['@babel/preset-env', '@babel/preset-react'],
-			plugins: [
-				['@babel/plugin-proposal-decorators', { legacy: true }],
-				['@babel/plugin-proposal-class-properties', { loose: true }]
-			]
-		}
-	}
+module.exports = {
+  module: {
+    rules: [
+      {
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: {
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+						plugins: [
+							['@babel/plugin-proposal-decorators', { legacy: true }],
+							['@babel/plugin-proposal-class-properties', { loose: true }]
+						]
+					}
+				}
+			}
+    ]
+  }
 }
 ```
 
@@ -442,14 +482,16 @@ const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 // 压缩 JS
 const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 
-[
-  new OptimizeCSSAssetsPlugin(),
-	new UglifyjsPlugin({
-		cache: true,
-		parallel: true,
-		sourceMap: false
-	})
-]
+module.exports = {
+  plugins: [
+		new OptimizeCSSAssetsPlugin(),
+		new UglifyjsPlugin({
+			cache: true,
+			parallel: true,
+			sourceMap: false
+		})
+	]
+}
 ```
 
 + HappyPack 多线程，HappyPack 能够让 webpack 把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程
@@ -461,15 +503,15 @@ module.exports = {
   module: {
     rules: [
       {
-              test: /\.css$/,
-              exclude: /node_modules/,
-              use: 'happypack/loader?id=css'
-            },
-            {
-              test: /\.(js|jsx)$/,
-              exclude: /node_modules/,
-              use: 'happypack/loader?id=babel'
-            }
+				test: /\.css$/,
+				exclude: /node_modules/,
+				use: 'happypack/loader?id=css'
+			},
+			{
+				test: /\.(js|jsx)$/,
+				exclude: /node_modules/,
+				use: 'happypack/loader?id=babel'
+			}
     ]
   },
   plugins: [
@@ -498,25 +540,29 @@ module.exports = {
 + ParallelUglifyPlugin 对 js 文件的串行压缩变为开启多个子进程并行执行
 
 ```javascript
-new ParallelUglifyPlugin({
-	workerCount: 3,
-	uglifyJs: {
-		output: {
-			beautify: false,
-			comments: false
-		},
-		compress: {
-			// 删掉没有用到的代码时不输出警告
-			warnings: false,
-			// 删掉所有的 console 语句，可以兼容 ie 浏览器
-			drop_console: true,
-			// 内嵌定义了但是只用到一次的变量
-			cpllapse_vars: true,
-			// 提取出现多次但是没有定义成变量或去引用的静态值
-			reduce_vars: true
-		}
-	}
-})
+module.exports = {
+  plugins: [
+    new ParallelUglifyPlugin({
+    	workerCount: 3,
+    	uglifyJs: {
+    		output: {
+    			beautify: false,
+    			comments: false
+    		},
+    		compress: {
+    			// 删掉没有用到的代码时不输出警告
+    			warnings: false,
+    			// 删掉所有的 console 语句，可以兼容 ie 浏览器
+    			drop_console: true,
+    			// 内嵌定义了但是只用到一次的变量
+    			cpllapse_vars: true,
+    			// 提取出现多次但是没有定义成变量或去引用的静态值
+    			reduce_vars: true
+    		}
+    	}
+    })
+  ]
+}
 ```
 
 ## 2.9 [DLL 动态链接库(Dynamic link library)](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93)
@@ -578,14 +624,18 @@ module.exports = {
 const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 // webpack.config.prod.js
-new Webpack.DllReferencePlugin({
-	// 这个引入的就是 webpack.config.react.js 打包生成的 react.manifest.json
-	manifest: require(path.resolve(__dirname, 'dist', 'manifest.json'))
-}),
-new HtmlIncludeAssetsPlugin({
-	assets: ['./react_dll.js'],
-	append: false
-})
+module.exports = {
+  plugins: [
+    new Webpack.DllReferencePlugin({
+    	// 这个引入的就是 webpack.config.react.js 打包生成的 react.manifest.json
+    	manifest: require(path.resolve(__dirname, 'dist', 'manifest.json'))
+    }),
+    new HtmlIncludeAssetsPlugin({
+    	assets: ['./react_dll.js'],
+    	append: false
+    })
+  ]
+}
 ```
 
 ### 2.9.3 library 和 libraryTarget
@@ -781,6 +831,72 @@ new Webpack.DefinePlugin({
 	__development__: JSON.stringify(process.env.NODE_ENV) === "'development'"
 })
 ```
+
+## 2.11 服务器自动刷新
++ 可以监听本地源码文件发生变化时，自动重新构建出可运行的代码后，再刷新浏览器
+
+### 2.11.1 文件监听流程
++ webpack 定时获取文件的更新时间，并跟上一次保存的时间进行比对，如果不一致就表示发生了变化，poll 用来配置每次询问服务器多少次
++ 当检测文件不再发生变化时，会先缓存起来，等待一段时间之后再通知监听者，这个等待时间通过 aggregateTimeout 配置
++ webpack 只会监听 entry 所依赖的文件
++ 尽可能减少需要监听的文件数量和检查频率，频率的降低会导致灵敏度下降
+
+```javascript
+// webpack.config.base.js
+module.exports = {
+  watch: true,
+	watchOptions: {
+	// 忽略的目录
+		ignored: /node_modules/,
+		// 每秒向服务发出多少次询问，是否要重新编译
+		poll: 10,
+		// 源代码文件编译 500 毫秒后，不再修改，重新编译
+		aggregateTimeout: 500
+	}
+}
+```
+
+### 2.11.2 模块热替换
++ 模块热替换(Module Hot Replacement) 的技术可在不刷新整个网页的情况下只更新指定的模块，原理是当一个源码发生变化时，只重新编译发生变化的模块，再用新输出的模块替换掉浏览器中对应的老的模块
++ 反应更块，时间更短
++ 不刷新网页可以保留网页运行状态
+
+```javascript
+// webpack.config.base.js
+module.exports = {
+  devServer: {
+    hot: true
+  },
+  plugins: [
+		new Webpack.HotModuleReplacementPlugin(),
+		new Webpack.NamedModulesPlugin()
+	]
+}
+```
+
+```javascript
+// src/index.js
+if (module.hot) {
+  module.hot.accept('./index.js', () => {
+    console.log('replaced');
+  });
+}
+```
+
+## 2.12 tree shaking
++ tree shaking 可以用来剔除 JavaScript 中用不上的死代码，它依赖静态的 ES6 模块化语法
++ 基于 ES6 的 import 和 export 语法
++ 打包的时候加参数 webpack --display-used-exports --config webpack.config.prod.js，可以显示哪些模块被引用
+
+## 2.13 提取公共代码
+### 2.13.1 为什么提取
++ 减少网络传输，降低服务器成本
+
+### 2.13.2 如何提取
++ 基础类库，方便长期缓存
++ 页面之间的公共代码
++ 各个页面单独生成文件
+
 
 # 3. CDN
 + CDN ，内容分发网络，通过把资源部署到世界各地，用户在访问时按照就近原则从离用户最近的服务器获取资源，从而加速资源的获取速度
