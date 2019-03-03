@@ -1,5 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HappyPack = require('happypack');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const Webpack = require('webpack');
 
 module.exports = {
   entry: './src/index.js',
@@ -12,7 +15,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'postcss-loader']
+        use: 'happypack/loader?id=css'
       },
       {
         test: /\.scss$/,
@@ -33,16 +36,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env', '@babel/preset-react'],
-            plugins: [
-              ['@babel/plugin-proposal-decorators', { legacy: true }],
-              ['@babel/plugin-proposal-class-properties', { loose: true }]
-            ]
-          }
-        }
+        use: 'happypack/loader?id=babel'
       }
     ]
   },
@@ -59,6 +53,48 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         removeAttributeQuotes: true
       }
+    }),
+    new HappyPack({
+      id: 'babel',
+      loaders: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+            plugins: [
+              ['@babel/plugin-proposal-decorators', { legacy: true }],
+              ['@babel/plugin-proposal-class-properties', { loose: true }]
+            ]
+          }
+        }
+      ]
+    }),
+    new HappyPack({
+      id: 'css',
+      loaders: ['style-loader', 'css-loader', 'postcss-loader']
+    }),
+    new ParallelUglifyPlugin({
+      workerCount: 3,
+      uglifyJs: {
+        output: {
+          beautify: false,
+          comments: false
+        },
+        compress: {
+          // 删掉没有用到的代码时不输出警告
+          warnings: false,
+          // 删掉所有的 console 语句，可以兼容 ie 浏览器
+          drop_console: true,
+          // 内嵌定义了但是只用到一次的变量
+          cpllapse_vars: true,
+          // 提取出现多次但是没有定义成变量或去引用的静态值
+          reduce_vars: true
+        }
+      }
+    }),
+    // 定义环境变量
+    new Webpack.DefinePlugin({
+      __development__: JSON.stringify(process.env.NODE_ENV) === "'development'"
     })
   ],
   resolve: {

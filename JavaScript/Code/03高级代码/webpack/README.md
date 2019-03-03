@@ -325,6 +325,7 @@ new HTMLWebpackPlugin({
 ```
 
 ## 2.6 webpack 配置多入口
+
 + 先找到每个入口，然后从各个入口分别出发，找到依赖的模块，然后生成一个 Chunk 代码块，最后会把 Chunk 写入到文件系统中(Assets)
 + 一个入口对应多个模块，对应一个 Chunk
 + webpack.config.js
@@ -449,6 +450,73 @@ const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 		sourceMap: false
 	})
 ]
+```
+
++ HappyPack 多线程，HappyPack 能够让 webpack 把任务分解给多个子进程去并发的执行，子进程处理完后再把结果发送给主进程
+
+```javascript
+const HappyPack = require('happypack');
+
+module.exports = {
+  module: {
+    rules: [
+      {
+              test: /\.css$/,
+              exclude: /node_modules/,
+              use: 'happypack/loader?id=css'
+            },
+            {
+              test: /\.(js|jsx)$/,
+              exclude: /node_modules/,
+              use: 'happypack/loader?id=babel'
+            }
+    ]
+  },
+  plugins: [
+    new HappyPack({
+			id: 'babel',
+			loaders: [
+				{
+					loader: 'babel-loader',
+					options: {
+						presets: ['@babel/preset-env', '@babel/preset-react'],
+						plugins: [
+							['@babel/plugin-proposal-decorators', { legacy: true }],
+							['@babel/plugin-proposal-class-properties', { loose: true }]
+						]
+					}
+				}
+			]
+		}),
+		new HappyPack({
+			id: 'css',
+			loaders: ['style-loader', 'css-loader', 'postcss-loader']
+		})
+  ]
+}
+```
++ ParallelUglifyPlugin 对 js 文件的串行压缩变为开启多个子进程并行执行
+
+```javascript
+new ParallelUglifyPlugin({
+	workerCount: 3,
+	uglifyJs: {
+		output: {
+			beautify: false,
+			comments: false
+		},
+		compress: {
+			// 删掉没有用到的代码时不输出警告
+			warnings: false,
+			// 删掉所有的 console 语句，可以兼容 ie 浏览器
+			drop_console: true,
+			// 内嵌定义了但是只用到一次的变量
+			cpllapse_vars: true,
+			// 提取出现多次但是没有定义成变量或去引用的静态值
+			reduce_vars: true
+		}
+	}
+})
 ```
 
 ## 2.9 [DLL 动态链接库(Dynamic link library)](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93)
@@ -669,7 +737,56 @@ console.log(window.lib.getName());
 console.log(globalThis.lib.getName());
 ```
 
+## 2.10 区分环境
++ 开发网页的时候，一般会有多套运行环境
+	+ 在开发过程中方便开发调试的环境
+	+ 发布到线上给用户使用的运行环境
 
-# 3. react-webpack 配置
+### 2.10.1 环境区别
++ 线上的代码被压缩
++ 开发环境可能会打印只有开发者开能看到的日志
++ 开发环境和线上环境后端数据接口可能不同
++ 在命令行使用不同操作系统的命令，如果直接使用 set 或 export 会报错，所以使用 cross-env 这个库来兼容，`cross-env NODE_ENV=development`
 
-# 4. 自定义 loader 和 plugin
+### 2.10.2 使用 webpack-merge
+```javascript
+// webpack.config.js
+const merge = require('webpack-merge');
+const base = require('./webpack.base.config.js');
+
+let env = '';
+
+if (process.env.NODE_ENV === 'development') {
+  env = require('./webpack.dev.config.js');
+} else if (process.env.NODE_ENV === 'production') {
+  env = require('./webpack.prod.config.js');
+}
+
+module.exports = merge(base, env);
+```
+
+### 2.10.3 在代码里使用环境变量
++ 这里定义的 `__development` 变量可以直接在代码中使用
+
+```javascript
+new Webpack.DefinePlugin({
+	__development__: JSON.stringify(process.env.NODE_ENV) === "'development'"
+})
+```
+
+# 3. CDN
++ CDN ，内容分发网络，通过把资源部署到世界各地，用户在访问时按照就近原则从离用户最近的服务器获取资源，从而加速资源的获取速度
++ HTML 文件不缓存，放在自己的服务器上，关闭自己服务器的缓存，静态资源的 url 变成指向 CDN 服务器的地址
++ 静态的 JavaScript ，CSS，图片等文件开启 CDN 和缓存，并且文件名上带哈希值
++ 为了并行加载不阻塞，把不同的静态资源分配到不同的 CDN 服务器上
+
+```javascript
+module.exports = {
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: '[name].[hash:8].js',
+    publicPath: 'http://cdn.yourdomain.com'
+  }
+}
+```
+
