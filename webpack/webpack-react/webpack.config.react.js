@@ -1,5 +1,6 @@
 const path = require('path');
 const Webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
   mode: 'development',
@@ -13,7 +14,7 @@ module.exports = {
     // 导出变量的名称
     // 全部变量的名字，其他会从此变量上获取到里边的模块
     library: '_dll_[name]',
-    libraryTarget: 'var'
+    libraryTarget: 'window'
   },
   plugins: [
     new Webpack.DllPlugin({
@@ -21,6 +22,7 @@ module.exports = {
       // 与 output.library 中的值一致，值就是输出的 manifest.json 中的 name 的值
       name: '_dll_[name]',
       path: path.resolve(__dirname, 'dist', 'manifest.json')
-    })
+    }),
+    new CleanWebpackPlugin(['dist'])
   ]
 };

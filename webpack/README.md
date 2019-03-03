@@ -569,14 +569,22 @@ module.exports = {
 };
 ```
 
-### 2.9.2 使用 dll
+### 2.9.2 引入使用 dll
 + DllReferencePlugin，在配置文件中引入 DllPlugin 插件打包好的动态连接库
 + 使用已经生成的 dll
++ HtmlIncludeAssetsPlugin 的配置里的 assets 是指要引入的 dll 资源， append 为 false 是指把引入的这个资源放在 webpack 打包引入的其他资源的前边
+
 ```javascript
+const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
+
 // webpack.config.prod.js
 new Webpack.DllReferencePlugin({
 	// 这个引入的就是 webpack.config.react.js 打包生成的 react.manifest.json
 	manifest: require(path.resolve(__dirname, 'dist', 'manifest.json'))
+}),
+new HtmlIncludeAssetsPlugin({
+	assets: ['./react_dll.js'],
+	append: false
 })
 ```
 

@@ -1,8 +1,9 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Webpack = require('webpack');
 const HappyPack = require('happypack');
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-const Webpack = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -41,6 +42,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new Webpack.IgnorePlugin(/\.\/locale/, /moment/),
     new HtmlWebpackPlugin({
       template: './index.html',
       filename: 'index.html',
@@ -95,6 +97,10 @@ module.exports = {
     // 定义环境变量
     new Webpack.DefinePlugin({
       __development__: JSON.stringify(process.env.NODE_ENV) === "'development'"
+    }),
+    new HtmlIncludeAssetsPlugin({
+      assets: ['./react_dll.js'],
+      append: false
     })
   ],
   resolve: {
