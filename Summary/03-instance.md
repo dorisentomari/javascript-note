@@ -37,7 +37,7 @@ console.log(String instanceof String);      // false
 ```
 + 问题: 为什么`Object`和`Function`的`instanceof`自己结果为`true`，而`String`和`Number`的`instanceof`自己结果为`false`？
 
-> 在 JavaScript 原型继承结构里面，规范中用 ``[[Prototype]]`` 表示对象隐式的原型，在 JavaScript 中用 `__proto__` 表示，并且在 Firefox 和 Chrome 浏览器中是可以访问得到这个属性的，但是 IE 下不行。所有 JavaScript 对象都有 `__proto__` 属性，但只有 `Object.prototype.__proto__` 为 null，前提是没有在 Firefox 或者 Chrome 下修改过这个属性。这个属性指向它的原型对象。 至于显示的原型，在 JavaScript 里用 `prototype` 属性表示，这个是 JavaScript 原型继承的基础知识，在这里就不在叙述了。
+> 在 JavaScript 原型继承结构里面，规范中用 `[[Prototype]]` 表示对象隐式的原型，在 JavaScript 中用 `__proto__` 表示，并且在 Firefox 和 Chrome 浏览器中是可以访问得到这个属性的，但是 IE 下不行。所有 JavaScript 对象都有 `__proto__` 属性，但只有 `Object.prototype.__proto__` 为 null，前提是没有在 Firefox 或者 Chrome 下修改过这个属性。这个属性指向它的原型对象。 至于显示的原型，在 JavaScript 里用 `prototype` 属性表示，这个是 JavaScript 原型继承的基础知识，在这里就不在叙述了。
 
 + 解答:
   + `Object.prototype`是所有对象的根源
