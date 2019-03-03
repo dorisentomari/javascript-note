@@ -1,12 +1,8 @@
 const path = require('path');
-const Webpack = require('webpack');
-const HappyPack = require('happypack');
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const HtmlIncludeAssetsPlugin = require('html-webpack-include-assets-plugin');
 
 module.exports = {
-  entry: './src/index.js',
+  entry: './src/lazy.js',
   output: {
     filename: '[name].[hash:8].js',
     path: path.resolve(__dirname, 'dist')
@@ -16,23 +12,7 @@ module.exports = {
       {
         test: /\.css$/,
         exclude: /node_modules/,
-        use: 'happypack/loader?id=css'
-      },
-      {
-        test: /\.scss$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg|bmp)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 8 * 1024
-        }
-      },
-      {
-        test: /\.(eot|woff|woff2|ttf)$/,
-        loader: 'url-loader'
+        use: ['style-loader', 'css-loader', 'postcss-loader']
       },
       {
         test: /\.(js|jsx)$/,
@@ -43,7 +23,8 @@ module.exports = {
             presets: [ '@babel/preset-react',  '@babel/preset-env' ],
             plugins: [
               ['@babel/plugin-proposal-decorators', { legacy: true }],
-              ['@babel/plugin-proposal-class-properties', { loose: true }]
+              ['@babel/plugin-proposal-class-properties', { loose: true }],
+              '@babel/plugin-syntax-dynamic-import'
             ]
           }
         }
@@ -51,42 +32,10 @@ module.exports = {
     ]
   },
   plugins: [
-    new Webpack.IgnorePlugin(/\.\/locale/, /moment/),
     new HtmlWebpackPlugin({
       template: './index.html',
-      filename: 'index.html',
-      hash: true,
-      minify: {
-        collapseWhitespace: true,
-        removeComments: true,
-        removeRedundantAttributes: true,
-        removeScriptTypeAttributes: true,
-        removeStyleLinkTypeAttributes: true,
-        removeAttributeQuotes: true
-      }
+      filename: 'index.html'
     }),
-    new HappyPack({
-      id: 'css',
-      loaders: ['style-loader', 'css-loader', 'postcss-loader']
-    }),
-    new ParallelUglifyPlugin({
-      workerCount: 3,
-      uglifyJs: {
-        output: {
-          beautify: false,
-          comments: false
-        },
-        compress: {
-          // 删掉没有用到的代码时不输出警告
-          warnings: false,
-          // 删掉所有的 console 语句，可以兼容 ie 浏览器
-          drop_console: true,
-          // 内嵌定义了但是只用到一次的变量
-          cpllapse_vars: true,
-          // 提取出现多次但是没有定义成变量或去引用的静态值
-          reduce_vars: true
-        }
-      }
-    }),
-  ]
+    new Webpack.IgnorePlugin(/\.\/locale/, /moment/)
+  ],
 };

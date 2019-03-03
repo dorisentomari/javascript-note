@@ -564,6 +564,15 @@ module.exports = {
   ]
 }
 ```
++ 忽略不需要的依赖
+```javascript
+module.exports = {
+  plugins: [
+    new Webpack.IgnorePlugin(/\.\/locale/, /moment/)
+  ]
+}
+```
+
 
 ## 2.9 [DLL 动态链接库(Dynamic link library)](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93)
 
@@ -897,6 +906,98 @@ if (module.hot) {
 + 页面之间的公共代码
 + 各个页面单独生成文件
 
+```javascript
+module.exports = {
+// 抽取公共代码
+optimization: {
+	splitChunks: {
+		cacheGroups: {
+			// commons 放的是不同页面之间的公共模块
+			commons: {
+				// 最少有两个页面复用，才会被提取出来
+				minChunks: 2,
+				// 最开始的模块
+				chunks: 'initial'
+			},
+			// 第三方模块
+			vendor: {
+				chunks: 'initial',
+				test: /node_modules/,
+				name: 'vendor'
+			}
+		}
+	}
+}
+}
+```
+
+## 2.14 开启 scope hoisting
++ Scope hoisting 可以让 webpack 打包出来的代码文件体积更小，运行的跟怪，被称为作用域的提升
++ 代码体积更小，因为函数声明语句会产生大量代码
++ 代码在运行时因为创建的函数作用域少了，内存开销也随之变小
+
+```javascript
+// a.js
+export default 'HELLO, WORLD';
+
+// b.js
+import str from './a.js';
+console.log(str);
+
+// 编译后的结果
+console.log('HELLO, WORLD');
+```
++ 采用的插件
+```javascript
+module.exports = {
+  plugins: [
+    new Webpack.optimize.ModuleConcatenationPlugin()
+  ]
+}
+```
+
+## 2.15 代码分离
++ 代码分离能够把代码分离到不同的 bundle 中，然后可以按需加载或并行下载这些文件，三种常见的代码分离方法
++ 入口起点，使用 entry 手动配置分离代码
++ 防止重复，使用 splitChunks 去重和分离 chunk
++ 动态导入，通过模块的内联函数调用来分离代码
+
+### 2.15.1 多个入口
+```javascript
+module.exports = {
+  entry: {
+    pageA: './src/pageA.js',
+    pageB: './src/pageB.js'
+  }
+}
+```
+
+### 2.15.2 防止重复
++ splitChunks 可以将公共的依赖模块提取到一个新生成的 chunk，common-chunk-and-vendor-chunk
+
+### 2.15.3 动态导入
++ 本质上是采用 jsonp 的方式获取需要的资源，因为 jsonp 不需要考虑跨域的问题
++ 通过 es7 的 import() 语法动态导入模块
++ babel 默认不支持该语法，需要使用 @babel/plugin-syntax-dynamic-import 插件解析
++ import() 语法返回的是一个 Promise，可以使用 Promise 的方法与使用
+
+```javascript
+// index.js
+document.getElementById('play').addEventListener('click', e => {
+  // 异步加载模块的语法 es7
+  // 在 webpack 里 import 是一个天然的分割点
+  import('./video.js').then(video => {
+    let name = video.getName();
+    console.log(name);
+  })
+});
+
+// video.js
+console.log('这是一个非常大的文件资源');
+export function getName() {
+  return 'get video.js name';
+}
+```
 
 # 3. CDN
 + CDN ，内容分发网络，通过把资源部署到世界各地，用户在访问时按照就近原则从离用户最近的服务器获取资源，从而加速资源的获取速度
@@ -913,4 +1014,3 @@ module.exports = {
   }
 }
 ```
-
