@@ -5,7 +5,9 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.config.dev.js",
-    "build": "rimraf dist && webpack --config webpack.config.prod.js"
+    "build": "webpack --config webpack.config.prod.js",
+    "build-react": "webpack --config webpack.config.react.js",
+    "build-lib": "webpack --config webpack.config.lib.js"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

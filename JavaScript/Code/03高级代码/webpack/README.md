@@ -451,6 +451,225 @@ const UglifyjsPlugin = require('uglifyjs-webpack-plugin');
 ]
 ```
 
+## 2.9 [DLL 动态链接库(Dynamic link library)](https://zh.wikipedia.org/wiki/%E5%8A%A8%E6%80%81%E9%93%BE%E6%8E%A5%E5%BA%93)
+
+> 动态链接库（英语：Dynamic-link library，缩写为DLL）是微软公司在微软视窗操作系统中实现共享函数库概念的一种实现方式。这些库函数的扩展名是.DLL、.OCX（包含ActiveX控制的库）或者.DRV（旧式的系统驱动程序）。
+  
+> 所谓动态链接，就是把一些经常会共享的代码（静态链接的OBJ程序库）制作成DLL档，当可执行文件调用到DLL档内的函数时，Windows操作系统才会把DLL档加载存储器内，DLL档本身的结构就是可执行档，当程序有需求时函数才进行链接。透过动态链接方式，存储器浪费的情形将可大幅降低。静态链接库则是直接链接到可执行文件。
+  
+> DLL的文件格式与视窗EXE文件一样——也就是说，等同于32位视窗的可移植执行文件（PE）和16位视窗的New Executable（NE）。作为EXE格式，DLL可以包括源代码、数据和资源的多种组合。
+  
+> 在更广泛的意义上说，任何同样文件格式的计算机文件都可以称作资源DLL。这样的DLL的例子有扩展名为ICL的图标库、扩展名为FON和FOT的字体文件。
+
++ .dll 后缀的文件成为动态链接库，在一个动态链接库红可以包含给其他模块调用的函数和数据
++ 把基础模块独立打包到单独的动态链接库
++ 把需要导入的模块在动态链接库里的时候，模块不能再次被打包，而是去动态链接库里获取 dll-plugin
+
+### 2.9.1 创建 DLL
++ DllPlugin插件，用于打包出一个个动态连接库
++ 使用一个单独的生成 dll 的 webpack 配置文件用来生成 dll
++ output.filename 是要生成的 dll 的文件的名字
++ output.library 要和 DllPlugin.name 的值相同，是创建的 dll 里的变量名
++ DllPlugin 里的 manifest.json 是生成的文件名，使用时要保持一致
++ manifest.json 文件是一个缓存文件，记录创建的 dll 里的变量名和缓存的库
+```javascript
+// webpack.config.react.js
+const path = require('path');
+const Webpack = require('webpack');
+
+module.exports = {
+  mode: 'development',
+  entry: {
+    react: ['react', 'react-dom']
+  },
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    // 输出动态链接库的文件名称
+    filename: '[name]_dll.js',
+    // 导出变量的名称
+    // 全部变量的名字，其他会从此变量上获取到里边的模块
+    library: '_dll_[name]'
+  },
+  plugins: [
+    new Webpack.DllPlugin({
+      // manifest.json 是一个缓存文件
+      // 与 output.library 中的值一致，值就是输出的 manifest.json 中的 name 的值
+      name: '_dll_[name]',
+      path: path.resolve(__dirname, 'dist', 'manifest.json')
+    })
+  ]
+};
+```
+
+### 2.9.2 使用 dll
++ DllReferencePlugin，在配置文件中引入 DllPlugin 插件打包好的动态连接库
++ 使用已经生成的 dll
+```javascript
+// webpack.config.prod.js
+new Webpack.DllReferencePlugin({
+	// 这个引入的就是 webpack.config.react.js 打包生成的 react.manifest.json
+	manifest: require(path.resolve(__dirname, 'dist', 'manifest.json'))
+})
+```
+
+### 2.9.3 library 和 libraryTarget
++ output.library 配置的是导出库的名称，通常和 libraryTarget 放在一起使用
++ output.libraryTarget 配置的是以何种方式导出库
+
+### 2.9.4 关于 libraryTarget 的方式
++ 实际上就是导出的方式不一样，导入的方式也不一样
++ 1. `var` 默认配置，编写的库将通过 var 被赋值给通过 library 指定的变量
+	+ lib_code 其中 lib_code 代指导出库的代码内容，是有返回值的一个自执行函数
+	
+```javascript
+// webpack 输出的代码
+var _dll_react = (function(modules) {})({
+  a: function () {},
+  b: function () {},
+  c: function () {},
+});
+
+// 使用库的方法
+_dll_react.doSomething();
+// 如果 output.library 为空值，那么就直接输出
+```
+
++ 2. `commonjs`，编写的库将通过 CommonJS 规范导出
+
+```javascript
+// webpack 输出的代码
+exports["_dll_react"] = (function(modules) {})({
+  a: function () {},
+  b: function () {},
+  c: function () {},
+});
+
+// 使用库的方法
+require('library-name-in-npm')['libraryName'].doSomething();
+// 其中 library-name-in-npm 是指模块发布到 npm 代码仓库时的名称
+```
+
++ 3. `commonjs2`，编写的库将通过 CommonJS2 规范导出，这个时候配置 output.library 没有意义，因为模块直接导出，没有导出变量
+
+```javascript
+// webpack 输出的代码
+module.exports = (function(modules) {})({
+  a: function () {},
+  b: function () {},
+  c: function () {},
+});
+
+// 使用库的方法
+require('library-name-in-npm')['libraryName'].doSomething();
+// 其中 library-name-in-npm 是指模块发布到 npm 代码仓库时的名称
+```
+
++ 4. `this`，编写的库将通过 this 被赋值给通过 library 指定的名称
+
+```javascript
+// webpack 输出的代码
+this["_dll_react"] = (function(modules) {})({
+  a: function () {},
+  b: function () {},
+  c: function () {},
+});
+
+// 使用库的方法
+this['_dll_react'].doSomething();
+```
+
++ 5. `global` 和 `window`，编写的库将通过 window 被赋值给通过 library 指定的名称，实际上就是把库挂载到 window 对象上
+
+```javascript
+// webpack 输出的代码
+window["_dll_react"] = (function(modules) {})({
+  a: function () {},
+  b: function () {},
+  c: function () {},
+});
+
+// 使用库的方法
+window['_dll_react'].doSomething();
+```
+
+### 2.9.5 写一个 lib 为例解释 libraryTarget 
++ lib.js
+```javascript
+function getName () {
+  return 'hello, webpack';
+}
+
+exports.getName = getName;
+```
+
++ webpack.config.lib.js
+```javascript
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+module.exports = {
+  mode: 'development',
+  entry: './src/lib.js',
+  output: {
+    path: path.resolve(__dirname, 'lib_dll'),
+    // 输出动态链接库的文件名称
+    filename: 'bundle.js',
+    // 导出变量的名称
+    // 全部变量的名字，其他会从此变量上获取到里边的模块
+    library: 'lib',
+    libraryTarget: ''
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './index.html',
+      filename: 'index.html',
+    })
+  ]
+};
+```
++ var 模式
+```javascript
+// bundle.js
+var lib = (function () {})();
+
+// 可以直接使用
+lib.getName();
+```
+
++ commonjs 模式
+```javascript
+// bundle.js
+exports["lib"] = (function () {})();
+
+// 由于浏览器不能识别 exports，所以要在 node 里进行引入使用
+let bundle = require('../lib_dll/bundle');
+console.log(bundle.lib.getName());
+```
+
++ commonjs2 模式
+```javascript
+// bundle.js
+module.exports = (function () {})();
+
+// 由于浏览器不能识别 module，所以要在 node 里进行引入使用
+let bundle = require('../lib_dll/bundle');
+console.log(bundle.getName());
+```
+
++ this 、 window 和 global 模式
+```javascript
+// bundle.js
+this["lib"] = (function () {})();
+window["lib"] = (function () {})();
+globalThis["lib"] = (function () {})();
+
+// 可以直接使用
+console.log(this.lib.getName());
+console.log(window.lib.getName());
+console.log(globalThis.lib.getName());
+```
+
+
 # 3. react-webpack 配置
 
 # 4. 自定义 loader 和 plugin

@@ -1,3 +1,4 @@
+const path = require('path');
 const baseConfig = require('./webpack.config.base');
 const Webpack = require('webpack');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
@@ -14,6 +15,10 @@ module.exports = merge(baseConfig, {
       sourceMap: false
     }),
     new Webpack.IgnorePlugin(/\.\/locale/, /moment/),
+    new Webpack.DllReferencePlugin({
+      // 这个引入的就是 webpack.config.react.js 打包生成的 react.manifest.json
+      manifest: require(path.resolve(__dirname, 'dist', 'manifest.json'))
+    })
   ],
   module: {
     rules: [
