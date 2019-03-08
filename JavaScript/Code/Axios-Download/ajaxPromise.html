@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ajaxPromise</title>
+  <script src="./ajaxPromise.js"></script>
+</head>
+<body>
+<script>
+  ajaxPromise.defaults.baseURL = 'https://easy-mock.com/mock/5c7fc8606498b753ed1f9e5e/example';
+
+  ajaxPromise({url: '/user'}).then(res => {
+    console.log(res);
+  });
+
+  ajaxPromise({method: 'post', url: '/user'}).then(res => {
+    console.log(res);
+  });
+
+</script>
+</body>
+</html>

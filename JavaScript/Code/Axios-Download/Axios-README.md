@@ -185,3 +185,33 @@ axios.defaults.data = {};
 ### 3.2.15 headers.post
 + `axios.defaults.headers['Content-Type'] = 'application/x-www-form-urlencoded'`
 + 设置在 POST 请求中基于请求主体向服务器发送内容的格式，默认是 RAW ，项目中常用的 urlencoded 格式
+
+
+# 4. 拦截器
++ 在请求和响应达到 then / catch 之前拦截
++ 在执行成功后设定的方法之前，会先执行拦截器中的方法
+
+## 4.1 请求拦截器
+```javascript
+axios.interceptors.request.use(config => {
+  return config;
+}, err => {
+  return Promise.reject(err);
+});
+
+// 处理请求的参数
+axios.defaults.transformRequest = data => {
+	console.log(data);
+}
+```
+
+
+## 4.2 响应拦截器
+```javascript
+axios.interceptors.response.use(res => {
+  return res;
+}, err => {
+  return Promise.reject(err);
+})
+```
+
