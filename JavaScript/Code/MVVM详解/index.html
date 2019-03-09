@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>MVVM 双向数据绑定</title>
+</head>
+<body>
+<script>
+  let obj = {};
+  Object.defineProperty(obj, 'school', {
+    // 默认是 false， 值不能被修改
+    configurable: true,
+    enumerable: true,
+    get () {
+      return 'shanghai';
+    },
+    set (value) {
+      console.log(value);
+    }
+  });
+  console.log(obj);
+  for (let key in obj) {
+    console.log(key, obj[key]);
+  }
+</script>
+</body>
+</html>
