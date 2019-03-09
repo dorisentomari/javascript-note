@@ -88,3 +88,47 @@ function observe(data) {
 // 深度响应，因为每次赋予一个新对象时会给这个新对象增加数据劫持
 ```
 
++ 编译
+
+整个 MVVM 的执行顺序是，先进行数据劫持 Observe ，然后把数据代理给当前的 vm 实例，再开始编译 Compile
+
+在数据劫持的时候，data 的属性包括其子属性都有一个 get 和 set 方法。编译的时候，首先要获取到需要编译的 DOM 元素和实例化的 vm，这样才能把 DOM 进行编译，然后把 vm 里的数据显示
+
+我们要创建一个文档碎片，把所有的 dom 元素全部获取到，一个一个进行遍历，然后把 DOM 元素统一放在一个文档碎片 fragment 中，此时所有的 node 节点都在内存中，在页面上，$el 里的元素已经不再显示。
+
+这个时候我们就可以进行替换，替换就是把 node 节点里的双花括号里的变量值替换为对应的 vm 属性里的值。此时需要进行正则查找，拆分，判断 node 节点的类型，最终把正则匹配到的双花括号里的值替换掉，在页面显示。
+
+如果 node 节点有子节点，那么就把这个 node 节点作为 $el ，进行递归操作。
+
+```javascript
+function Compile (el, vm) {
+  // el 表示替换的范围
+  vm.$el = document.querySelector(el);
+  let fragment = document.createDocumentFragment()
+  // 将 app 中的内容移入内存中
+  while(child = vm.$el.firstChild) {
+    fragment.appendChild(child);
+  }
+  replace(fragment);
+  function replace (fragment) {
+    Array.from(fragment.childNodes).forEach(node => {
+      let text = node.textContent;
+      let reg = /\{\{(.*)\}\}/;
+      if (node.nodeType === 3 && reg.test(text)) {
+        console.log(RegExp.$1);         // user.name
+        let arr = RegExp.$1.split('.'); // [user, name]
+        let value = vm;
+        arr.forEach(k => {              // this.user.name
+          value = value[k];
+        })
+        node.textContent = text.replace(/\{\{(.*)\}\}/, value);
+      }
+      if (node.childNodes) {
+        replace(node);
+      }
+    });
+  }
+  // 再把内存中的内容放到页面上
+  vm.$el.appendChild(fragment);
+}
+```
