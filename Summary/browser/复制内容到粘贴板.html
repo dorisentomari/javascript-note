@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>复制内容到粘贴板</title>
+</head>
+<body>
+  <p><input type="text" id="text"></p>
+  <p><button id="button">click copy</button></p>
+  <script>
+    function copyToClipboard(str) {
+      const el = document.createElement('input');
+      el.value = str;
+      el.setAttribute('readonly', '');
+      el.style.position = 'absolute';
+      el.style.left = '-9999px';
+      document.body.appendChild(el);
+      el.select()
+      document.execCommand('copy');
+      document.body.removeChild(el);
+    }
+
+    document.getElementById('button').addEventListener('click', e=> {
+      let str = document.getElementById('text').value;
+      copyToClipboard(str);
+      console.log('已经复制该文本', str);
+    });
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>把数组元素转换成 li 添加到 ul 元素上</title>
+</head>
+
+<body>
+  <script>
+    function arrayToHTMLList(arr, listId) {
+      return function (el) {
+        el = document.querySelector(`#${listId}`);
+        el.innerHTML += arr.map(item => `<li>${item}</li>`).join('');
+        return el;
+      }();
+    }
+
+    let ul = document.createElement('ul');
+    ul.setAttribute('id', 'myId');
+    document.body.appendChild(ul);
+    const list = arrayToHTMLList(['list 01', 'list 02', 'list 03', 'list 04'], 'myId');
+    console.log(list);
+  </script>
+</body>
+
+</html>
