@@ -1,6 +1,7 @@
 ## [[3, 2, 1].reduce(Math.pow), [].reduce(Math.pow)]
 
 + 结果: `TypeError: Reduce of empty array with no initial value`
++ 使用 reduce ，多个数据，最终变成了一个数据
 + [`reduce`方法](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
   + `reduce()` 方法对累计器和数组中的每个元素（从左到右）应用一个函数，将其简化为单个值。
   + `reduce(accumulator, currentValue, currentIndex, sourceArray)`函数接收4个参数

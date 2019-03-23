@@ -1,4 +1,22 @@
-# AST
+# 1. 抽象语法树(Abstract Syntax Tree)
++ webpack 和 lint 等很多的工具和库的核心都是通过 AST 抽象语法树这个概念来实现对代码的检查、分析等操作的，通过了解 AST 的概念，可以编写类似的工具
+
+# 2. 抽象语法树的用途
++ 代码语法的检查，代码风格的检查，代码的格式化，代码的高亮，代码的错误提示，代码自动补全等
+	+ 如 eslint 对代码错误或风格的检查，发现一些潜在的错误
+	+ IDE 的错图提示，格式化，高亮，自动补全
++ 代码混淆压缩
+	+ uglifyjs等
++ 优化变更代码，改变代码结构
+	+ 代码打包工具 webpack， rollup 等
+	+ CommonJS，AMD，CMD，UMD 等代码规范之间的转义
+	+ CoffeeScript，TypeScript，JSX 等语法转原生 JavaScript
+
+# 3. 抽象语法树的定义
+
+
+
+
 ## 1. 工具
 + esprima
 + estraverse

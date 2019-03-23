@@ -24,6 +24,7 @@ function MVVM(options = {}){
 
 // 这里是主要的逻辑
 function Observe(data){
+  let dep = new Dep();
   for (let key in data) {
     if (data.hasOwnProperty(key)) {
       let value = data[key];
@@ -34,6 +35,7 @@ function Observe(data){
       Object.defineProperty(data, key, {
         enumerable: true,
         get () {
+          Dep.target && dep.addSub(Dep.target); // [watcher]
           return value;
         },
         // 更改值的时候
@@ -44,6 +46,8 @@ function Observe(data){
           }
           value = newValue;
           observe(value);
+          // 让所有的 watcher 的 update 方法执行即可
+          dep.notify();
         }
       })
     }
@@ -79,7 +83,15 @@ function Compile (el, vm) {
         let value = vm;
         arr.forEach(k => {              // this.user.name
           value = value[k];
-        })
+        });
+        // 函数里需要接收一个新值
+        new Watcher(vm, RegExp.$1, function (newValue) {
+          node.textContent = text.replace(/\{\{(.*)\}\}/, value);
+        });
+
+
+
+        // 替换的逻辑
         node.textContent = text.replace(/\{\{(.*)\}\}/, value);
       }
       if (node.childNodes) {
@@ -90,5 +102,45 @@ function Compile (el, vm) {
   // 再把内存中的内容放到页面上
   vm.$el.appendChild(fragment);
 }
+
+// 发布订阅
+function Dep() {
+  this.subs = [];
+}
+
+Dep.prototype.addSub = function (sub) {
+  this.subs.push(sub);
+};
+
+Dep.prototype.notify = function () {
+  this.subs.forEach(sub => sub.update());
+};
+
+// watcher 是一个类，通过这个类创建的实例都拥有 update 方法
+function Watcher(vm, exp, fn) {
+  // 添加到订阅中
+  this.fn = fn;
+  this.vm = vm;
+  this.exp = exp;
+  Dep.target = this;
+  let value = vm;
+  let arr = exp.split('.');
+  arr.forEach(k => {
+    value = value[k];
+  });
+  Dep.target = null;
+}
+
+Watcher.prototype.update = function () {
+  Dep.target = this;
+  let value = this.vm;
+  let arr = this.exp.split('.');
+  arr.forEach(k => {
+    value = value[k];
+  });
+  this.fn(value);
+};
+
+
 
 
