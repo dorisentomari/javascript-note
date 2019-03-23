@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Promise</title>
+</head>
+<body>
+<h1>给方法分类，分为宏任务和微任务</h1>
+<h1>setTimeout, setImmediate(IE), MessageChanel 是宏任务</h1>
+<h1>原生 Promise, MutationObserve 是微任务</h1>
+<h1>宏任务和微任务都有一个任务队列</h1>
+<h1>浏览器的事件环和 Node 的事件环的区别(现在的执行效果一样)</h1>
+<h1>默认执行主栈的代码，然后执行微任务，执行完毕微任务。然后去执行一个宏任务，如果这个宏任务里有微任务，那么就在继续执行微任务。然后再执行后边的宏任务。</h1>
+<h1>进程是计算机分配任务和调度任务的基本单位</h1>
+<h1>js 中一个进程里，只有一个主线程</h1>
+<h1>js 线程和 ui 线程是互斥的，主线程中，不能同时进行渲染 ui 和 js</h1>
+<h1>prefetch 默认不会马上加载，等待浏览器空闲的时候再进行加载，preload 是先加载资源</h1>
+<script>
+  setTimeout(() => {
+    console.log('1');
+    Promise.resolve().then(data => {
+      console.log('2');
+    })
+  }, 0);
+
+  Promise.resolve().then(data => {
+    console.log('3');
+    setTimeout(() => {
+      console.log('4');
+    }, 0);
+  })
+
+</script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>messageChannel</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  // vue 的 nextTick 以前是用这个方法实现的
+  let channel = new MessageChannel();
+  let port1 = channel.port1;
+  let port2 = channel.port2;
+  console.log(port1, port2);
+
+  setTimeout(() => {
+    console.log('time out');
+  })
+  port2.postMessage('你好啊，MessageChannel');
+  console.log('1111');
+
+  port1.onmessage = function (e) {
+    console.log('e: ', e.data);
+  }
+  console.log('2222');
+
+</script>
+</body>
+</html>
