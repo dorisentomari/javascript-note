@@ -12,6 +12,9 @@ function MyPromise(executor) {
   let self = this;
 
   function resolve(value) {
+    if (value instanceof MyPromise) {
+      return value.then(resolve, reject);
+    }
     if (self.status === PENDING) {
       self.value = value;
       self.status = FULFILLED;
@@ -82,7 +85,9 @@ MyPromise.prototype.then = function (onfulfilled, onrejected) {
     onfulfilled = value => value;
   }
   if (typeof onrejected !== 'function') {
-    onrejected = err => {throw err};
+    onrejected = err => {
+      throw err
+    };
   }
   let self = this;
   let promise2 = new Promise((resolve, reject) => {
@@ -134,8 +139,12 @@ MyPromise.prototype.then = function (onfulfilled, onrejected) {
       });
     }
   });
-
   return promise2;
+};
+
+// catch 是对 then 的简写，只是没有 resolve
+MyPromise.prototype.catch = function (errCallback) {
+  return this.then(null, errCallback);
 };
 
 MyPromise.deferred = function () {
@@ -145,5 +154,18 @@ MyPromise.deferred = function () {
     dfd.reject = reject;
   });
   return dfd;
-}
+};
+
+MyPromise.resolve = function (value) {
+  return new MyPromise((resolve, reject) => {
+    resolve(value);
+  });
+};
+
+MyPromise.reject = function (reason) {
+  return new MyPromise((resolve, reject) => {
+    reject(reason);
+  });
+};
+
 module.exports = MyPromise;
