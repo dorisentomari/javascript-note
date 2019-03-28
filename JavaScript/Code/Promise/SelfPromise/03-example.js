@@ -1,20 +1,11 @@
-// const MyPromise = require('./03-thenPromise.js')
+const MyPromise = require('./03-thenPromise.js')
 
 let p = new MyPromise((resolve, reject) => {
-  resolve(123);
+  throw new Error('错误')
 });
 
-let promise2 = p.then(data => {
-  console.log(data, '|||||||||');
-  return data;
+p.then().then().then().then().then().then().then(data => {
+  console.log(data, 'success');
 }, err => {
-  return err + 400;
-})
-
-promise2.then(data => {
-  console.log(data, '***');
-}).then(data => {
-  console.log(data, '////')
-})
-
-
+  console.log(err);
+});
