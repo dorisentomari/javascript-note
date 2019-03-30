@@ -1,12 +1,11 @@
 import {version} from '../../package.json';
 
-
 export const VERSION = version;
 
 const HOME = process.env[process.platform === 'win32' ? 'USERPROFILE' : 'HOME'];
 
-export const RC = `${HOME}/.packclirc`;
 // RC 是配置下载模板的地方，有什么模板
+export const RC = `${HOME}/.packclirc`;
 
 export const DEFAULTS = {
   registry: 'pack-cli',
@@ -14,3 +13,5 @@ export const DEFAULTS = {
   type: 'user',
 };
 
+// 下载目录
+export const DOWNLOAD_DIRECTORY = `${HOME}/.packcli/template`;
