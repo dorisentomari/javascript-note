@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>requestAnimationFrame</title>
+  <style>
+    canvas {
+      border: 1px solid red;
+      background: #00ff9c;
+    }
+  </style>
+</head>
+<body>
+<canvas id="canvas" width="500px" height="500px"></canvas>
+<script>
+  window.onload = function () {
+    let oC = document.getElementById('canvas');
+    let gd = oC.getContext('2d');
+    let left = 100;
+
+    function next() {
+      gd.clearRect(0, 0, oC.width, oC.height);
+      left += 5;
+      gd.strokeRect(left, 20, 100, 100);
+      requestAnimationFrame(next);
+    }
+
+    requestAnimationFrame(next);
+  }
+</script>
+</body>
+</html>

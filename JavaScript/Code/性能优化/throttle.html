@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>throttle</title>
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+<button class="btn btn-primary" id="btn">click</button>
+<script>
+  let btn = document.getElementById('btn');
+
+  /*
+  * function throttle(func, wait) {
+    // 上一次的默认值
+    let previous = 0;
+    return function () {
+      let now = +new Date();
+      if (now - previous > wait) {
+        func.apply(this, arguments);
+        previous = now;
+      }
+    }
+  }
+  * */
+
+  function throttle(func, wait, options) {
+    let args, context, previous = 0, timeout;
+    let later = function () {
+      previous = options.leading === false ? 0 : +new Date();
+      func.apply(context, args);
+    };
+
+    let throttled = function () {
+      args = arguments;
+      context = this;
+      let now = +new Date();
+      if (!previous && options.leading === false) {
+        previous = now;
+      }
+      let remaining = wait - (now - previous);
+      if (remaining <= 0) {
+        if (timeout) {
+          clearTimeout(timeout);
+          timeout = null;
+        }
+        func.apply(context, args);
+        previous = now;
+      } else if (!timeout && options.trailing !== false) {
+        // trailing 最后一次应该触发，默认就是触发
+        timeout = setTimeout(later, remaining);
+      }
+    };
+    return throttled;
+  }
+
+  function logger() {
+    console.log('logger');
+  }
+
+  btn.addEventListener('click', throttle(logger, 1000, {leading: false}));
+</script>
+</body>
+</html>

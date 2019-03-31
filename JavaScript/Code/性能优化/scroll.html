@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>scroll</title>
+</head>
+<body style="height:20000px;">
+<script>
+  let flag = false;
+
+  function scroll() {
+    if (!flag) {
+      flag = true;
+      requestAnimationFrame(logger);
+      flag = false;
+    }
+  }
+
+  function logger() {
+    console.log('logger');
+  }
+
+  window.addEventListener('scroll', scroll);
+
+</script>
+</body>
+</html>
