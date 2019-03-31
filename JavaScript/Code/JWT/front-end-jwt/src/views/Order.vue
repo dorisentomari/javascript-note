@@ -17,6 +17,8 @@
     mounted () {
       axios.get('/order').then(res => {
         this.username = res.data.user.username;
+      }).catch(e => {
+        this.$router.push('/login');
       })
     }
   };

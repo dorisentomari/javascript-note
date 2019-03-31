@@ -25,7 +25,6 @@ app.use((req, res, next) => {
   }
 });
 
-
 app.post('/reg', async (req, res) => {
   let user = req.body;
   console.log(user);
@@ -52,6 +51,7 @@ app.post('/login', async (req, res) => {
   let user = req.body;
   try {
     user = await User.findOne(user, __filter);
+    console.log('findOne: ', user);
     if (user) {
       let token = jwt.encode({
         id: user._id,
@@ -70,6 +70,7 @@ app.post('/login', async (req, res) => {
       });
     }
   } catch (e) {
+    console.log(e);
     res.json({
       code: 1,
       data: '用户不存在'
@@ -92,7 +93,6 @@ let auth = function (req, res, next) {
   }
 };
 
-
 // authorization:Bearer token
 app.get('/order', auth, (req, res, next) => {
   res.json({
@@ -103,7 +103,6 @@ app.get('/order', auth, (req, res, next) => {
     }
   })
 });
-
 
 app.listen(PORT, err => {
   if (err) {
