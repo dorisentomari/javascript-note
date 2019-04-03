@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  function Person(name) {
+    this.name = name;
+  }
+  //
+  // let p1 = new Person('p1');
+  //
+  // let set = new Set();
+  // set.add(p1);
+  // p1 = null;
+  // set = null;
+
+  let PersonFactory = function (name) {
+    let p = new Person(name);
+    return function (){
+      console.log(p);
+    }
+  }
+
+  let p1 = PersonFactory('mark');
+
+</script>
+</body>
+</html>
