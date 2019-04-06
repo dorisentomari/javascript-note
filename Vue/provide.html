@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-provide</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <hello></hello>
+</div>
+<script>
+  Vue.component('hello', {
+    inject: ['a'],
+    template: `<div><h3>{{a}}</h3></div>`
+  })
+
+  let vm = new Vue({
+    el: '#app',
+    provide: {
+      a: 100
+    }
+  });
+
+</script>
+</body>
+</html>

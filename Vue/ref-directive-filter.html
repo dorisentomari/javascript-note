@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-ref-directive-filter</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
+</head>
+<body>
+<ul>
+  <li>ref不能给多个元素设置相同的 ref，只会识别第一个</li>
+  <li>如果在循环中使用 ref，那么就是多个元素的数组形式</li>
+  <li>如果给组件增加 ref，那么可以获取到组件的实例，调用组件实例上的方法</li>
+</ul>
+<ul>
+  <li>指令默认是函数格式，可以写成对象格式，使用 update 和 bind 事件</li>
+</ul>
+<div id="app">
+  <input type="text" v-model="a" v-split.5="a">
+  <h1>{{title | capitalize}}</h1>
+</div>
+<script>
+  // Vue.directive('split', (el, bindings, vnode) => {
+  //   let ctx = vnode.context;
+  //   ctx[bindings.expression] = el.value.slice(0, 3);
+  // });
+
+  Vue.directive('split', {
+    bind(el, bindings, vnode) {
+      let ctx = vnode.context;
+      let [, len] = bindings.rawName.split('.');
+      el.addEventListener('input', e => {
+        let value = e.target.value.slice(0, len);
+        ctx[bindings.expression] = value;
+        el.value = value;
+      });
+      // 赋予默认值
+      el.value = ctx[bindings.expression].toString().slice(0, 3);
+    }
+  });
+
+  // 过滤器不会改变原数据
+  Vue.filter('capitalize', (value, len = 1) => {
+    return value.slice(0, len).toUpperCase() + value.slice(len);
+  });
+
+
+  let vm = new Vue({
+    el: '#app',
+    data() {
+      return {
+        a: 1,
+        title: 'hello'
+      }
+    }
+  })
+</script>
+</body>
+</html>

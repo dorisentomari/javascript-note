@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-computed</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+
+</div>
+<script>
+  // computed 有缓存， methods 没有缓存
+  // computed 是它所依赖的数据有变化，才会调用
+  // watch 是这值有变化的时候，会调用
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      info: {
+        name: 'mark'
+      },
+      list: [1, 2, 3, 4]
+    },
+    methods: {
+      keyupFn () {
+        console.log('111')
+      }
+    }
+  });
+
+</script>
+</body>
+</html>

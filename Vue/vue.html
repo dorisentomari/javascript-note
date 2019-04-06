@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-basic</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  {{info.name}}
+  {{info.age}}
+  {{ {list} }}
+  <button @keyup.f1="keyupFn">keyup</button>
+</div>
+<script>
+  Vue.config.keyCodes = {
+    f1: '112'
+  }
+
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      info: {
+        name: 'mark'
+      },
+      list: [1, 2, 3, 4]
+    },
+    methods: {
+      keyupFn () {
+        console.log('111')
+      }
+    }
+  });
+  vm.$set(vm.info, 'age', 18);
+  // vue 实例上的方法
+  console.log(vm.$el.innerHTML);
+  // $options 选项
+  console.log(vm.$options);
+  vm.list = [5, 6, 7, 8];
+  vm.list = [9, 10, 11, 12];
+  vm.list = [13, 14, 15, 16];
+  vm.list = [17, 18, 19, 20];
+  // 数据变化后更新视图操作时异步执行的
+  vm.$watch('info.name', (newValue, oldValue) => {
+    console.log('info.name changed', newValue, oldValue);
+  });
+  vm.info.name = 'sherry';
+  vm.info.name = 'jack';
+</script>
+</body>
+</html>

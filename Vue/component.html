@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>vue-component</title>
+  <script src="https://cdn.bootcss.com/vue/2.6.8/vue.min.js"></script>
+</head>
+<body>
+<div id="app">
+  <collapse>
+    <template>
+      <collapse-item title="react">内容 react</collapse-item>
+      <collapse-item title="vue">内容 vue</collapse-item>
+      <collapse-item title="node">内容 node</collapse-item>
+    </template>
+  </collapse>
+</div>
+<script>
+  Vue.component('Collapse', {
+    methods: {
+      cut(childId) {
+        // 只要儿子点击了，就要知道 当前点击的是谁
+        this.$children.forEach(child => {
+          if (child._uid !== childId) {
+            child.show = false;
+          }
+        })
+      }
+    },
+    template: `<div class="wrap"><slot></slot></div>`
+  });
+  Vue.component('CollapseItem', {
+    props: ['title'],
+    data() {
+      return {
+        show: false
+      }
+    },
+    methods: {
+      change() {
+        this.show = !this.show;
+        this.$parent.cut(this._uid);
+      }
+    },
+    template: `<div class="item">
+      <div class="title" @click="change">{{title}}</div>
+      <div class="content" v-show="show"><slot></slot></div>
+    </div>`
+  });
+  // v-bind=$attrs
+  // v-on=$listeners 绑定所有的方法
+  // $parent
+  // $children
+  let vm = new Vue({
+    el: '#app',
+    data: {},
+    components: {}
+  });
+
+</script>
+</body>
+</html>
