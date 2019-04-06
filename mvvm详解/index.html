@@ -2,26 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>MVVM 双向数据绑定</title>
+  <title>mvvm</title>
+  <script src="./mvvm/Dep.js"></script>
+  <script src="./mvvm/compileUtil.js"></script>
+  <script src="./mvvm/Observer.js"></script>
+  <script src="./mvvm/Watcher.js"></script>
+  <script src="./mvvm/index.js"></script>
 </head>
 <body>
+<div id="app">
+  <input type="text" v-model="school.name">
+  <div>{{school.name}}</div>
+  <div>{{school.age}}</div>
+  <ul>
+    <li>1</li>
+    <li>2</li>
+  </ul>
+</div>
 <script>
-  let obj = {};
-  Object.defineProperty(obj, 'school', {
-    // 默认是 false， 值不能被修改
-    configurable: true,
-    enumerable: true,
-    get () {
-      return 'shanghai';
-    },
-    set (value) {
-      console.log(value);
+  let vm = new Vue({
+    el: '#app',
+    data: {
+      school: {
+        name: '上海大学',
+        age: 20
+      }
     }
-  });
-  console.log(obj);
-  for (let key in obj) {
-    console.log(key, obj[key]);
-  }
+  })
 </script>
 </body>
 </html>
