@@ -1,0 +1,15 @@
+{
+  "name": "珠峰课堂",
+  "short_name": "课堂",
+  "display": "standalone",
+  "start_url": "/index.html",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }
+  ],
+  "background_color": "#aaa",
+  "theme_color": "#aaa"
+}

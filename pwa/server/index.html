@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>pwa</title>
+  <link rel="stylesheet" href="/index.css">
+  <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+  <div>
+    <h3>漫画图片</h3>
+    <ul id="content"></ul>
+  </div>
+  <script src="/main.js"></script>
+  <script>
+    // 加载 service worker
+    window.addEventListener('load', () => {
+      // 检查当前浏览器是否支持 service worker
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(registeration => {
+          console.log(registeration);
+        });
+      }
+    });
+    // Site cannot be installed: the page does not work offline
+    // service worker 需要拦截客户的请求
+
+  </script>
+</body>
+</html>
