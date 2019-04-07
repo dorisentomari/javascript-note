@@ -11,6 +11,7 @@
   },
   "scripts": {
     "start": "nodemon server.js",
+    "build": "npm-run-all --parallel client:** server:**",
     "client:dev": "webpack-dev-server --config ./config/webpack.client.js",
     "client:build": "webpack --config ./config/webpack.client.js",
     "server:build": "webpack --config ./config/webpack.server.js"
