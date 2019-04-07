@@ -10,8 +10,10 @@
     "vue-server-renderer": "^2.6.10"
   },
   "scripts": {
-    "start": "nodemon app.js",
-    "client:dev": "webpack-dev-server"
+    "start": "nodemon server.js",
+    "client:dev": "webpack-dev-server --config ./config/webpack.client.js",
+    "client:build": "webpack --config ./config/webpack.client.js",
+    "server:build": "webpack --config ./config/webpack.server.js"
   },
   "devDependencies": {
     "@babel/core": "^7.4.3",
