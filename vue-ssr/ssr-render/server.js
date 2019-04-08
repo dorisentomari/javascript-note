@@ -18,7 +18,10 @@ let render = VueServerRenderer.createBundleRenderer(serverBundle, {
 
 app.get('/', (req, res) => {
   // 把渲染成功的字符串，交给客户端
-  render.renderToString((err, html) => {
+  let context = {
+    url: req.url,
+  };
+  render.renderToString(context, (err, html) => {
     res.send(html);
   });
 });
@@ -26,6 +29,17 @@ app.get('/', (req, res) => {
 // static 的配置必须放在 app.get('/') 的后边，不然的话走不到 app.get('/') 路由，那么就是客户端渲染
 // 客户端载入 js 文件 <script src="/client.bundle.js"></script>
 app.use(express.static(path.resolve(__dirname, 'dist')));
+
+// 如果访问的路径不存在，默认渲染 index.ssr.html，并且把路由重定向到当前请求路径
+app.get('*', (req, res) => {
+  // 把渲染成功的字符串，交给客户端
+  let context = {
+    url: req.url,
+  };
+  render.renderToString(context, (err, html) => {
+    res.send(html);
+  });
+});
 
 app.listen(PORT, err => {
   if (err) {
