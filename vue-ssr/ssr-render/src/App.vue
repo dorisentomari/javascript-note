@@ -8,7 +8,10 @@
 
 <script>
   export default {
-    name: "App"
+    name: "App",
+    metaInfo: {
+      title: '默认的 title'
+    }
   }
 </script>
 

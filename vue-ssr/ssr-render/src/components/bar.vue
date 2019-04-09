@@ -9,6 +9,9 @@
 <script>
   export default {
     name: "bar",
+    metaInfo: {
+      title: 'bar page'
+    },
     // 异步数据获取，在服务端运行，客户端不会运行这个方法
     // 这里边的代码都是异步的，可以全部采用 Promise
     asyncData ({store}) {

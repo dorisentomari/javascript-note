@@ -6,7 +6,11 @@
 
 <script>
   export default {
-    name: "foo"
+    name: "foo",
+    metaInfo: {
+      title: 'foo page',
+
+    }
   }
 </script>
 

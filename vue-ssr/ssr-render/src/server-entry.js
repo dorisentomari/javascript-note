@@ -20,8 +20,7 @@ export default (context) => {
       })).then(() => {
         // 把 vuex 中的状态挂载到当前上下文的 state 中
         context.state = store.state;
-        console.log(store.state)
-        console.log(context.state)
+        context.meta = app.$meta();
         resolve(app);
       })
     })

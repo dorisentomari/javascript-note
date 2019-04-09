@@ -8,12 +8,15 @@ const PORT = 3000;
 
 // serverBundle 和 index.ssr.html 一起生成了静态的页面，包括页面的 DOM 元素和 CSS 样式，但是没有事件交互
 // 但是现在还需要客户端的事件，所以把客户端的代码通过静态资源加载的方式载入页面，就可以找到页面
-let serverBundle = fs.readFileSync('./dist/server.bundle.js', 'utf8');
+// let serverBundle = fs.readFileSync('./dist/server.bundle.js', 'utf8');
+let serverBundle = require('./dist/vue-ssr-server-bundle.json');
+let clientManifest = require('./dist/vue-ssr-client-manifest.json');
 let template = fs.readFileSync('./dist/index.ssr.html', 'utf8');
 
 // VueServerRenderer.createBundleRenderer 的目的是把 serverBundle 和 html 模板结合在一起，生成一个字符串的 HTML 模板
 let render = VueServerRenderer.createBundleRenderer(serverBundle, {
-  template
+  template,
+  clientManifest
 });
 
 app.get('/', (req, res) => {
