@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>深拷贝</title>
+</head>
+<body>
+<script>
+  let obj = {
+    name: 'mark',
+    age: 18,
+    home: {
+      a: 'beijing',
+      b: 'shanghai'
+    }
+  };
+
+  // typeof
+  // instanceof
+  // Object.prototype.toString.call
+  // constructor
+
+  function deepClone(obj, hash = new WeakMap()) {
+    if (obj == null) {
+      return obj;
+    }
+    if (typeof obj !== 'object') {
+      return obj;
+    }
+    if (hash.has(obj)) {
+      return hash.get(obj);
+    }
+    let cloneObj = new obj.constructor;
+    hash.set(obj, cloneObj);
+    for (let key in obj) {
+      // 实现深拷贝
+      if (obj.hasOwnProperty(key)) {
+        cloneObj[key] = deepClone(obj[key], hash);
+      }
+    }
+    return cloneObj;
+  }
+
+  // 循环引用的问题
+  obj.xxx = obj;
+  let res = deepClone(obj);
+  console.log(res);
+
+</script>
+</body>
+</html>
