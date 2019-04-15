@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>history-router</title>
+</head>
+<body>
+<span onclick="change('/home')">首页</span>
+<span onclick="change('/list')">列表页面</span>
+<div id="container"></div>
+<script>
+  function change(route) {
+    history.pushState({}, null, route);
+    container.innerHTML = route;
+  }
+
+  // history 只能通过popstate 方法监听浏览器的前进和后退
+  window.addEventListener('popstate', () => {
+    container.innerHTML = location.pathname;
+  });
+
+</script>
+</body>
+</html>
