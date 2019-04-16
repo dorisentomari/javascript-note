@@ -4,7 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "router": "webpack-dev-server --config webpack.router.config.js"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
@@ -20,6 +21,7 @@
     "webpack-dev-server": "^3.2.1"
   },
   "dependencies": {
+    "path-to-regexp": "^3.0.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-router-dom": "^4.3.1"
