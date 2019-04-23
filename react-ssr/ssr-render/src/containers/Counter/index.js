@@ -6,7 +6,6 @@ class Counter extends Component {
     number: 0
   };
 
-
   render() {
     return (
       <div>

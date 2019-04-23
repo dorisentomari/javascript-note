@@ -1,21 +1,37 @@
 import express from 'express';
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import Home from '../containers/Home/index';
-import Counter from '../containers/Counter/index';
+import {StaticRouter} from 'react-router-dom';
+import routes from '../routes';
+import Header from '../components/Header';
 
 let app = express();
-
 const PORT = 3000;
 
-let domContent = renderToString(<Counter/>);
+app.get('*', (req, res) => {
 
-const html = `
+  let context = {
+    name: 'REACT SSR'
+  };
+
+  let domContent = renderToString(
+    <StaticRouter context={context} location={req.path}>
+      <div style={{marginTop: 70}}>
+        <Header/>
+        <div className="container">
+          {routes}
+        </div>
+      </div>
+    </StaticRouter>
+  );
+
+  const html = `
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
   <title>react-ssr</title>
 </head>
 <body>
@@ -24,8 +40,6 @@ const html = `
 </body>
 </html>
 `;
-
-app.get('/', (req, res) => {
   res.send(html);
 });
 
