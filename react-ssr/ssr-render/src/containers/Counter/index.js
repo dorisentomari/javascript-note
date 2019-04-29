@@ -10,9 +10,8 @@ class Counter extends Component {
     return (
       <div>
         <h1>{this.state.number}</h1>
-        <button onClick={() => {
+        <button className="btn btn-primary" onClick={() => {
           this.setState({number: this.state.number + 1});
-          console.log(this.state.number);
         }}>click
         </button>
       </div>
