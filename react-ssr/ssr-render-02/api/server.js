@@ -3,19 +3,11 @@ const chalk = require('chalk');
 const cors = require('cors');
 
 let app = express();
-const PORT = 4000;
+const PORT = 8757;
 
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "content-type");
-  res.header("Access-Control-Allow-Methods", "DELETE,PUT,POST,GET,OPTIONS");
-  next();
-});
-
-
-// app.use(cors({
-//   origin: 'http://localhost:3000'
-// }));
+app.use(cors({
+  origin: 'http://localhost:3000'
+}));
 
 let user = [
   {id: 1, name: 'hello, react'},

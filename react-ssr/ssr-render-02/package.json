@@ -7,8 +7,7 @@
     "dev": "npm-run-all --parallel dev:**",
     "dev:build:server": "webpack --config webpack.server.js --watch",
     "dev:build:client": "webpack --config webpack.client.js --watch",
-    "dev:start": "nodemon build/server.js",
-    "dev:api:server": "nodemon api/server.js"
+    "dev:start": "nodemon build/server.js"
   },
   "dependencies": {
     "axios": "^0.18.0",

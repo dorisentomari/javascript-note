@@ -2,13 +2,12 @@ import React from 'react';
 import {Route} from 'react-router-dom';
 import Home from './containers/Home';
 import Counter from './containers/Counter';
-import News from './containers/News';
 
 export default [
   {
     path: '/',
     component: Home,
-    // exact: true,
+    exact: true,
     key: '/',
     loadData: Home.loadData
   },

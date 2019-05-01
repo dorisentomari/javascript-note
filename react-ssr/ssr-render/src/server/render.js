@@ -19,10 +19,12 @@ export default (req, res) => {
 
   matchedRoutes.forEach(item => {
     let loadData = item.route.loadData;
-    const promise = new Promise((resolve) => {
-      loadData(store).then(resolve).catch(resolve);
-    });
-    promises.push(promise);
+    if (loadData) {
+      const promise = new Promise((resolve) => {
+        loadData(store).then(resolve).catch(resolve);
+      });
+      promises.push(promise);
+    }
   });
 
   Promise.all(promises).then(() => {
