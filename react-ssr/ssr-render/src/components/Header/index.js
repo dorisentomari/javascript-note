@@ -13,13 +13,18 @@ class Header extends Component {
           <div>
             <ul className="nav navbar-nav">
               <li><Link to="/">首页</Link></li>
-              {this.props.user && <><li><Link to="/logout">退出</Link></li><li><Link to="/profile">个人中心</Link></li></>}
-              {!this.props.user && <><li><Link to="/login">登录</Link></li></>}
+              {this.props.user && <>
+                <li><Link to="/logout">退出</Link></li>
+                <li><Link to="/profile">个人中心</Link></li>
+              </>}
+              {!this.props.user && <>
+                <li><Link to="/login">登录</Link></li>
+              </>}
             </ul>
             {
               this.props.user && (
                 <ul className="nav navbar-nav navbar-right">
-                  <li><a href="">{this.props.user.username}</a></li>
+                  <li><a href="">{this.props.user}</a></li>
                 </ul>
               )
             }
@@ -30,4 +35,9 @@ class Header extends Component {
   }
 }
 
-export default connect(state => state.session)(Header);
+export default connect(state => {
+  console.log(state.session);
+  return {
+    user: state.session.user
+  }
+})(Header);
