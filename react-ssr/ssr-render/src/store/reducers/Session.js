@@ -1,13 +1,15 @@
 import * as Types from '../action-types';
 
 const initState = {
-  list: []
+  user: null,
+  success: null,
+  error: null
 };
 
 export default (state = initState, action) => {
   switch (action.type) {
-    case Types.GET_HOME_LIST:
-      return {...state, list: action.payload};
+    case Types.SET_SESSION:
+      return action.payload;
     default:
       return {...state};
   }

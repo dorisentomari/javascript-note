@@ -1,7 +1,7 @@
 import * as Types from '../action-types';
 
 const getHomeListTypes = list => ({
-  type: Types.SET_HOME_LIST,
+  type: Types.GET_HOME_LIST,
   payload: list
 });
 

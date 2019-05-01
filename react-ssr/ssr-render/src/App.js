@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Header from './components/Header';
 import {renderRoutes} from 'react-router-config';
+import sessionActions from './store/actions/session';
 
 class App extends Component {
   render() {
@@ -16,5 +17,7 @@ class App extends Component {
     );
   }
 }
+
+App.loadData = store => store.dispatch(sessionActions.getUser());
 
 export default App;
