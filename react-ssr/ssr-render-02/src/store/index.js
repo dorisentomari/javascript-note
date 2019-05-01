@@ -1,18 +1,25 @@
-import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import {createStore, applyMiddleware} from 'redux';
+import {composeWithDevTools} from 'redux-devtools-extension';
+
 import thunk from 'redux-thunk';
 import logger from 'redux-logger';
+import reducer from './reducers';
 
-import reducers from './reducers';
+import clientAxios from '../client/request';
+import serverAxios from '../server/request';
 
-export const getServerStore = () => createStore(
-  reducers,
-  composeWithDevTools(applyMiddleware(thunk, logger))
-);
-
-export const getClientStore = () => {
+export function getServerStore(req) {
   return createStore(
-    reducers,
-    composeWithDevTools(applyMiddleware(thunk, logger))
-  )
-};
+    reducer,
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(serverAxios(req)), logger))
+  );
+}
+
+export function getClientStore() {
+  const initState = window.context.state;
+  return createStore(
+    reducer,
+    initState,
+    composeWithDevTools(applyMiddleware(thunk.withExtraArgument(clientAxios), logger))
+  );
+}

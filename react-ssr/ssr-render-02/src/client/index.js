@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { getClientStore } from './../store/index';
 
 const store = getClientStore();
+window._store = store;
 
 ReactDOM.render(
   <Provider store={store}>
