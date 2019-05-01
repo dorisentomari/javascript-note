@@ -8,17 +8,14 @@ class Login extends Component {
     username: '11111'
   };
 
-  handleLogin = e => {
-    console.log(e);
-    this.props.propsGetLogin({
-      username: this.state.username
-    });
+  handleLogin = () => {
+    this.props.propsGetLogin(this.state.username);
   };
 
   handleChange = e => {
     this.setState({
       username: e.target.value
-    })
+    });
   };
 
   render() {
@@ -53,8 +50,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  propsGetLogin() {
-    dispatch(sessionActions.getLogin());
+  propsGetLogin(username) {
+    dispatch(sessionActions.getLogin(username));
   }
 });
 

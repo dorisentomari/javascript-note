@@ -3,7 +3,7 @@ import * as Types from '../action-types';
 export default {
   getLogin(username) {
     return (dispatch, getState, axiosInstance) => {
-      return axiosInstance.post('/api/login', {username}).then(res => {
+      return axiosInstance.post('/api/login', {user: username}).then(res => {
         let data = res.data.data;
         dispatch({
           type: Types.SET_SESSION,
@@ -12,7 +12,7 @@ export default {
       });
     }
   },
-  logout () {
+  logout() {
     return (dispatch, getState, axiosInstance) => {
       return axiosInstance.post('/api/logout').then(res => {
         let data = res.data.data;
@@ -23,9 +23,9 @@ export default {
       });
     }
   },
-  getUser () {
+  getUser() {
     return (dispatch, getState, axiosInstance) => {
-      return axiosInstance.post('/api/user').then(res => {
+      return axiosInstance.get('/api/user').then(res => {
         let data = res.data.data;
         dispatch({
           type: Types.SET_SESSION,
