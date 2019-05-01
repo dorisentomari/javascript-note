@@ -1,6 +1,7 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
-import {StaticRouter, Route, matchPath} from 'react-router-dom';
+import {StaticRouter, Route} from 'react-router-dom';
+import {matchRoutes} from 'react-router-config';
 import routes from '../routes';
 import {Provider} from 'react-redux';
 import {getServerStore} from "../store";
@@ -12,24 +13,19 @@ export default (req, res) => {
 
   let store = getServerStore();
 
-  // 路由工具方法，可以判断 req.path 是否和路由对象匹配
-  let matchRoutes = routes.filter(route => {
-    return matchPath(req.path, route);
-  });
+  let matchedRoutes = matchRoutes(routes, req.path);
 
   let promises = [];
 
-  matchRoutes.forEach(route => {
-    if (route.loadData) {
-      console.log(route.loadData);
-      let promise = new Promise(resolve => route.loadData(store).then(resolve).catch(resolve));
-      promises.push(promise);
-    }
+  matchedRoutes.forEach(item => {
+    let loadData = item.route.loadData;
+    const promise = new Promise((resolve) => {
+      loadData(store).then(resolve).catch(resolve);
+    });
+    promises.push(promise);
   });
 
-  Promise.all(promises).then((data) => {
-    console.log(data);
-    console.log('store: ', store.getState());
+  Promise.all(promises).then(() => {
     let domContent = renderToString(
       <Provider store={store}>
         <StaticRouter context={context} location={req.path}>
