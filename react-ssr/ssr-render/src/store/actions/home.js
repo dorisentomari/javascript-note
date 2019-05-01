@@ -1,5 +1,4 @@
 import * as Types from '../action-types';
-import axios from 'axios';
 
 const getHomeListTypes = list => ({
   type: Types.SET_HOME_LIST,
@@ -8,8 +7,8 @@ const getHomeListTypes = list => ({
 
 export default {
   getHomeList() {
-    return (dispatch) => {
-      return axios.get('http://localhost:8757/api/users').then(res => {
+    return (dispatch, getState, axiosInstance) => {
+      return axiosInstance.get('/api/users').then(res => {
         let list = res.data;
         dispatch(getHomeListTypes(list));
       });

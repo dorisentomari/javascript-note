@@ -1,11 +1,10 @@
 import React from 'react';
 import {renderToString} from 'react-dom/server';
 import {StaticRouter, Route} from 'react-router-dom';
-import {matchRoutes} from 'react-router-config';
+import {renderRoutes, matchRoutes} from 'react-router-config';
 import routes from '../routes';
 import {Provider} from 'react-redux';
 import {getServerStore} from "../store";
-import Header from '../components/Header';
 
 export default (req, res) => {
 
@@ -19,6 +18,7 @@ export default (req, res) => {
 
   matchedRoutes.forEach(item => {
     let loadData = item.route.loadData;
+
     if (loadData) {
       const promise = new Promise((resolve) => {
         loadData(store).then(resolve).catch(resolve);
@@ -31,14 +31,7 @@ export default (req, res) => {
     let domContent = renderToString(
       <Provider store={store}>
         <StaticRouter context={context} location={req.path}>
-          <div>
-            <Header/>
-            <div className="container" style={{marginTop: 70}}>
-              {
-                routes.map(route => (<Route {...route} />))
-              }
-            </div>
-          </div>
+          { renderRoutes(routes) }
         </StaticRouter>
       </Provider>
     );

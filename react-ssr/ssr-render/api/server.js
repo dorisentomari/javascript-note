@@ -1,8 +1,9 @@
 const express = require('express');
 const chalk = require('chalk');
-
+const config = require('../common/config');
 let app = express();
-const PORT = 8757;
+
+const PORT = config.port;
 
 app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");

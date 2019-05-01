@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "npm-run-all --parallel dev:**",
-    "dev:build:server": "webpack --config webpack.server.js --watch",
-    "dev:build:client": "webpack --config webpack.client.js --watch",
+    "dev:build:server": "webpack --config webpack.server.js",
+    "dev:build:client": "webpack --config webpack.client.js",
     "dev:start": "nodemon build/server.js",
     "dev:api:server": "nodemon api/server.js"
   },
@@ -14,6 +14,7 @@
     "axios": "^0.18.0",
     "cors": "^2.8.5",
     "express": "^4.16.4",
+    "express-http-proxy": "^1.5.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.2",
