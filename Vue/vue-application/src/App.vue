@@ -24,6 +24,7 @@
       </div>
     </div>
     <div class="container">
+      <h1 v-color.trim="color">HELLO, COLOR</h1>
       <router-view></router-view>
       <router-view name="name"></router-view>
       <router-view name="version"></router-view>
@@ -33,7 +34,12 @@
 
 <script>
   export default {
-    name: 'app'
+    name: 'app',
+    data () {
+      return {
+        color: 'red'
+      }
+    }
   }
 </script>
 
