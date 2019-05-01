@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>history-router</title>
+</head>
+<body>
+<a onclick="go('/home')">home</a>
+<a onclick="go('/news')">news</a>
+<a onclick="go('/about')">about</a>
+<br>
+<span>history router 可能会导致 404 页面的出现</span>
+<div id="html"></div>
+<script>
+    function go(pathname) {
+        console.log(pathname);
+        history.pushState({
+            name: 'Mark',
+            age: 18
+        }, pathname, pathname);
+        console.log(history);
+        document.getElementById('html').innerHTML = pathname;
+    }
+
+    window.addEventListener('popstate', (e) => {
+        console.log(e);
+        go(location.pathname);
+    });
+
+</script>
+
+</body>
+</html>
