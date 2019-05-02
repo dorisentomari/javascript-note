@@ -4,6 +4,7 @@ import Home from './containers/Home';
 import Login from './containers/Login';
 import Logout from './containers/Logout';
 import Profile from './containers/Profile';
+import NotFound from './containers/NotFound';
 import App from './App';
 
 export default [
@@ -37,6 +38,9 @@ export default [
         component: Profile,
         exact: true,
         key: '/profile'
+      },
+      {
+        component: NotFound
       }
     ]
   }

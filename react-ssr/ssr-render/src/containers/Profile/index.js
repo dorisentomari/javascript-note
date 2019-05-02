@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
+import {Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+
 
 class Profile extends Component {
   render() {
     return (
-      <div>
-        <h1>个人中心</h1>
-      </div>
+      this.props.user ? <h2>个人中心</h2> : <Redirect to="/login" />
     );
   }
 }
 
-export default Profile;
+const mapStateToProps = state => ({
+  user: state.session.user
+});
+
+export default connect(mapStateToProps)(Profile);

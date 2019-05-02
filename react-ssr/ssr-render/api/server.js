@@ -90,6 +90,49 @@ app.post('/api/logout', (req, res) => {
   res.json(JSON.parse(isLogin));
 });
 
+// app.get('/api/user', (req, res) => {
+//   let user = req.session.user;
+//   if (user) {
+//     res.json({
+//       code: 0,
+//       data: {
+//         success: '获取用户信息成功',
+//         user: user.user
+//       }
+//     })
+//   } else {
+//     res.json({
+//       code: 1,
+//       data: {
+//         error: '获取用户信息失败'
+//       }
+//     })
+//   }
+// });
+//
+// app.post('/api/login', (req, res) => {
+//   let user = req.body;
+//   console.log(user);
+//   req.session.user = user;
+//   res.json({
+//     code: 0,
+//     data: {
+//       success: '登录成功',
+//       user: user.user
+//     }
+//   })
+// });
+//
+// app.post('/api/logout', (req, res) => {
+//   req.session.user = null;
+//   res.json({
+//     code: 0,
+//     data: {
+//       success: '退出成功'
+//     }
+//   })
+// });
+
 app.listen(PORT, err => {
   if (err) {
     console.log(err);

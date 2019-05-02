@@ -8,9 +8,12 @@ import {getServerStore} from "../store";
 
 export default (req, res) => {
 
-  let context = {};
+  // 收集每一个组件引入的样式
+  let context = {
+    csses: []
+  };
 
-  let store = getServerStore();
+  let store = getServerStore(req);
 
   let matchedRoutes = matchRoutes(routes, req.path);
 
@@ -31,11 +34,14 @@ export default (req, res) => {
     let domContent = renderToString(
       <Provider store={store}>
         <StaticRouter context={context} location={req.path}>
-          { renderRoutes(routes) }
+          {renderRoutes(routes)}
         </StaticRouter>
       </Provider>
     );
-
+    console.log('context.csses');
+    console.log(context.csses);
+    let cssStr = context.csses.join('\n');
+    console.log(cssStr);
     let html = `
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +50,7 @@ export default (req, res) => {
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
   <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
   <title>react-ssr</title>
+  <style>${cssStr}</style>
 </head>
 <body>
 <div id="root">${domContent}</div>
@@ -56,6 +63,12 @@ export default (req, res) => {
 </body>
 </html>
 `;
+
+    if (context.action === 'REPLACE') {
+      res.redirect(301, context.url);
+    } else if (context.notFound) {
+      res.statusCode = 404;
+    }
     res.send(html);
   });
 };

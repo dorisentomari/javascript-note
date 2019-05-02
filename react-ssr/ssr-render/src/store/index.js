@@ -7,9 +7,9 @@ import reducers from './reducers';
 import clientAxios from '../client/request';
 import serverAxios from '../server/request';
 
-export const getServerStore = () => createStore(
+export const getServerStore = (req) => createStore(
   reducers,
-  composeWithDevTools(applyMiddleware(thunk.withExtraArgument(serverAxios), logger))
+  composeWithDevTools(applyMiddleware(thunk.withExtraArgument(serverAxios(req)), logger))
 );
 
 export const getClientStore = () => {
