@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>mixins</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.21/vue.js"></script>
+    <style>
+        li {
+            list-style-type: toggle(circle, square);
+        }
+    </style>
+</head>
+
+<body>
+<ul>
+    <li>a</li>
+    <li>b</li>
+</ul>
+    <script>
+        let mixinA = {
+            data () {
+                return {
+                    number: 100,
+                    age: 18
+                }
+            },
+            created () {
+                console.log('mixinA crearted');
+            }
+        };
+
+        let mixinB = {
+            data () {
+                return {
+                    age: 20
+                }
+            },
+            created () {
+                console.log('mixinB crearted');
+            }
+        };
+
+        let vm = new Vue({
+            mixins: [mixinA, mixinB],
+            data () {
+                return {
+                    number: 200
+                }
+            },
+            created () {
+                console.log('Vue crearted');
+            }
+        });
+        console.log(vm.number);
+        console.log(vm.age);
+
+    </script>
+</body>
+
+</html>

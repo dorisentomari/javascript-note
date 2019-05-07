@@ -22,6 +22,8 @@ function queryURLParameterByString(url) {
 }
 
 // 方法2，使用正则
+// q = {};
+// location.search.replace(/([^?&=])=([^&]+)/g, (_,k,v) => q[k] = v);
 function queryURLParameterByRegExp(url) {
   let regexp = /([^&?=]+)=([^&?=]+)/g;
   let obj = {};
