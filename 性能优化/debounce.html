@@ -27,11 +27,28 @@
     }
   }
 
-  function logger() {
-    console.log('logger');
+  function debounce(func, wait, immediate) {
+    let timeout = null;
+    return function () {
+      clearTimeout(timeout);
+      if(immediate) {
+        let callNow = !timeout;
+        if (callNow) {
+          fn.apply(this, arguments);
+        }
+      }
+      timeout = setTimeout(() => {
+        func.apply(this, arguments);
+        timeout = null;
+      }, wait);
+    }
   }
 
-  btn.addEventListener('click', debounce(logger, 1000, true));
+  // function logger() {
+  //   console.log('logger');
+  // }
+
+  // btn.addEventListener('click', debounce(logger, 1000, true));
 
 </script>
 </body>

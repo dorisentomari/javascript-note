@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lazyload 2</title>
+    <style>
+        img {
+            display: block;
+            margin-bottom: 50px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/1.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/2.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/3.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/4.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/5.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/6.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/7.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/8.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/9.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/10.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/11.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/12.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/13.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/14.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/15.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/16.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/17.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/18.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/19.jpg">
+<img src="images/loading.gif" data-src="http://static.ikite.top/image/cartoon/20.jpg">
+<script>
+    function throttle(fn, delay, atleast) {
+        let timeout = null,
+            startTime = new Date();
+        return function () {
+            let curTime = new Date();
+            clearTimeout(timeout);
+            if (curTime - startTime >= atleast) {
+                fn();
+                startTime = curTime;
+            } else {
+                timeout = setTimeout(fn, delay);
+            }
+        }
+    }
+
+    function lazyload() {
+        let images = document.getElementsByTagName('img');
+        let len = images.length;
+        let n = 0;      //存储图片加载到的位置，避免每次都从第一张图片开始遍历
+        return function () {
+            console.log('n: ', n);
+            let seeHeight = document.documentElement.clientHeight;
+            let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            for (let i = n; i < len; i++) {
+                if (images[i].offsetTop < seeHeight + scrollTop) {
+                    if (images[i].getAttribute('src') === 'images/loading.gif') {
+                        images[i].src = images[i].getAttribute('data-src');
+                    }
+                    n = n + 1;
+                }
+            }
+        }
+    }
+
+    let loadImages = lazyload();
+    loadImages();          //初始化首页的页面图片
+    window.addEventListener('scroll', throttle(loadImages, 500, 1000), false);
+</script>
+</body>
+</html>
