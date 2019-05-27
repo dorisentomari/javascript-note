@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+  <title>浏览器生成文件并下载</title>
+  <style>
+    .container {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+             使用 a 标签下载
+          </div>
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="text" 文本内容</label>
+                <input type="text" class="form-control" id="text">
+            </div>
+            <button class="btn btn-primary" id="download">下载</button>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+
+    /**
+     * 使用 a 标签下载
+     ***/
+
+    let downloadEl = document.getElementById('download');
+    downloadEl.addEventListener('click', e => {
+      let textEl = document.getElementById('text');
+      let textContent = textEl.value;
+      download('file.txt', textContent);
+    });
+
+    function download(filename, text) {
+      let el = document.createElement('a');
+      el.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+      el.setAttribute('download', filename);
+      el.style.display = 'none';
+      document.body.appendChild(el);
+      el.click();
+      document.body.removeChild(el);
+    }
+  </script>
+</body>
+
+</html>
