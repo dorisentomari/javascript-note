@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div id="app"></div>
+<script>
+  let ob = new MutationObserver(() => {
+    console.log(app.children);
+  });
+
+  ob.observe(app, {childList: true});
+
+  for (let i = 0; i < 100; i++) {
+    console.log(i);
+    app.appendChild(document.createElement('p'));
+  }
+  console.log('---------');
+  for (let i = 0; i < 100; i++) {
+    console.log(i);
+    app.appendChild(document.createElement('p'));
+  }
+  console.log('---------');
+  for (let i = 0; i < 100; i++) {
+    console.log(i);
+    app.appendChild(document.createElement('p'));
+  }
+
+</script>
+</body>
+</html>
