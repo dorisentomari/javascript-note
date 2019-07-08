@@ -134,10 +134,3 @@ function wideRmdir (p) {
 wideRmdir('./aDir');
 
 // TODO Promise 方式写，async await 方式写
-
-
-
-
-
-
-
