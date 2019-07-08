@@ -1,3 +1,1 @@
-name=马克
-age=18
-home=shanghai
+hello world how are you?
