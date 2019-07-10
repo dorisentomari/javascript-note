@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ejs": "^2.6.2",
     "mime": "^2.4.4",
     "mz": "^2.7.0"
   }
