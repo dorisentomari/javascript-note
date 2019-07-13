@@ -1,88 +1,94 @@
 const http = require('http');
 const url = require('url');
-let methods = require('methods');
+const methods = require('methods');
 
 function application() {
-  let app = (req, res) => {
-    // 获取用户请求的方法和路径
-    let method = req.method.toLowerCase();
-    let {pathname} = url.parse(req.url);
+    const app = (req, res) => {
+        const {pathname} = url.parse(req.url, true);
+        const method = req.method.toLowerCase();
+        let index = 0;
 
-    // 默认先取出第一个，看一下是路由还是中间件
-    let index = 0;
-    function next () {
-      let currentLayer = app.router[index];
-      if (currentLayer.method === 'middle') {
+        function next(err) {
+            if (index === app.routes.length) {
+                return res.end();
+            }
+            const {method: m, path: p, handler: h} = app.routes[index++];
+            if (err) {
+                // 错误处理中间件，如果不是错误处理，就带着错误继续向下传递
+                if (m === 'middleware' && h.length === 4) {
+                    return h(err, req, res, next);
+                } else {
+                    next(err);
+                }
+            } else {
+                if (m === 'middleware') {
+                    // 判断路径
+                    if (p === pathname || pathname.startsWith(p + '/') || p === '/') {
+                        return h(req, res, next);
+                    } else {
+                        next();
+                    }
+                } else {
+                    if (p instanceof RegExp) {
+                        if (p.test(pathname)) {
+                            const [, ...values] = pathname.match(p);
+                            req.params = p.keys.reduce((prev, curr, index) => (prev[curr] = values[index], prev), {});
+                            h(req, res);
+                        }
+                    } else {
+                        if ((method === m || m === 'all') && (pathname === p || p === '*')) {
+                            return h(req, res);
+                        }
+                    }
+                    next();
+                }
+            }
 
-      }
-    }
-
-    next();
-
-    for (let i = 0; i < app.routes.length; i++) {
-      let currentLayer = app.routes[i];
-      // 存在路径参数
-      if (currentLayer.path.params) {
-        // currentLayer.path 是正则
-        // pathname 是真实的url路径
-        if (method === currentLayer.method && currentLayer.path.test(pathname)) {
-          let [, ...args] = pathname.match(currentLayer.path);
-          req.params = currentLayer.path.params.reduce((a, b, index) => (a[b] = args[index], a), {});
-          return currentLayer.callback(req, res);
         }
-      }
 
-      if ((method === currentLayer.method || currentLayer.method === 'all') && (pathname === currentLayer.path || currentLayer.path === '*')) {
-        return currentLayer.callback(req, res);
-      }
-    }
-    res.end(`Cannot ${method} ${pathname}`);
-    res.end('Cannot found /');
-  };
+        next();
 
-  app.listen = (...args) => {
-    let server = http.createServer(app);
-    server.listen(...args);
-  };
-
-  app.routes = [];
-
-  app.use = function (path, handler) {
-    if (typeof handler === 'undefined') {
-      handler = path;
-      patth = '/';
-    }
-    let layer = {
-      method: 'middle',
-      path,
-      callback: handler
+        res.end(`Cannot ${method.toUpperCase()} ${pathname}`);
     };
-    app.routes.push(layer);
+    app.routes = [];
+    app.listen = function () {
+        const server = http.createServer(app);
+        server.listen(...arguments);
+    }
 
+    ;[...methods, 'all'].forEach(method => {
+        app[method] = function (p, callback) {
+            // 调用 get 方法的时候，可能会有冒号，说明是一个路径参数
+            if (p.includes(':')) {
+                const keys = [];
+                p = p.replace(/:([^\/]+)/g, function () {
+                    keys.push(arguments[1]);
+                    return '/([^\/]+)';
+                });
+                p = new RegExp(p);
+                p.keys = keys;
+            }
+            app.routes.push({
+                method,
+                path: p,
+                handler: callback
+            });
+        }
+    });
 
-  };
-
-  ;[...methods, 'all'].forEach(method => {
-    app[method] = function (path, callback) {
-      // path 如果有冒号，那么就是路由参数
-      if (path.includes(':')) {
-        let params = [];
-        path = path.replace(/:([^\/]+)/g, function () {
-          params.push(arguments[1]);
-          return '([^\/]+)';
+    app.use = function (p, callback) {
+        if (typeof callback !== 'function') {
+            callback = p;
+            p = '/';
+        }
+        app.routes.push({
+            method: 'middleware',
+            path: p,
+            handler: callback
         });
-        path = new RegExp(path);
-        path.params = params;
-      }
-      let layer = {
-        method,
-        path,
-        callback
-      };
-      app.routes.push(layer);
     };
-  });
-  return app;
+
+    return app;
 }
 
 module.exports = application;
