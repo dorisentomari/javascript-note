@@ -33,6 +33,7 @@ Application.prototype.listen = function () {
         function done() {
             res.end(`Cannot ${req.url} ${req.method}`);
         }
+
         this._router.handle(req, res, done);
         // let {pathname} = url.parse(req.url);
         // for (let i = 1; i < this._router.length; i++) {
