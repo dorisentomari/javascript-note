@@ -21,3 +21,36 @@
 + 利用 position （absolute 的情况下）
   + `left/right/top/bottom: 9999px/-9999px` 让元素在视区外
   + `z-index: -9999` 放到最底层，同一位置可以让其他元素把这个给遮掉
+
+# 3. 使用 CSS 绘制三角形
++ 参考链接: [CSS绘制三角形—border法](https://www.jianshu.com/p/9a463d50e441)
+
+```css
+.rect {
+  width: 0;
+  height: 0;
+  margin: 100px auto;
+  border-top: 50px solid transparent;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 50px solid red;
+}
+```
+
+# 4. BFC 规范的理解
++ BFC 全称块级格式化上下文(Block Formatting Context)，对应的还有 IFC。BFC 类似一个结界，如果一个 DOM 元素具有 BFC，那么它内部的子元素不会影响外面的元素；外面的元素也不会影响到其内部元素。
++ 特性:
+  + 计算BFC的高度时，浮动子元素也参与计算
+  + BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，反之亦然
+  + BFC的区域不会与 `float` 的元素区域重叠
++ 触发 BFC 的条件：
+  + `<html>` 根元素
+  + `float` 不为 `none`
+  + `overflow` 为 `auto`，`scroll`，`hidden`
+  + `display` 的值为 `table-cell`，`table-caption`，`inline-block` 中任何一个
+  + `position` 的值不为 `static` 和 `relative`
++ 应用场景
+  + 解决浮动子元素导致父元素，高度坍塌的问题。
+  + 解决文字环绕在 `float` 四周的情况。
+  + 解决边距重叠问题 （父子，兄弟，空元素等）。
+  + 最常见的例子就是清除 `float` 的 `overflow: hidden;` 属性。`overflow: hidden;` 会触发元素的 BFC，因此其内部的 `float` 元素不会影响到外部元素的布局。
