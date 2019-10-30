@@ -1,0 +1,28 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.mb-20 {
+	margin-bottom: 20px;
+}
+
+.mb-50 {
+	margin-bottom: 50px;
+}
+
+.red {
+	background: #ee0a24;
+}
+
+.green {
+	background: #07c160;
+}
+
+.blue {
+	background: #1989fa;
+}
+
+.orange {
+	background: #ff976a;
+}

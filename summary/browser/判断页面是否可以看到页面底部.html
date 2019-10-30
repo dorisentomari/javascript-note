@@ -30,12 +30,12 @@
 
   /***
     * document.documentElement.clientHeight 是当前视窗的高度，假如说浏览器是 1366 * 768 的分辨率，那么 clientHeight 的高度就是 分辨率的高度 - 浏览器顶部的标签，网址，书签的高度 - 电脑的任务栏的高度
-    * 
+    *
     * window.scrollY 是指如果网页内容的高度需要滚动才能查看，那么 scrollHeight 就是页面所滚动的高度，假如说页面高度是 2000px，clientHeight 是 635px，往下滚动了 200px，那么 scrollHeight 的值就是 200px。如果没有滚动页面，那么这个值就是 0。
-    * 
+    *
     * document.documentElement.scrollHeight 是该元素在不使用滚动条的情况下为了适应视口中所用内容所需的最小高度，假如说页面的 DOM 元素的高度是 100px，视窗的高度是 635px，那么scrollHeight 的值就是 635px。如果页面的 DOM 元素的高度是 1082px，视窗的高度是 635px，那么 scrollHeight 的值就是 1082px
-    * 
-    * 所以判断的方法就是 
+    *
+    * 所以判断的方法就是
     * 1. 视窗的高度 + 滚动的高度 的和，大于或等于 页面最大高度，说明已经可以看到底部信息了
     * 2. 如果视窗的高度 + 滚动的高度 的和，大于或等于 视窗的高度，就是页面内容的高度不足以滚动页面，那么也可以看到页面底部信息
     ****/
@@ -43,10 +43,6 @@
   const bottomVisible = () =>
       document.documentElement.clientHeight + window.scrollY >=
       (document.documentElement.scrollHeight || document.documentElement.clientHeight);
-
-  
-
-
   </script>
 </body>
 </html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>px</title>
+	<link rel="stylesheet" href="./common.css">
+	<style type="text/css">
+		html {
+			font-size: 20px;
+		}
+
+		.px16 {
+			font-size: 16px;
+		}
+
+		.px20 {
+			font-size: 20px;
+		}
+
+		.px24 {
+			font-size: 24px;
+		}
+
+		.em1 {
+			font-size: 1em;
+		}
+
+		.rem1 {
+			font-size: 1rem;
+		}
+
+		.rem2 {
+			font-size: 2rem;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="orange mb-20">
+		<p class="px16">16px</p>
+		<p class="px20">20px</p>
+		<p class="px24">24px</p>
+	</div>
+
+	<div class="red mb-20">
+		<p class="px24">
+			<span class="em1">父元素为 24px，子元素为 1em</span>
+		</p>
+		<p>
+			<span class="em1">父元素为默认像素，子元素为 1em</span>
+		</p>
+	</div>
+
+	<div class="green mb-20">
+		<p class="rem1">rem1</p>
+		<p class="rem2">rem2</p>
+	</div>
+</body>
+
+</html>
