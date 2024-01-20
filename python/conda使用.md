@@ -11,3 +11,6 @@
   - mac/linux `source deactivate`
 - 删除虚拟环境 `conda remove -n env_name --all`
 - 删除虚拟环境中的某个包 `conda remove -n env_name package_name`
+- 查看现在有的镜像 `conda config --show channels`
+- 添加镜像 `conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
+- 删除镜像 `conda config --remove https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/`
