@@ -13,7 +13,11 @@ mysql -uroot
 
 ## 修改密码
 ```shell
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mi123456';  
+-- 修改密码
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'mi123456';
+
+-- 更新权限
+FLUSH PRIVILEGES;
 ```
 
 # MySQL 命令记录
