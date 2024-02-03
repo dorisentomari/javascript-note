@@ -4,7 +4,6 @@
 # 查看当前环境列表
 conda env list
 
-
 # 更新 conda
 conda update conda
 

@@ -1,6 +1,7 @@
 # Python 常用命令
 
 ## 临时换源
+
 ```shell
 #清华源
 pip install markdown -i https://pypi.tuna.tsinghua.edu.cn/simple
@@ -47,7 +48,7 @@ activate.bat
 cd Scripts
 deactivate.bat
 
-MacOS Linux 进入虚拟环境
+# MacOS Linux 进入虚拟环境
 source env_name/bin/activate
 ```
 
@@ -60,12 +61,15 @@ source env_name/bin/activate
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 ```
 
-## 生成 requirements.txt
+## requirements.txt
 
 ```shell
-# Python3
+# Python3 生成 requirements.txt
 pip3 freeze > requirements.txt  
 
-# Python2
-pip freeze > requirements.txt  
+# Python2 生成 requirements.txt
+pip freeze > requirements.txt
+
+# 通过 requirements.txt 安装依赖
+pip install -r requirements.txt
 ```
