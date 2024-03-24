@@ -11,7 +11,7 @@ conda update conda
 conda create -n env_name python=x.x
 
 # Windows 激活虚拟环境
-conda deactivate
+conda activate env_name
 
 # Windows 退出虚拟环境
 deactivate env_name
